@@ -17,4 +17,11 @@ object RetrofitCliente {
             .create(ApiAutenticacionC::class.java)
 
     }
+    val apiAlumno: ApiAlumnoN by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiAlumnoN::class.java)
+    }
 }
