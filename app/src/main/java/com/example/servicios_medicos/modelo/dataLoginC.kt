@@ -1,0 +1,24 @@
+package com.example.servicios_medicos.modelo
+
+import com.google.gson.annotations.SerializedName
+
+data class dataLoginC(
+    val correo: String = "",
+    val contrasena: String = ""
+
+)
+data class dataUsuarioC(
+    @SerializedName("id_usuario")
+    val idUsuario: Int = 0,
+    val correo: String = "",
+    val rol: String = "",
+    val identificador: String = "",
+    val token: String = ""
+)
+
+data class dataLoginRespuestaC(
+    val estado: Boolean = false,
+    val mensaje: String = "",
+    val datos: dataUsuarioC? = null
+)
+
