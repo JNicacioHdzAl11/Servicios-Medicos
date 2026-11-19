@@ -1,5 +1,144 @@
 <resources>
-    <string name="app_name">servicios_medicos</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Login -->
+    <string name="app_name">Servicios Médicos</string>
+    <string name="login_cd_logo">Logotipo de Servicios Médicos de la UTHH</string>
+    <string name="login_titulo_app">Salud Campus UTHH</string>
+    <string name="login_subtitulo_app">Cuidamos de nuestra comunidad universitaria</string>
+    <string name="login_titulo">Bienvenida de nuevo</string>
+    <string name="login_subtitulo">Accede al portal de enfermería de tu universidad</string>
+    <string name="login_label_correo">Matrícula o correo institucional</string>
+    <string name="login_hint_correo">20230351</string>
+    <string name="login_label_contrasena">Contraseña</string>
+    <string name="login_hint_contrasena">••••••••••••</string>
+    <string name="login_olvidaste_contrasena">¿Olvidaste tu contraseña?</string>
+    <string name="login_btn_iniciar_sesion">Iniciar sesión</string>
+    <string name="login_aviso_acceso">Acceso exclusivo para estudiantes.\nTu información está protegida.</string>
+    <string name="login_necesitas_ayuda">¿Necesitas ayuda?</string>
+    <string name="login_contacta_soporte"><u>Contacta a soporte</u></string>
+    <string name="login_no_tienes_cuenta">¿No tienes cuenta?</string>
+    <string name="login_crear_cuenta"><u>Crear cuenta</u></string>
+    <string name="login_servicios_medicos">Servicios médicos universitarios</string>
+    <string name="login_aviso_privacidad">Aviso de privacidad</string>
+    <string name="login_quienes_somos"><u>¿Quiénes somos?</u></string>
+    <string name="login_manual_operaciones">Manual de operaciones</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Común: encabezado y navegación inferior del alumno -->
+    <string name="comun_cd_regresar">Regresar</string>
+    <string name="comun_nav_inicio">Inicio</string>
+    <string name="comun_nav_citas">Citas</string>
+    <string name="comun_nav_expediente">Expediente</string>
+    <string name="comun_nav_campanias">Campañas</string>
+    <string name="comun_nav_perfil">Perfil</string>
+
+    <!-- Crear cuenta -->
+    <string name="crear_cuenta_titulo">Crea tu cuenta</string>
+    <string name="crear_cuenta_subtitulo">Regístrate para acceder al portal de enfermería de tu universidad.</string>
+    <string name="crear_cuenta_label_nombre">Nombre completo</string>
+    <string name="crear_cuenta_hint_nombre">Tu nombre y apellidos</string>
+    <string name="crear_cuenta_label_matricula">Matrícula</string>
+    <string name="crear_cuenta_hint_matricula">Ej. 20230351</string>
+    <string name="crear_cuenta_label_correo">Correo institucional</string>
+    <string name="crear_cuenta_hint_correo">nombre@uthh.edu.mx</string>
+    <string name="crear_cuenta_label_contrasena">Contraseña</string>
+    <string name="crear_cuenta_hint_contrasena">Crea una contraseña</string>
+    <string name="crear_cuenta_ayuda_contrasena">Usa al menos 8 caracteres, letras y números.</string>
+    <string name="crear_cuenta_label_confirmar_contrasena">Confirmar contraseña</string>
+    <string name="crear_cuenta_hint_confirmar_contrasena">Repite tu contraseña</string>
+    <string name="crear_cuenta_acepto_privacidad">Al crear tu cuenta, aceptas el tratamiento de tus datos conforme al <font color="#1E88E5"><u>Aviso de privacidad</u></font>.</string>
+    <string name="crear_cuenta_btn_crear_cuenta">Crear cuenta</string>
+    <string name="crear_cuenta_aviso_registro">Registro exclusivo para estudiantes.\nTu información está protegida.</string>
+
+    <!-- Recuperar contraseña -->
+    <string name="recuperar_titulo">Recupera tu contraseña</string>
+    <string name="recuperar_subtitulo">Ingresa tu correo institucional y te enviaremos un enlace para restablecer tu contraseña.</string>
+    <string name="recuperar_label_correo">Correo institucional</string>
+    <string name="recuperar_hint_correo">nombre@uthh.edu.mx</string>
+    <string name="recuperar_btn_enviar_enlace">Enviar enlace de recuperación</string>
+    <string name="recuperar_volver_inicio_sesion">Volver al inicio de sesión</string>
+    <string name="recuperar_aviso_enlace">Si el correo está registrado, recibirás un enlace.\nRevisa también tu carpeta de spam.</string>
+
+    <!-- Configuración -->
+    <string name="configuracion_titulo">Configuración</string>
+    <string name="configuracion_cd_ajustes">Ajustes</string>
+    <string name="configuracion_descripcion">Administra tu cuenta y las preferencias de tu atención médica.</string>
+    <string name="configuracion_seccion_cuenta">Cuenta</string>
+    <string name="configuracion_correo_titulo">Correo institucional</string>
+    <string name="configuracion_correo_valor">valeria.romero@universidad.edu.mx</string>
+    <string name="configuracion_contrasena_titulo">Cambiar contraseña</string>
+    <string name="configuracion_contrasena_desc">Actualiza tu acceso de forma segura</string>
+    <string name="configuracion_telefono_titulo">Teléfono de emergencia</string>
+    <string name="configuracion_telefono_valor">Laura Romero · 55 8765 4321</string>
+    <string name="configuracion_modo_oscuro_titulo">Modo Oscuro</string>
+    <string name="configuracion_modo_oscuro_desc">Tema visual de la interfaz</string>
+    <string name="configuracion_seccion_notificaciones">Notificaciones</string>
+    <string name="configuracion_recordatorios_titulo">Recordatorios de citas</string>
+    <string name="configuracion_avisos_campanias_titulo">Avisos de campañas de salud</string>
+    <string name="configuracion_estado_activados">Activados</string>
+    <string name="configuracion_estado_desactivados">Desactivados</string>
+    <string name="configuracion_seccion_soporte">Soporte y Legal</string>
+    <string name="configuracion_terminos">Términos del Servicio Médico</string>
+    <string name="configuracion_privacidad">Privacidad y consentimientos</string>
+    <string name="configuracion_preguntas_frecuentes">Preguntas frecuentes</string>
+    <string name="configuracion_btn_cerrar_sesion">Cerrar sesión</string>
+    <string name="configuracion_pie_portal">Salud Campus · Portal del alumno</string>
+
+    <!-- Términos del servicio -->
+    <string name="terminos_titulo">Términos del servicio</string>
+    <string name="terminos_subtitulo">Lineamientos del servicio médico universitario</string>
+    <string name="terminos_version">Versión de referencia · Noviembre de 2026</string>
+    <string name="terminos_seccion1_titulo">1. Acceso al servicio</string>
+    <string name="terminos_seccion1_texto">La atención está dirigida a alumnos con matrícula y afiliación vigentes. Presenta tu credencial y comprobante al acudir.</string>
+    <string name="terminos_seccion2_titulo">2. Citas y puntualidad</string>
+    <string name="terminos_seccion2_texto">Agenda mediante el portal y llega 10 minutos antes. Si no puedes asistir, cancela o solicita la reprogramación con anticipación.</string>
+    <string name="terminos_seccion3_titulo">3. Alcance de la atención</string>
+    <string name="terminos_seccion3_texto">El servicio brinda valoración inicial, orientación preventiva y seguimiento. Cuando se requiera, el médico indicará la referencia a otra unidad.</string>
+    <string name="terminos_seccion4_titulo">4. Trato y responsabilidad</string>
+    <string name="terminos_seccion4_texto">Recibe un trato respetuoso y proporciona información veraz sobre tus antecedentes, alergias y medicamentos. Sigue las indicaciones del personal.</string>
+    <string name="terminos_seccion5_titulo">5. Confidencialidad</string>
+    <string name="terminos_seccion5_texto">Tu información clínica es confidencial. El acceso y la entrega del expediente requieren identificación y los procedimientos correspondientes.</string>
+    <string name="terminos_seccion6_titulo">6. Situaciones de urgencia</string>
+    <string name="terminos_seccion6_texto">En una emergencia, solicita apoyo inmediato al personal del campus o llama al 911. No esperes a una cita programada.</string>
+    <string name="terminos_btn_descargar_pdf">Descargar términos en PDF</string>
+    <string name="terminos_nota">Texto de ejemplo para el mockup; sujeto a revisión institucional.</string>
+
+    <!-- Privacidad y permisos -->
+    <string name="privacidad_titulo">Privacidad y permisos</string>
+    <string name="privacidad_descripcion">Tú decides cómo se utilizan tus datos.</string>
+    <string name="privacidad_proteccion_titulo">Protección de tu información</string>
+    <string name="privacidad_proteccion_texto">Tus datos de salud son sensibles y se utilizan para brindarte atención, integrar tu expediente y dar seguimiento a tus consultas.</string>
+    <string name="privacidad_proteccion_nota">Solo el personal autorizado debe acceder a tu información. Puedes solicitar su consulta o rectificación en Servicios Médicos.</string>
+    <string name="privacidad_seccion_consentimientos">Consentimientos médicos</string>
+    <string name="privacidad_consentimiento1_titulo">Atención y seguimiento clínico</string>
+    <string name="privacidad_consentimiento1_descripcion">Autorizo el uso de mis datos para mi atención y seguimiento por personal médico autorizado.</string>
+    <string name="privacidad_consentimiento2_titulo">Compartir con especialistas</string>
+    <string name="privacidad_consentimiento2_descripcion">Autorizo compartir información clínica necesaria para una referencia médica.</string>
+    <string name="privacidad_consentimiento3_titulo">Campañas de prevención</string>
+    <string name="privacidad_consentimiento3_descripcion">Acepto recibir información sobre campañas y actividades de salud.</string>
+    <string name="privacidad_consentimiento4_titulo">Investigación anonimizada</string>
+    <string name="privacidad_consentimiento4_descripcion">Autorizo el uso de datos disociados en estudios de salud universitaria.</string>
+    <string name="privacidad_estado_activado">Activado</string>
+    <string name="privacidad_estado_desactivado">Desactivado</string>
+    <string name="privacidad_btn_guardar">Guardar preferencias</string>
+    <string name="privacidad_nota">Puedes modificar tus preferencias en cualquier momento.\nContenido de ejemplo sujeto a revisión institucional.</string>
+
+    <!-- Preguntas frecuentes -->
+    <string name="faq_titulo">Preguntas frecuentes</string>
+    <string name="faq_hint_buscar">Buscar sobre citas, urgencias…</string>
+    <string name="faq_seccion_ayuda">¿En qué podemos ayudarte?</string>
+    <string name="faq_pregunta1">¿Cómo agendo una cita?</string>
+    <string name="faq_respuesta1">Entra a Citas y selecciona “Solicitar nueva cita”. Elige especialidad, fecha y horario; después confirma. Verás la cita en Próximas.</string>
+    <string name="faq_pregunta2">¿Puedo reprogramar o cancelar?</string>
+    <!-- Respuestas 2, 4, 5 y 6: el boceto las muestra cerradas, falta su texto -->
+    <string name="faq_respuesta2"></string>
+    <string name="faq_pregunta3">¿Qué hago en una urgencia?</string>
+    <string name="faq_respuesta3">Acude al servicio médico del campus o pide apoyo al personal. Si hay riesgo inmediato, llama al 911; no esperes una cita.</string>
+    <string name="faq_pregunta4">¿Cómo solicito un justificante médico?</string>
+    <string name="faq_respuesta4"></string>
+    <string name="faq_pregunta5">¿Qué debo llevar a mi consulta?</string>
+    <string name="faq_respuesta5"></string>
+    <string name="faq_pregunta6">¿Cómo descargo mi receta?</string>
+    <string name="faq_respuesta6"></string>
+    <string name="faq_dudas_titulo">¿Aún tienes dudas?</string>
+    <string name="faq_dudas_texto">Visita Servicios Médicos en la planta baja del campus.\nLunes a viernes, 08:00–18:00.</string>
 </resources>
