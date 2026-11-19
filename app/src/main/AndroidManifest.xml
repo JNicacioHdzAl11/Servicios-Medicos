@@ -75,30 +75,7 @@
             android:name=".Vista.EnfermeriaActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".Vista.BuscarAlumnoActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".Vista.TomaSignosActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".Vista.SubirCampaniaActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".InicioEnfermeraFragmentJ"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".CitasPendientesFragmentJ"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".InventarioFragment"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>
