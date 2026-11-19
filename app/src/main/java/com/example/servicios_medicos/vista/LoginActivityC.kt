@@ -1,13 +1,23 @@
 package com.example.servicios_medicos.vista
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.servicios_medicos.R
+import com.example.servicios_medicos.modelo.dataUsuarioC
+import com.example.servicios_medicos.presentador.clsLoginPresentadorC
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 
 class LoginActivityC : AppCompatActivity() {
+    private lateinit var etCorreo: TextInputEditText
+    private lateinit var etContrasena: TextInputEditText
+    private lateinit var btnIniciarSesion: MaterialButton
+    private lateinit var presentador: clsLoginPresentadorC
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -17,5 +27,63 @@ class LoginActivityC : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        etCorreo = findViewById(R.id.etCorreo)
+        etContrasena = findViewById(R.id.etContrasena)
+        btnIniciarSesion = findViewById(R.id.btnIniciarSesion)
+
+        presentador = clsLoginPresentadorC(this)
+
+        configurarListeners()
     }
+
+    private fun configurarListeners() {
+
+        btnIniciarSesion.setOnClickListener(
+            object : View.OnClickListener {
+
+                override fun onClick(v: View?) {
+
+                    val correo = etCorreo.text.toString()
+                    val contrasena = etContrasena.text.toString()
+
+                    presentador.iniciarSesion(
+                        correo,
+                        contrasena
+                    )
+                }
+            }
+        )
+    }
+
+    fun mostrarCargando(cargando: Boolean) {
+
+        btnIniciarSesion.isEnabled = !cargando
+
+        if (cargando) {
+            btnIniciarSesion.text = "Validando..."
+        } else {
+            btnIniciarSesion.text = "Iniciar sesión"
+        }
+    }
+
+    fun mostrarInicioExitoso(usuario: dataUsuarioC) {
+
+        val rol = usuario.rol
+
+        Toast.makeText(
+            this,
+            "Tu rol es: " + rol,
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    fun mostrarError(mensaje: String) {
+
+        Toast.makeText(
+            this,
+            mensaje,
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
 }
