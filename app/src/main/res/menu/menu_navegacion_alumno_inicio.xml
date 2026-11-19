@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_inicio"
+        android:checked="true"
+        android:icon="@drawable/ic_inicio"
+        android:title="@string/comun_nav_inicio" />
+    <item
+        android:id="@+id/nav_citas"
+        android:icon="@drawable/ic_calendario"
+        android:title="@string/comun_nav_citas" />
+    <item
+        android:id="@+id/nav_expediente"
+        android:icon="@drawable/ic_documento"
+        android:title="@string/comun_nav_expediente" />
+    <item
+        android:id="@+id/nav_campanias"
+        android:icon="@drawable/ic_campania"
+        android:title="@string/comun_nav_campanias" />
+    <item
+        android:id="@+id/nav_perfil"
+        android:icon="@drawable/ic_usuario"
+        android:title="@string/comun_nav_perfil" />
+</menu>

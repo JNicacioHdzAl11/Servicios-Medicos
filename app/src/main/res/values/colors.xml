@@ -20,5 +20,8 @@
     <color name="color_switch_inactivo">#FFCBD5E1</color>
     <color name="color_peligro">#FFDC2626</color>
     <color name="color_peligro_borde">#FFFCA5A5</color>
+    <!-- Nuevos: pantallas del alumno (_n y _j) -->
+    <color name="color_exito">#FF0F8A5F</color>
+    <color name="color_fondo_verde_claro">#FFE6F6EF</color>
 
 </resources>

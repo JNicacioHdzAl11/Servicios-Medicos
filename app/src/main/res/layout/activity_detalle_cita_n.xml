@@ -5,6 +5,502 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_fondo_secundario"
     tools:context=".vista.DetalleCitaActivityN">
+
+    <!-- Encabezado: regresar y título -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clEncabezado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fondo"
+        android:minHeight="64dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibRegresar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/comun_cd_regresar"
+            android:src="@drawable/ic_flecha_atras"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_enlace" />
+
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/detalle_cita_titulo"
+            android:textColor="@color/color_texto_principal"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ibRegresar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vDivisorEncabezado"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_borde"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clEncabezado" />
+
+    <!-- Contenido desplazable -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvContenido"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/vDivisorNavegacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vDivisorEncabezado">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContenido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="24dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="32dp">
+
+            <TextView
+                android:id="@+id/tvTipoCita"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/cita_consulta_general"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Fecha y horario -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvFechaCita"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/color_fondo_azul_claro"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTipoCita"
+                app:strokeColor="@color/color_fondo_azul_claro"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvEstadoCita"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/cita_estado_confirmada"
+                        android:textColor="@color/color_exito"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvFechaCita"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_cita_fecha"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvEstadoCita" />
+
+                    <TextView
+                        android:id="@+id/tvHorarioCita"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_cita_horario"
+                        android:textColor="@color/color_enlace"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvFechaCita" />
+
+                    <TextView
+                        android:id="@+id/tvFolioCita"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_cita_folio"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="11sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvHorarioCita" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Atención médica -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvAtencion"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/color_fondo"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvFechaCita"
+                app:strokeColor="@color/color_borde"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvAtencionTitulo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_cita_atencion"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvMedicoEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/detalle_cita_medico"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAtencionTitulo" />
+
+                    <TextView
+                        android:id="@+id/tvMedico"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/detalle_cita_medico_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvMedicoEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvMedicoEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvConsultorioEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/detalle_cita_consultorio"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvMedicoEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvConsultorio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/detalle_cita_consultorio_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvConsultorioEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvConsultorioEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvUbicacionEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/detalle_cita_ubicacion"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvConsultorioEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvUbicacion"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/detalle_cita_ubicacion_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvUbicacionEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvUbicacionEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvSedeEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/detalle_cita_sede"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvUbicacionEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvSede"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/detalle_cita_sede_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvSedeEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvSedeEtiqueta" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Antes de tu cita -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvAntesCita"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/color_fondo"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvAtencion"
+                app:strokeColor="@color/color_borde"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvAntesCitaTitulo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_cita_antes"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvIndicacion1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_cita_indicacion1"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_check"
+                        app:drawableTint="@color/color_texto_secundario"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAntesCitaTitulo" />
+
+                    <TextView
+                        android:id="@+id/tvIndicacion2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_cita_indicacion2"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_check"
+                        app:drawableTint="@color/color_texto_secundario"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvIndicacion1" />
+
+                    <TextView
+                        android:id="@+id/tvIndicacion3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_cita_indicacion3"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_check"
+                        app:drawableTint="@color/color_texto_secundario"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvIndicacion2" />
+
+                    <TextView
+                        android:id="@+id/tvIndicacion4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:drawablePadding="12dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_cita_indicacion4"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_check"
+                        app:drawableTint="@color/color_texto_secundario"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvIndicacion3" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReprogramarCita"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/detalle_cita_btn_reprogramar"
+                android:textAllCaps="false"
+                android:textColor="@color/color_enlace"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/color_fondo"
+                app:cornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvAntesCita"
+                app:strokeColor="@color/color_enlace"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelarCita"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/detalle_cita_btn_cancelar"
+                android:textAllCaps="false"
+                android:textColor="@color/color_peligro"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/color_fondo"
+                app:cornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnReprogramarCita"
+                app:strokeColor="@color/color_peligro_borde"
+                app:strokeWidth="1dp" />
+
+            <TextView
+                android:id="@+id/tvNota"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_cita_nota"
+                android:textColor="@color/color_texto_secundario"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnCancelarCita" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Navegación inferior del alumno -->
+    <View
+        android:id="@+id/vDivisorNavegacion"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_borde"
+        app:layout_constraintBottom_toTopOf="@id/bnvNavegacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnvNavegacion"
+        style="@style/Widget.Material3.BottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fondo"
+        app:elevation="0dp"
+        app:itemActiveIndicatorStyle="@style/SaludCampus.IndicadorNavegacion"
+        app:itemIconTint="@color/selector_nav_item"
+        app:itemTextAppearanceActive="@style/SaludCampus.TextoNavegacion.Activo"
+        app:itemTextAppearanceInactive="@style/SaludCampus.TextoNavegacion"
+        app:itemTextColor="@color/selector_nav_item"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navegacion_alumno_citas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

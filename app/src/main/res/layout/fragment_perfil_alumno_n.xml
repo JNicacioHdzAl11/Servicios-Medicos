@@ -1,14 +1,550 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_fondo_secundario"
     tools:context=".perfilAlumnoN">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <!-- Encabezado: regresar y título -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clEncabezado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fondo"
+        android:minHeight="64dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/ibRegresar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/comun_cd_regresar"
+            android:src="@drawable/ic_flecha_atras"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_enlace" />
+
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/perfil_titulo"
+            android:textColor="@color/color_texto_principal"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ibAjustes"
+            app:layout_constraintStart_toEndOf="@id/ibRegresar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ibAjustes"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/comun_cd_ajustes"
+            android:src="@drawable/ic_ajustes"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_enlace" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vDivisorEncabezado"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_borde"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clEncabezado" />
+
+    <!-- Contenido desplazable -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvContenido"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vDivisorEncabezado">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContenido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="24dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="32dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivFotoPerfil"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@color/color_fondo_azul_claro"
+                android:contentDescription="@string/comun_cd_foto_perfil"
+                android:padding="14dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_usuario"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/SaludCampus.FormaAvatar"
+                app:tint="@color/color_enlace" />
+
+            <TextView
+                android:id="@+id/tvNombreAlumno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/comun_nombre_alumno"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivFotoPerfil"
+                app:layout_constraintTop_toTopOf="@id/ivFotoPerfil" />
+
+            <TextView
+                android:id="@+id/tvMatricula"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/perfil_matricula"
+                android:textColor="@color/color_texto_secundario"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvNombreAlumno"
+                app:layout_constraintTop_toBottomOf="@id/tvNombreAlumno" />
+
+            <TextView
+                android:id="@+id/tvTipoCuenta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/perfil_tipo_cuenta"
+                android:textColor="@color/color_enlace"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvNombreAlumno"
+                app:layout_constraintTop_toBottomOf="@id/tvMatricula" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/brEncabezadoAlumno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="ivFotoPerfil,tvTipoCuenta" />
+
+            <!-- Datos académicos -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvDatosAcademicos"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/color_fondo"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/brEncabezadoAlumno"
+                app:strokeColor="@color/color_borde"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvDatosAcademicosTitulo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/perfil_datos_academicos"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvCarreraEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/perfil_carrera"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDatosAcademicosTitulo" />
+
+                    <TextView
+                        android:id="@+id/tvCarrera"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/perfil_carrera_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvCarreraEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvCarreraEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvGrupoEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/perfil_grupo"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvCarreraEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvGrupo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/perfil_grupo_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvGrupoEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvGrupoEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvTurnoEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/perfil_turno"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvGrupoEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvTurno"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/perfil_turno_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvTurnoEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvTurnoEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvSemestreEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/perfil_semestre"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvTurnoEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvSemestre"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/perfil_semestre_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvSemestreEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvSemestreEtiqueta" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Datos personales -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvDatosPersonales"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/color_fondo"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvDatosAcademicos"
+                app:strokeColor="@color/color_borde"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvDatosPersonalesTitulo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/perfil_datos_personales"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/tvEditarDatos"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvEditarDatos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingStart="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/perfil_editar"
+                        android:textColor="@color/color_enlace"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvDatosPersonalesTitulo"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvEdadEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/perfil_edad"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDatosPersonalesTitulo" />
+
+                    <TextView
+                        android:id="@+id/tvEdad"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/perfil_edad_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvEdadEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvEdadEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvTelefonoEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/perfil_telefono"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvEdadEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvTelefono"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/perfil_telefono_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvTelefonoEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvTelefonoEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvCorreoEtiqueta"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/perfil_correo"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvTelefonoEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvCorreo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/perfil_correo_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvCorreoEtiqueta" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Contacto de emergencia -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvContactoEmergencia"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/color_fondo"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvDatosPersonales"
+                app:strokeColor="@color/color_borde"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvContactoEmergenciaTitulo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/perfil_contacto_emergencia"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvContactoNombreEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/perfil_contacto_nombre"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvContactoEmergenciaTitulo" />
+
+                    <TextView
+                        android:id="@+id/tvContactoNombre"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/perfil_contacto_nombre_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvContactoNombreEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvContactoNombreEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvContactoTelefonoEtiqueta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/perfil_telefono"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvContactoNombreEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/tvContactoTelefono"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text="@string/perfil_contacto_telefono_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvContactoTelefonoEtiqueta"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvContactoTelefonoEtiqueta" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCerrarSesion"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/perfil_btn_cerrar_sesion"
+                android:textAllCaps="false"
+                android:textColor="@color/color_enlace"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/color_fondo"
+                app:cornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvContactoEmergencia"
+                app:strokeColor="@color/color_enlace"
+                app:strokeWidth="1dp" />
+
+            <TextView
+                android:id="@+id/tvNota"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/perfil_nota"
+                android:textColor="@color/color_texto_secundario"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnCerrarSesion" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

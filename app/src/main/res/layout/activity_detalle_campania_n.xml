@@ -5,6 +5,543 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_fondo_secundario"
     tools:context=".vista.DetalleCampaniaActivityN">
+
+    <!-- Encabezado: regresar y título -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clEncabezado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fondo"
+        android:minHeight="64dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibRegresar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/comun_cd_regresar"
+            android:src="@drawable/ic_flecha_atras"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_enlace" />
+
+        <TextView
+            android:id="@+id/tvTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/detalle_campania_titulo"
+            android:textColor="@color/color_texto_principal"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ibCompartir"
+            app:layout_constraintStart_toEndOf="@id/ibRegresar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ibCompartir"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/detalle_campania_cd_compartir"
+            android:src="@drawable/ic_compartir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_enlace" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vDivisorEncabezado"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_borde"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clEncabezado" />
+
+    <!-- Contenido desplazable -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvContenido"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/vDivisorNavegacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vDivisorEncabezado">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContenido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="24dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="32dp">
+
+            <!-- Encabezado de la campaña -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvEncabezadoCampania"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/color_fondo_azul_claro"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/color_fondo_azul_claro"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvCategoria"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        android:letterSpacing="0.04"
+                        android:text="@string/detalle_campania_categoria"
+                        android:textAllCaps="true"
+                        android:textColor="@color/color_enlace"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_campania"
+                        app:drawableTint="@color/color_enlace"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvNombreCampania"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_campania_nombre"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvCategoria" />
+
+                    <TextView
+                        android:id="@+id/tvLemaCampania"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_campania_lema"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvNombreCampania" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cgEtiquetas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:chipSpacingHorizontal="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvEncabezadoCampania">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chpPreventiva"
+                    style="@style/SaludCampus.Etiqueta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detalle_campania_etiqueta_preventiva" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chpGratuita"
+                    style="@style/SaludCampus.Etiqueta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detalle_campania_etiqueta_gratuita" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chpComunidad"
+                    style="@style/SaludCampus.Etiqueta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detalle_campania_etiqueta_comunidad" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- Fechas, horario y ubicación -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvDatosCampania"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/color_fondo"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cgEtiquetas"
+                app:strokeColor="@color/color_borde"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivFechas"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_calendario"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/color_enlace" />
+
+                    <TextView
+                        android:id="@+id/tvFechasTitulo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/detalle_campania_fechas"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivFechas"
+                        app:layout_constraintTop_toTopOf="@id/ivFechas" />
+
+                    <TextView
+                        android:id="@+id/tvFechas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_campania_fechas_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tvFechasTitulo"
+                        app:layout_constraintTop_toBottomOf="@id/tvFechasTitulo" />
+
+                    <ImageView
+                        android:id="@+id/ivHorario"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="16dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_reloj"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvFechas"
+                        app:tint="@color/color_enlace" />
+
+                    <TextView
+                        android:id="@+id/tvHorarioTitulo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/detalle_campania_horario"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivHorario"
+                        app:layout_constraintTop_toTopOf="@id/ivHorario" />
+
+                    <TextView
+                        android:id="@+id/tvHorario"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_campania_horario_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tvHorarioTitulo"
+                        app:layout_constraintTop_toBottomOf="@id/tvHorarioTitulo" />
+
+                    <ImageView
+                        android:id="@+id/ivUbicacion"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="16dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_ubicacion"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvHorario"
+                        app:tint="@color/color_enlace" />
+
+                    <TextView
+                        android:id="@+id/tvUbicacionTitulo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/detalle_campania_ubicacion"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivUbicacion"
+                        app:layout_constraintTop_toTopOf="@id/ivUbicacion" />
+
+                    <TextView
+                        android:id="@+id/tvUbicacion"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/detalle_campania_ubicacion_valor"
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tvUbicacionTitulo"
+                        app:layout_constraintTop_toBottomOf="@id/tvUbicacionTitulo" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ¿En qué consiste? -->
+            <TextView
+                android:id="@+id/tvConsisteTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_consiste"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvDatosCampania" />
+
+            <TextView
+                android:id="@+id/tvConsiste"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_consiste_texto"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvConsisteTitulo" />
+
+            <!-- Requisitos -->
+            <TextView
+                android:id="@+id/tvRequisitosTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_requisitos"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvConsiste" />
+
+            <TextView
+                android:id="@+id/tvRequisito1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:drawablePadding="12dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_requisito1"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_vineta"
+                app:drawableTint="@color/color_enlace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRequisitosTitulo" />
+
+            <TextView
+                android:id="@+id/tvRequisito2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:drawablePadding="12dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_requisito2"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_vineta"
+                app:drawableTint="@color/color_enlace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRequisito1" />
+
+            <TextView
+                android:id="@+id/tvRequisito3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:drawablePadding="12dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_requisito3"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_vineta"
+                app:drawableTint="@color/color_enlace"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRequisito2" />
+
+            <!-- Recomendaciones -->
+            <TextView
+                android:id="@+id/tvRecomendacionesTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_recomendaciones"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRequisito3" />
+
+            <TextView
+                android:id="@+id/tvAntesAcudirTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_antes"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRecomendacionesTitulo" />
+
+            <TextView
+                android:id="@+id/tvAntesAcudir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_antes_texto"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAntesAcudirTitulo" />
+
+            <TextView
+                android:id="@+id/tvDespuesTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_despues"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAntesAcudir" />
+
+            <TextView
+                android:id="@+id/tvDespues"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/detalle_campania_despues_texto"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDespuesTitulo" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDescargarInfografia"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/detalle_campania_btn_infografia"
+                android:textAllCaps="false"
+                android:textColor="@color/color_enlace"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/color_fondo"
+                app:cornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDespues"
+                app:strokeColor="@color/color_enlace"
+                app:strokeWidth="1dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Navegación inferior del alumno -->
+    <View
+        android:id="@+id/vDivisorNavegacion"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_borde"
+        app:layout_constraintBottom_toTopOf="@id/bnvNavegacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnvNavegacion"
+        style="@style/Widget.Material3.BottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fondo"
+        app:elevation="0dp"
+        app:itemActiveIndicatorStyle="@style/SaludCampus.IndicadorNavegacion"
+        app:itemIconTint="@color/selector_nav_item"
+        app:itemTextAppearanceActive="@style/SaludCampus.TextoNavegacion.Activo"
+        app:itemTextAppearanceInactive="@style/SaludCampus.TextoNavegacion"
+        app:itemTextColor="@color/selector_nav_item"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navegacion_alumno_campanias" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
