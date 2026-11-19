@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Salud Campus UTHH: estilos de la navegación inferior (solo modo claro) -->
+    <style name="SaludCampus.IndicadorNavegacion" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/color_fondo_azul_claro</item>
+        <item name="shapeAppearance">@style/SaludCampus.FormaIndicador</item>
+    </style>
+
+    <style name="SaludCampus.FormaIndicador" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="SaludCampus.TextoNavegacion" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="SaludCampus.TextoNavegacion.Activo">
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>
