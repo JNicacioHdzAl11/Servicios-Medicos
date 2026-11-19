@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Paleta Salud Campus UTHH (solo modo claro) -->
+    <color name="color_fondo">#FFFFFFFF</color>
+    <color name="color_texto_principal">#FF1E344D</color>
+    <color name="color_texto_secundario">#FF64748B</color>
+    <color name="color_texto_label">#FF475569</color>
+    <color name="color_campo_fondo">#FFF8F9FA</color>
+    <color name="color_borde">#FFE2E8F0</color>
+    <color name="color_icono">#FF64748B</color>
+    <color name="color_enlace">#FF1E88E5</color>
+    <color name="color_boton_primario">#FF146AC2</color>
+    <color name="color_boton_primario_texto">#FFFFFFFF</color>
+    <color name="color_icono_escudo">#1D4ED8</color>
+    <color name="color_enlace_pie">#475569</color>
+
+    <!-- Nuevos: pantallas con encabezado y navegación inferior -->
+    <color name="color_fondo_secundario">#FFF8FAFC</color>
+    <color name="color_fondo_azul_claro">#FFE8F1FC</color>
+    <color name="color_switch_inactivo">#FFCBD5E1</color>
+    <color name="color_peligro">#FFDC2626</color>
+    <color name="color_peligro_borde">#FFFCA5A5</color>
+
 </resources>
