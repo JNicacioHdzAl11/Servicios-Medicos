@@ -343,4 +343,21 @@
     <string name="detalle_campania_despues_texto">Permanece en observación el tiempo indicado y sigue las recomendaciones del personal. Si presentas molestias intensas o persistentes, busca atención médica.</string>
     <string name="detalle_campania_btn_infografia">Descargar infografía informativa (PDF)</string>
     <string name="detalle_campania_cd_compartir">Compartir campaña</string>
+    <!-- Comprobante de ingreso -->
+    <string name="comprobante_titulo">Comprobante de ingreso</string>
+    <string name="comprobante_descripcion">Presenta este comprobante al acudir a tu consulta médica.</string>
+    <string name="comprobante_seguro_estudiantil">Seguro estudiantil</string>
+    <string name="comprobante_vigencia_activa">Vigencia activa</string>
+    <string name="comprobante_folio">FOL-00000</string>
+    <string name="comprobante_inicio_vigencia">Inicio de vigencia</string>
+    <string name="comprobante_inicio_vigencia_valor">01/01/2026</string>
+    <string name="comprobante_fin_vigencia">Fin de vigencia</string>
+    <string name="comprobante_fin_vigencia_valor">31/12/2026</string>
+    <string name="comprobante_qr_titulo">Código QR de acceso</string>
+    <string name="comprobante_cd_qr">Código QR</string>
+    <string name="comprobante_qr_nota">Escanea este código en recepción</string>
+    <string name="comprobante_btn_descargar">Descargar comprobante</string>
+    <string name="comprobante_antes_titulo">Antes de tu consulta</string>
+    <string name="comprobante_antes_texto">Llega 10 minutos antes con tu credencial vigente.</string>
+    <string name="comprobante_nota">Este documento es válido únicamente para atención médica interna.</string>
 </resources>
