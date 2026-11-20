@@ -12,6 +12,7 @@ import com.example.servicios_medicos.modelo.dataUsuarioC
 import com.example.servicios_medicos.presentador.clsLoginPresentadorC
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import android.content.Intent
 
 class LoginActivityC : AppCompatActivity() {
     private lateinit var etCorreo: TextInputEditText
@@ -70,11 +71,21 @@ class LoginActivityC : AppCompatActivity() {
 
         val rol = usuario.rol
 
-        Toast.makeText(
-            this,
-            "Tu rol es: " + rol,
-            Toast.LENGTH_LONG
-        ).show()
+        if (rol.equals("alumno", ignoreCase = true)) {
+            val intent = Intent(this, AlumnoMainActivityN::class.java)
+            intent.putExtra("id_usuario", usuario.idUsuario)
+            intent.putExtra("identificador", usuario.identificador)
+            intent.putExtra("correo", usuario.correo)
+            intent.putExtra("token", usuario.token)
+            startActivity(intent)
+            finish()
+        } else {
+            Toast.makeText(
+                this,
+                "Tu rol es: " + rol,
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
     fun mostrarError(mensaje: String) {

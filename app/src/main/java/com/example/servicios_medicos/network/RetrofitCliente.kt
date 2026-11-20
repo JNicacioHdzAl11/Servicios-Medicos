@@ -16,4 +16,7 @@ object RetrofitCliente {
 
     val apiAutenticacion: ApiAutenticacionC =
         retrofit.create(ApiAutenticacionC::class.java)
+
+    val apiAlumnoN: ApiAlumnoN =
+        retrofit.create(ApiAlumnoN::class.java)
 }
