@@ -123,7 +123,7 @@
                 app:layout_constraintTop_toTopOf="@id/ivFotoPerfil" />
 
             <TextView
-                android:id="@+id/tvMatricula"
+                android:id="@+id/txtMatricula"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -144,7 +144,7 @@
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tvNombreAlumno"
-                app:layout_constraintTop_toBottomOf="@id/tvMatricula" />
+                app:layout_constraintTop_toBottomOf="@id/txtMatricula" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/brEncabezadoAlumno"

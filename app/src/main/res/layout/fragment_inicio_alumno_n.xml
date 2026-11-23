@@ -110,7 +110,7 @@
                 app:tint="@color/color_enlace" />
 
             <TextView
-                android:id="@+id/tvSaludo"
+                android:id="@+id/txtSaludo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -123,7 +123,7 @@
                 app:layout_constraintTop_toTopOf="@id/ivFotoPerfil" />
 
             <TextView
-                android:id="@+id/tvMatricula"
+                android:id="@+id/txtMatricula"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -131,11 +131,11 @@
                 android:textColor="@color/color_texto_secundario"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvSaludo"
-                app:layout_constraintTop_toBottomOf="@id/tvSaludo" />
+                app:layout_constraintStart_toStartOf="@id/txtSaludo"
+                app:layout_constraintTop_toBottomOf="@id/txtSaludo" />
 
             <TextView
-                android:id="@+id/tvFechaHoy"
+                android:id="@+id/txtFechaHoy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -143,15 +143,15 @@
                 android:textColor="@color/color_texto_secundario"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvSaludo"
-                app:layout_constraintTop_toBottomOf="@id/tvMatricula" />
+                app:layout_constraintStart_toStartOf="@id/txtSaludo"
+                app:layout_constraintTop_toBottomOf="@id/txtMatricula" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/brEncabezadoAlumno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="bottom"
-                app:constraint_referenced_ids="ivFotoPerfil,tvFechaHoy" />
+                app:constraint_referenced_ids="ivFotoPerfil,txtFechaHoy" />
 
             <!-- Resumen -->
             <com.google.android.material.card.MaterialCardView
@@ -176,7 +176,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tvCitasProximasValor"
+                        android:id="@+id/txtCitasProximasValor"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="2sp"
@@ -199,7 +199,7 @@
                         android:textSize="13sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvCitasProximasValor" />
+                        app:layout_constraintTop_toBottomOf="@id/txtCitasProximasValor" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -227,7 +227,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tvEstadoSaludValor"
+                        android:id="@+id/txtEstadoSaludValor"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="2sp"
@@ -250,7 +250,7 @@
                         android:textSize="13sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvEstadoSaludValor" />
+                        app:layout_constraintTop_toBottomOf="@id/txtEstadoSaludValor" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -266,12 +266,12 @@
                 android:textColor="@color/color_texto_principal"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/tvVerTodasCitas"
+                app:layout_constraintEnd_toStartOf="@id/txtVerTodasCitas"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cvCitasProximas" />
 
             <TextView
-                android:id="@+id/tvVerTodasCitas"
+                android:id="@+id/txtVerTodasCitas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -310,7 +310,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tvCita1Titulo"
+                        android:id="@+id/txtCita1Titulo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
@@ -318,23 +318,23 @@
                         android:textColor="@color/color_texto_principal"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@id/tvCita1Estado"
+                        app:layout_constraintEnd_toStartOf="@id/txtCita1Estado"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvCita1Estado"
+                        android:id="@+id/txtCita1Estado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cita_estado_confirmada"
                         android:textColor="@color/color_exito"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        app:layout_constraintBaseline_toBaselineOf="@id/tvCita1Titulo"
+                        app:layout_constraintBaseline_toBaselineOf="@id/txtCita1Titulo"
                         app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvCita1Fecha"
+                        android:id="@+id/txtCita1Fecha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -347,10 +347,10 @@
                         app:drawableTint="@color/color_enlace"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvCita1Titulo" />
+                        app:layout_constraintTop_toBottomOf="@id/txtCita1Titulo" />
 
                     <TextView
-                        android:id="@+id/tvCita1Medico"
+                        android:id="@+id/txtCita1Medico"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -360,7 +360,7 @@
                         android:textSize="13sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvCita1Fecha" />
+                        app:layout_constraintTop_toBottomOf="@id/txtCita1Fecha" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -438,7 +438,7 @@
                         app:tint="@color/color_enlace" />
 
                     <TextView
-                        android:id="@+id/tvAvisoVacunacionTitulo"
+                        android:id="@+id/txtAvisoVacunacionTitulo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -451,7 +451,7 @@
                         app:layout_constraintTop_toTopOf="@id/ivAvisoVacunacion" />
 
                     <TextView
-                        android:id="@+id/tvAvisoVacunacion"
+                        android:id="@+id/txtAvisoVacunacion"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
@@ -460,8 +460,8 @@
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="13sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/tvAvisoVacunacionTitulo"
-                        app:layout_constraintTop_toBottomOf="@id/tvAvisoVacunacionTitulo" />
+                        app:layout_constraintStart_toStartOf="@id/txtAvisoVacunacionTitulo"
+                        app:layout_constraintTop_toBottomOf="@id/txtAvisoVacunacionTitulo" />
 
                     <ImageView
                         android:id="@+id/ivAvisoBienestar"
@@ -471,11 +471,11 @@
                         android:importantForAccessibility="no"
                         android:src="@drawable/ic_corazon"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvAvisoVacunacion"
+                        app:layout_constraintTop_toBottomOf="@id/txtAvisoVacunacion"
                         app:tint="@color/color_enlace" />
 
                     <TextView
-                        android:id="@+id/tvAvisoBienestarTitulo"
+                        android:id="@+id/txtAvisoBienestarTitulo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -488,7 +488,7 @@
                         app:layout_constraintTop_toTopOf="@id/ivAvisoBienestar" />
 
                     <TextView
-                        android:id="@+id/tvAvisoBienestar"
+                        android:id="@+id/txtAvisoBienestar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
@@ -497,8 +497,8 @@
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="13sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/tvAvisoBienestarTitulo"
-                        app:layout_constraintTop_toBottomOf="@id/tvAvisoBienestarTitulo" />
+                        app:layout_constraintStart_toStartOf="@id/txtAvisoBienestarTitulo"
+                        app:layout_constraintTop_toBottomOf="@id/txtAvisoBienestarTitulo" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
