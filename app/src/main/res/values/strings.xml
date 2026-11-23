@@ -33,7 +33,7 @@
 
     <!-- Crear cuenta -->
     <string name="crear_cuenta_titulo">Crea tu cuenta</string>
-    <string name="crear_cuenta_subtitulo">Regístrate para acceder al portal de enfermería de tu universidad.</string>
+    <string name="crear_cuenta_subtitulo">Regístrate para acceder al portal de alumnos de tu universidad.</string>
     <string name="crear_cuenta_label_nombre">Nombre completo</string>
     <string name="crear_cuenta_hint_nombre">Tu nombre y apellidos</string>
     <string name="crear_cuenta_label_matricula">Matrícula</string>
