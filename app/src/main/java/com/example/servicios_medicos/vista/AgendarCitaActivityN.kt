@@ -2,13 +2,11 @@ package com.example.servicios_medicos.vista
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -156,7 +154,7 @@ class AgendarCitaActivityN : AppCompatActivity() {
         }
     }
 
-    private fun irAPantallaPrincipal(abrir: String) { // regresa a la pantalla principal
+    private fun irAPantallaPrincipal(abrir: String) { // regresa a la pantalla principal y abre inicio o mis citas
         val intent = Intent(this, AlumnoMainActivityN::class.java)
         intent.putExtra("abrir", abrir)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -174,22 +172,6 @@ class AgendarCitaActivityN : AppCompatActivity() {
         }
     }
 
-    fun pedirOtroMotivoCita() { // abre una ventana para que el alumno escriba su motivo
-        val campoMotivoCita = EditText(this)
-        campoMotivoCita.hint = "Ej. Revisión de presión"
-        val ventana = AlertDialog.Builder(this)
-        ventana.setTitle("Otro motivo")
-        ventana.setMessage("Escribe el motivo de tu cita")
-        ventana.setView(campoMotivoCita)
-        ventana.setPositiveButton("Aceptar") { dialogo, boton ->
-            presentador.escribirOtroMotivoCita(campoMotivoCita.text.toString())
-        }
-        ventana.setNegativeButton("Cancelar") { dialogo, boton ->
-            presentador.cancelarOtroMotivoCita()
-        }
-        ventana.setCancelable(false)
-        ventana.show()
-    }
     fun mostrarMes(texto: String) { // muestra el mes del calendario
         txtMes.text = texto
     }
@@ -285,5 +267,6 @@ class AgendarCitaActivityN : AppCompatActivity() {
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 }
+
 
 

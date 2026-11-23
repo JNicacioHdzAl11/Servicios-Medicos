@@ -32,33 +32,15 @@ class clsAgendarCitaPresentadorN(private val vista: AgendarCitaActivityN) {
             }
         }
     }
-    fun seleccionarMotivoCita(posicion: Int) { // guarda el motivo que eligio el alumno o pide escribirlo si es Otro motivo
+    fun seleccionarMotivoCita(posicion: Int) { // guarda el motivo que eligio el alumno
         val motivos = modelo.obtenerMotivosCita()
         if (posicion < 0 || posicion >= motivos.size) {
-            return
-        }
-        if (motivos[posicion] == "Otro motivo") {
-            vista.pedirOtroMotivoCita()
             return
         }
         posicionMotivoCita = posicion
         motivoCitaSeleccionado = motivos[posicion]
         vista.marcarMotivoCita(posicionMotivoCita)
         actualizarResumen()
-    }
-    fun escribirOtroMotivoCita(texto: String) { // guarda el motivo que escribio el alumno
-        if (texto.trim().isEmpty()) {
-            vista.mostrarError("Escribe el motivo de tu cita.")
-            vista.marcarMotivoCita(posicionMotivoCita)
-            return
-        }
-        posicionMotivoCita = 3
-        motivoCitaSeleccionado = texto.trim()
-        vista.marcarMotivoCita(posicionMotivoCita)
-        actualizarResumen()
-    }
-    fun cancelarOtroMotivoCita() { // deja el motivo que estaba antes si el alumno cancela
-        vista.marcarMotivoCita(posicionMotivoCita)
     }
     fun semanaAnterior() { // regresa a la semana anterior sin pasar de la semana actual
         val lunesDeHoy = modelo.obtenerLunes(modelo.obtenerHoy())
@@ -144,7 +126,7 @@ class clsAgendarCitaPresentadorN(private val vista: AgendarCitaActivityN) {
         val resumen = modelo.obtenerResumen(motivoCitaSeleccionado, fechaSeleccionada, horaSeleccionada)
         vista.mostrarResumen(resumen[0], resumen[1], resumen[2])
     }
-    fun confirmarCita() {  // revisa que los datos esten llenos
+    fun confirmarCita() { // revisa que el alumno eligio motivo, dia y hora y guarda la cita
         if (token.isEmpty()) {
             vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
             return
@@ -185,3 +167,4 @@ class clsAgendarCitaPresentadorN(private val vista: AgendarCitaActivityN) {
         }
     }
 }
+

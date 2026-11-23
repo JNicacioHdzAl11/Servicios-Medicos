@@ -213,6 +213,7 @@
     <string name="agendar_nutricion">Nutrición</string>
     <string name="agendar_psicologia">Psicología</string>
     <string name="agendar_odontologia">Odontología</string>
+    <string name="agendar_otro_motivo">Otro motivo</string>
     <string name="agendar_horario_0900">09:00</string>
     <string name="agendar_horario_0930">09:30</string>
     <string name="agendar_horario_1000">10:00</string>

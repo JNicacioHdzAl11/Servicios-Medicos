@@ -104,6 +104,24 @@ class DetalleCitaActivityN : AppCompatActivity() {
         txtConsultorio.text = consultorio
     }
 
+    fun preguntarCancelar() { // abre una ventana para preguntar si quiere cancelar
+        val diseno = layoutInflater.inflate(R.layout.ventana_cancelar_cita_n, null)
+        val btnNoCancelar: MaterialButton = diseno.findViewById(R.id.btnNoCancelar)
+        val btnSiCancelar: MaterialButton = diseno.findViewById(R.id.btnSiCancelar)
+        val ventana = AlertDialog.Builder(this).setView(diseno).create()
+        val fondo = ventana.window
+        if (fondo != null) {
+            fondo.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+        btnNoCancelar.setOnClickListener {
+            ventana.dismiss()
+        }
+        btnSiCancelar.setOnClickListener {
+            ventana.dismiss()
+            presentador.confirmarCancelacion()
+        }
+        ventana.show()
+    }
     fun activarCancelar(activo: Boolean) { // activa o apaga el boton cancelar cita
         btnCancelarCita.isEnabled = activo
         if (activo) {
@@ -111,17 +129,6 @@ class DetalleCitaActivityN : AppCompatActivity() {
         } else {
             btnCancelarCita.alpha = 0.4f
         }
-    }
-
-    fun preguntarCancelar() { // abre una ventana para preguntar si quiere cancelar
-        val ventana = AlertDialog.Builder(this)
-        ventana.setTitle("Cancelar cita")
-        ventana.setMessage("¿Seguro que quieres cancelar esta cita?")
-        ventana.setPositiveButton("Sí, cancelar") { dialogo, boton ->
-            presentador.confirmarCancelacion()
-        }
-        ventana.setNegativeButton("No", null)
-        ventana.show()
     }
 
     fun mostrarCargando(cargando: Boolean) { // cambia el boton cancelar mientras se cancela la cita
