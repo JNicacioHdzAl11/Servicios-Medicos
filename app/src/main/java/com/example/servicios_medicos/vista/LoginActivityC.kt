@@ -1,5 +1,6 @@
 package com.example.servicios_medicos.vista
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -18,6 +19,7 @@ class LoginActivityC : AppCompatActivity() {
     private lateinit var etContrasena: TextInputEditText
     private lateinit var btnIniciarSesion: MaterialButton
     private lateinit var presentador: clsLoginPresentadorC
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,6 +36,13 @@ class LoginActivityC : AppCompatActivity() {
         presentador = clsLoginPresentadorC(this)
 
         configurarListeners()
+
+        findViewById<View>(R.id.tvCrearCuenta).setOnClickListener {
+            startActivity(Intent(this, CrearCuentaActivityC::class.java))
+        }
+        findViewById<View>(R.id.tvOlvidasteContrasena).setOnClickListener {
+            startActivity(Intent(this, RecuperarContrasenaActivityC::class.java))
+        }
     }
 
     private fun configurarListeners() {
