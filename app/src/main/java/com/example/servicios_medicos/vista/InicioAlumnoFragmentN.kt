@@ -1,5 +1,6 @@
 package com.example.servicios_medicos.vista
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,36 +10,33 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.modelo.CampaniaModeloN
-import com.example.servicios_medicos.modelo.CitaModeloN
 import com.example.servicios_medicos.presentador.clsInicioAlumnoPresentadorN
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
-import android.content.Intent
-import com.example.servicios_medicos.modelo.AlumnoInicioModeloN
 
 class InicioAlumnoFragmentN : Fragment() {
-
-    private lateinit var tvSaludo: TextView
-    private lateinit var tvMatricula: TextView
-    private lateinit var tvFechaHoy: TextView
-    private lateinit var tvCitasProximasValor: TextView
-    private lateinit var tvEstadoSaludValor: TextView
-    private lateinit var tvCita1Titulo: TextView
-    private lateinit var tvCita1Estado: TextView
-    private lateinit var tvCita1Fecha: TextView
-    private lateinit var tvCita1Medico: TextView
-    private lateinit var tvVerTodasCitas: TextView
+    private lateinit var txtSaludo: TextView
+    private lateinit var txtMatricula: TextView
+    private lateinit var txtFechaHoy: TextView
+    private lateinit var txtCitasProximasValor: TextView
+    private lateinit var txtEstadoSalud: TextView
+    private lateinit var txtCita1Titulo: TextView
+    private lateinit var txtCita1Estado: TextView
+    private lateinit var txtCita1Fecha: TextView
+    private lateinit var txtCita1Medico: TextView
+    private lateinit var txtVerTodasCitas: TextView
     private lateinit var btnSolicitarCita: MaterialButton
-    private lateinit var ibRegresar: ImageButton
-    private lateinit var ibAjustes: ImageButton
+    private lateinit var btnRegresar: ImageButton
+    private lateinit var btnAjustes: ImageButton
+    private lateinit var txtCampania1Titulo: TextView
+    private lateinit var txtCampania1Detalle: TextView
+    private lateinit var txtCampania2Titulo: TextView
+    private lateinit var txtCampania2Detalle: TextView
     private lateinit var presentador: clsInicioAlumnoPresentadorN
-    private lateinit var tvAvisoVacunacionTitulo: TextView
-    private lateinit var tvAvisoVacunacion: TextView
-    private lateinit var tvAvisoBienestarTitulo: TextView
-    private lateinit var tvAvisoBienestar: TextView
+    private var token = ""
+    private var regresoDeAgendar = false
 
-
-    override fun onCreateView(
+    override fun onCreateView( // carga el diseño XML del fragment
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,118 +44,93 @@ class InicioAlumnoFragmentN : Fragment() {
         return inflater.inflate(R.layout.fragment_inicio_alumno_n, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // enlaza el XML, crea el presentador y arranca la pantalla
         super.onViewCreated(view, savedInstanceState)
 
-        tvSaludo = view.findViewById(R.id.tvSaludo)
-        tvMatricula = view.findViewById(R.id.tvMatricula)
-        tvFechaHoy = view.findViewById(R.id.tvFechaHoy)
-        tvCitasProximasValor = view.findViewById(R.id.tvCitasProximasValor)
-        tvEstadoSaludValor = view.findViewById(R.id.tvEstadoSaludValor)
-        tvCita1Titulo = view.findViewById(R.id.tvCita1Titulo)
-        tvCita1Estado = view.findViewById(R.id.tvCita1Estado)
-        tvCita1Fecha = view.findViewById(R.id.tvCita1Fecha)
-        tvCita1Medico = view.findViewById(R.id.tvCita1Medico)
-        tvVerTodasCitas = view.findViewById(R.id.tvVerTodasCitas)
+        txtSaludo = view.findViewById(R.id.txtSaludo)
+        txtMatricula = view.findViewById(R.id.txtMatricula)
+        txtFechaHoy = view.findViewById(R.id.txtFechaHoy)
+        txtCitasProximasValor = view.findViewById(R.id.txtCitasProximasValor)
+        txtEstadoSalud = view.findViewById(R.id.txtEstadoSaludValor)
+        txtCita1Titulo = view.findViewById(R.id.txtCita1Titulo)
+        txtCita1Estado = view.findViewById(R.id.txtCita1Estado)
+        txtCita1Fecha = view.findViewById(R.id.txtCita1Fecha)
+        txtCita1Medico = view.findViewById(R.id.txtCita1Medico)
+        txtVerTodasCitas = view.findViewById(R.id.txtVerTodasCitas)
         btnSolicitarCita = view.findViewById(R.id.btnSolicitarCita)
-        ibRegresar = view.findViewById(R.id.ibRegresar)
-        ibAjustes = view.findViewById(R.id.ibAjustes)
+        btnRegresar = view.findViewById(R.id.ibRegresar)
+        btnAjustes = view.findViewById(R.id.ibAjustes)
+        // los id del XML se quedan igual, solo cambia el nombre de la variable
+        txtCampania1Titulo = view.findViewById(R.id.txtAvisoVacunacionTitulo)
+        txtCampania1Detalle = view.findViewById(R.id.txtAvisoVacunacion)
+        txtCampania2Titulo = view.findViewById(R.id.txtAvisoBienestarTitulo)
+        txtCampania2Detalle = view.findViewById(R.id.txtAvisoBienestar)
 
-        tvAvisoVacunacionTitulo = view.findViewById(R.id.tvAvisoVacunacionTitulo)
-        tvAvisoVacunacion = view.findViewById(R.id.tvAvisoVacunacion)
-        tvAvisoBienestarTitulo = view.findViewById(R.id.tvAvisoBienestarTitulo)
-        tvAvisoBienestar = view.findViewById(R.id.tvAvisoBienestar)
-
-        presentador = clsInicioAlumnoPresentadorN(this)
-
-        configurarListeners()
-
-        val token = requireActivity().intent.getStringExtra("token") ?: ""
-        val matriculaLogin = requireActivity().intent.getStringExtra("identificador") ?: ""
-        if (matriculaLogin.isNotEmpty()) {
-            tvMatricula.text = "Matrícula $matriculaLogin · Alumno"
+        btnRegresar.setOnClickListener { // regresa al login
+            val intent = Intent(requireContext(), LoginActivityC::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            requireActivity().finish()
         }
-
-        if (token.isNotEmpty()) {
-            presentador.cargarDatosInicio(token)
-        } else {
-            mostrarError("No se recibió token de sesión")
-        }
-        val formatoFecha = java.text.SimpleDateFormat("EEEE, d 'de' MMMM 'de' yyyy", java.util.Locale.forLanguageTag("es-MX"))
-        val fechaActual = formatoFecha.format(java.util.Date())
-        tvFechaHoy.text = fechaActual.replaceFirstChar { it.uppercase() }
-    }
-
-    private fun configurarListeners() {
-        btnSolicitarCita.setOnClickListener {
+        btnSolicitarCita.setOnClickListener { // abre agendar cita
             val intent = Intent(requireContext(), AgendarCitaActivityN::class.java)
+            intent.putExtra("token", token)
+            regresoDeAgendar = true
             startActivity(intent)
         }
-
-        tvVerTodasCitas.setOnClickListener {
+        txtVerTodasCitas.setOnClickListener { // abre mis citas desde el menu de abajo
+            val menu = requireActivity().findViewById<BottomNavigationView>(R.id.bnvNavegacion)
+            menu.selectedItemId = R.id.nav_citas
         }
-
-        ibAjustes.setOnClickListener {
-            val intent = Intent(requireContext(), ConfiguracionActivityC::class.java)
-            startActivity(intent)
+        presentador = clsInicioAlumnoPresentadorN(this)
+        val intent = requireActivity().intent
+        val tokenRecibido = intent.getStringExtra("token")
+        if (tokenRecibido != null) {
+            token = tokenRecibido
         }
-
-        ibRegresar.setOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
+        val nombre = intent.getStringExtra("nombre")
+        var matricula = intent.getStringExtra("matricula")
+        if (matricula == null) {
+            matricula = intent.getStringExtra("identificador")
+        }
+        presentador.iniciarPantalla(token, nombre, matricula)
+    }
+    override fun onResume() { // al regresar de agendar cita se recargan los datos
+        super.onResume()
+        if (regresoDeAgendar && token.isNotEmpty()) {
+            regresoDeAgendar = false
+            presentador.cargarDatosInicio(token)
         }
     }
-
-    fun mostrarCargando(cargando: Boolean) {
-        btnSolicitarCita.isEnabled = !cargando
+    fun mostrarSaludo(texto: String) { //muestra el saludo
+        txtSaludo.text = texto
+    }
+    fun mostrarMatricula(texto: String) {// muestra la matricula del alumno
+        txtMatricula.text = texto
+    }
+    fun mostrarFechaHoy(fecha: String) { // muestra la fecha de hoy
+        txtFechaHoy.text = fecha
+    }
+    fun mostrarResumen(citasProximas: String, estadoSalud: String) { // muestra cuantas citas proximas hay
+        txtCitasProximasValor.text = citasProximas
+        txtEstadoSalud.text = estadoSalud
     }
 
-    fun mostrarDatosAlumno(alumno: AlumnoInicioModeloN?) {
-        if (alumno != null) {
-            val primerNombre = alumno.nombreCompleto.trim().split(" ").firstOrNull() ?: alumno.nombreCompleto
-            if (primerNombre.isNotEmpty()) {
-                tvSaludo.text = "Hola, $primerNombre"
-            }
-            if (alumno.matricula.isNotEmpty()) {
-                tvMatricula.text = "Matrícula ${alumno.matricula} · Alumno"
-            }
-        }
+    fun mostrarProximaCita(titulo: String, estado: String, fecha: String, medico: String) { // muestra la proxima cita
+        txtCita1Titulo.text = titulo
+        txtCita1Estado.text = estado
+        txtCita1Fecha.text = fecha
+        txtCita1Medico.text = medico
     }
-
-    fun mostrarProximaCita(cita: CitaModeloN?) {
-        if (cita != null) {
-            tvCitasProximasValor.text = "01"
-            tvEstadoSaludValor.text = cita.estado
-            tvCita1Titulo.text = cita.motivo
-            tvCita1Estado.text = cita.estado
-            tvCita1Fecha.text = "${cita.fecha} · ${cita.hora}"
-            tvCita1Medico.text = "Servicios Médicos UTHH"
-        } else {
-            tvCitasProximasValor.text = "00"
-            tvEstadoSaludValor.text = "Al día"
-            tvCita1Titulo.text = "Sin citas programadas"
-            tvCita1Estado.text = ""
-            tvCita1Fecha.text = "Agenda una consulta cuando lo necesites"
-            tvCita1Medico.text = ""
-        }
+    fun mostrarCampania1(titulo: String, detalle: String) { // muestra la 1ra campaña
+        txtCampania1Titulo.text = titulo
+        txtCampania1Detalle.text = detalle
     }
-    fun mostrarCampanias(campanias: List<CampaniaModeloN>) {
-        if (campanias.isNotEmpty()) {
-            tvAvisoVacunacionTitulo.text = campanias[0].titulo
-            tvAvisoVacunacion.text = "${campanias[0].fechaInicio} · ${campanias[0].lugar}"
-        } else {
-            tvAvisoVacunacionTitulo.text = "Sin avisos de salud"
-            tvAvisoVacunacion.text = ""
-        }
-
-        if (campanias.size > 1) {
-            tvAvisoBienestarTitulo.text = campanias[1].titulo
-            tvAvisoBienestar.text = "${campanias[1].fechaInicio} · ${campanias[1].lugar}"
-        } else {
-            tvAvisoBienestarTitulo.text = ""
-            tvAvisoBienestar.text = ""
-        }
+    fun mostrarCampania2(titulo: String, detalle: String) { // muestra la 2da campaña
+        txtCampania2Titulo.text = titulo
+        txtCampania2Detalle.text = detalle
     }
-    fun mostrarError(mensaje: String) {
+    fun mostrarError(mensaje: String) {// muestra el mensaje de error
         Toast.makeText(requireContext(), mensaje, Toast.LENGTH_LONG).show()
     }
 }
