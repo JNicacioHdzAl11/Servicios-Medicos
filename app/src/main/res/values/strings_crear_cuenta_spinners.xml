@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Crear cuenta: selectores académicos (las opciones vienen de la BD) -->
+    <string name="crear_cuenta_label_carrera">Carrera</string>
+    <string name="crear_cuenta_label_grupo">Grupo</string>
+    <string name="crear_cuenta_label_cuatrimestre">Cuatrimestre</string>
+    <!-- Texto opcional para la primera opción del adapter (ej. "Selecciona tu carrera") -->
+    <string name="crear_cuenta_selecciona_carrera">Selecciona tu carrera</string>
+    <string name="crear_cuenta_selecciona_grupo">Selecciona tu grupo</string>
+    <string name="crear_cuenta_selecciona_cuatrimestre">Selecciona tu cuatrimestre</string>
+</resources>

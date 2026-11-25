@@ -185,6 +185,93 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Selector: carrera (opciones desde la BD) -->
+        <TextView
+            android:id="@+id/txtLabelCarrera"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:labelFor="@id/spnCarrera"
+            android:text="@string/crear_cuenta_label_carrera"
+            android:textColor="@color/color_texto_label"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilMatricula" />
+
+        <Spinner
+            android:id="@+id/spnCarrera"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_spinner"
+            android:dropDownVerticalOffset="60dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:popupBackground="@drawable/bg_spinner_lista"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtLabelCarrera" />
+
+        <!-- Selector: grupo (opciones desde la BD) -->
+        <TextView
+            android:id="@+id/txtLabelGrupo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:labelFor="@id/spnGrupo"
+            android:text="@string/crear_cuenta_label_grupo"
+            android:textColor="@color/color_texto_label"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spnCarrera" />
+
+        <Spinner
+            android:id="@+id/spnGrupo"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_spinner"
+            android:dropDownVerticalOffset="60dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:popupBackground="@drawable/bg_spinner_lista"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtLabelGrupo" />
+
+        <!-- Selector: cuatrimestre (opciones desde la BD) -->
+        <TextView
+            android:id="@+id/txtLabelCuatrimestre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:labelFor="@id/spnCuatrimestre"
+            android:text="@string/crear_cuenta_label_cuatrimestre"
+            android:textColor="@color/color_texto_label"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spnGrupo" />
+
+        <Spinner
+            android:id="@+id/spnCuatrimestre"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_spinner"
+            android:dropDownVerticalOffset="60dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:popupBackground="@drawable/bg_spinner_lista"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtLabelCuatrimestre" />
+
         <!-- Campo: correo institucional -->
         <TextView
             android:id="@+id/tvLabelCorreo"
@@ -197,7 +284,7 @@
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilMatricula" />
+            app:layout_constraintTop_toBottomOf="@id/spnCuatrimestre" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilCorreo"
