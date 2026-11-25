@@ -16,10 +16,11 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.servicios_medicos.R
 import com.example.servicios_medicos.modelo.ConsultaMedicoModelo
 import com.example.servicios_medicos.modelo.ExpedienteMedicoData
-import com.example.servicios_medicos.presentador.clsExpedienteMedicoPresentador
+import com.example.servicios_medicos.modelo.clsExpedienteAlumnoModeloJM
+import com.example.servicios_medicos.presentador.clsExpedienteAlumPresentadorJM
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class ExpedienteAlumnoActivityJM : AppCompatActivity() {
+class ExpedienteAlumActivityJM : AppCompatActivity() {
 
     private lateinit var btnVolver: ImageView
     private lateinit var tvTitulo: TextView
@@ -39,7 +40,7 @@ class ExpedienteAlumnoActivityJM : AppCompatActivity() {
     private lateinit var btnIniciarNuevaConsulta: Button
     private lateinit var bnvNavegacion: BottomNavigationView
 
-    private lateinit var presenter: clsExpedienteMedicoPresentador
+    private lateinit var presenter: clsExpedienteAlumPresentadorJM
     private var tokenSesion: String = ""
     private var matriculaActual: String = ""
     private var consultasRecientes: List<ConsultaMedicoModelo> = emptyList()
@@ -76,7 +77,7 @@ class ExpedienteAlumnoActivityJM : AppCompatActivity() {
         tokenSesion = intent.getStringExtra("token") ?: ""
         matriculaActual = intent.getStringExtra("matricula") ?: ""
 
-        presenter = clsExpedienteMedicoPresentador(this)
+        presenter = clsExpedienteAlumPresentadorJM(this)
 
         if (tokenSesion.isNotEmpty() && matriculaActual.isNotEmpty()) {
             presenter.realizarBusqueda(tokenSesion, matriculaActual)

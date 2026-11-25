@@ -2,7 +2,7 @@ package com.example.servicios_medicos.modelo
 
 import com.google.gson.annotations.SerializedName
 
-data class dataExpedienteAlumno(
+data class dataExpedienteJM(
     @SerializedName("status")
     val status: Boolean = false,
 
@@ -65,4 +65,43 @@ data class ConsultaRecienteModelo(
 
     @SerializedName("id_receta")
     val idReceta: Int? = null
+)
+
+data class dataHistorialConsultas(
+    @SerializedName("status")
+    val status: Boolean = false,
+
+    @SerializedName("message")
+    val message: String = "",
+
+    @SerializedName("data")
+    val consultas: List<ConsultaRecienteModelo> = emptyList()
+)
+
+data class dataRecetaConsulta(
+    @SerializedName("status")
+    val status: Boolean = false,
+
+    @SerializedName("message")
+    val message: String = "",
+
+    @SerializedName("data")
+    val receta: RecetaDetalleModelo? = null
+)
+
+data class RecetaDetalleModelo(
+    @SerializedName("id_receta")
+    val idReceta: Int = 0,
+
+    @SerializedName("id_consulta")
+    val idConsulta: Int = 0,
+
+    @SerializedName("indicaciones")
+    val indicaciones: String = "",
+
+    @SerializedName("medicamentos")
+    val medicamentos: String = "",
+
+    @SerializedName("url_pdf")
+    val urlPdf: String = ""
 )

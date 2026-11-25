@@ -1,12 +1,12 @@
 package com.example.servicios_medicos.presentador
 
 import com.example.servicios_medicos.modelo.clsExpedienteAlumnoModeloJM
-import com.example.servicios_medicos.vista.ExpedienteAlumnoActivityJM
+import com.example.servicios_medicos.vista.ExpedienteAlumActivityJM
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class clsExpedienteMedicoPresentador(private val vista: ExpedienteAlumnoActivityJM) {
+class clsExpedienteAlumPresentadorJM(private val vista: ExpedienteAlumActivityJM) {
     private val modelo = clsExpedienteAlumnoModeloJM()
 
     fun realizarBusqueda(token: String, matricula: String) {

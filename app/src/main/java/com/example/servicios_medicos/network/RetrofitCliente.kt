@@ -8,26 +8,28 @@ import kotlin.jvm.java
 object RetrofitCliente {
     const val BASE_URL = "http://10.0.2.2/Servi_medicos/"
 
-    val apiService: ApiAutenticacionC by lazy {
-
+    private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(ApiAutenticacionC::class.java)
-
-<<<<<<< Updated upstream
     }
-}
-=======
-    val apiAutenticacion: ApiAutenticacionC =
+
+    val apiService: ApiAutenticacionC by lazy {
         retrofit.create(ApiAutenticacionC::class.java)
+    }
 
-    val apiAlumnoN: ApiAlumnoN =
+    val apiAutenticacion: ApiAutenticacionC by lazy {
+        retrofit.create(ApiAutenticacionC::class.java)
+    }
+
+    val apiAlumnoN: ApiAlumnoN by lazy {
         retrofit.create(ApiAlumnoN::class.java)
+    }
 
-    val apiRecetaJM: ApiRecetaJM=
+    val apiRecetaJM: ApiRecetaJM by lazy {
         retrofit.create(ApiRecetaJM::class.java)
+    }
 
     val apiConsultaJM: ApiConsultaJM by lazy {
         retrofit.create(ApiConsultaJM::class.java)
@@ -36,8 +38,8 @@ object RetrofitCliente {
     val apiExpedienteAlumJM: ApiExpedienteAlumJM by lazy {
         retrofit.create(ApiExpedienteAlumJM::class.java)
     }
+
     val apiExpedienteJM: ApiExpedienteJM by lazy {
         retrofit.create(ApiExpedienteJM::class.java)
     }
 }
->>>>>>> Stashed changes
