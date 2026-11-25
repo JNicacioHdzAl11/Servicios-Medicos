@@ -17,7 +17,12 @@ data class HorariosDataN(
     val fecha: String = "",
 
     @SerializedName("horarios")
-    val horarios: List<String> = emptyList()
+    val horarios: List<String> = emptyList(),
+    @SerializedName("doctora")
+    val doctora: String? = "",
+
+    @SerializedName("consultorio")
+    val consultorio: String? = ""
 )
 data class AgendarCitaRequestN(
     @SerializedName("fecha")
@@ -125,4 +130,11 @@ data class CancelarCitaResponseN(
 
     @SerializedName("message")
     val message: String = ""
+)
+
+data class TarjetaCitaN(
+    val motivo: String = "",
+    val estado: String = "",
+    val fecha: String = "",
+    val doctora: String = ""
 )

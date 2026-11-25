@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Buscar alumno (enfermería) -->
+    <string name="buscar_alumno_titulo">Alumnos</string>
+    <string name="buscar_alumno_pregunta">¿A quién atenderás hoy?</string>
+    <string name="buscar_alumno_descripcion">Encuentra al alumno e inicia su valoración.</string>
+    <string name="buscar_alumno_label_buscar">Buscar alumno</string>
+    <string name="buscar_alumno_hint">Nombre o matrícula</string>
+    <string name="buscar_alumno_iniciar_atencion">Iniciar atención</string>
+
+    <!-- Filtro de alumnos por cita -->
+    <string name="buscar_alumno_tipo_busqueda_j">Tipo de búsqueda</string>
+    <string-array name="buscar_alumno_opciones_j">
+        <item>Todos los alumnos</item>
+        <item>Alumnos con cita</item>
+    </string-array>
+    <string name="buscar_alumno_contador_j">%1$d de %2$d alumnos · Toca para actualizar</string>
+    <string name="buscar_alumno_filtro_no_disponible_j">Actualiza el PHP de listado para consultar alumnos con cita.</string>
+    <string name="buscar_alumno_consultando_j">Consultando alumnos…</string>
+
+    <!-- Toma de signos (enfermería) -->
+    <string name="toma_signos_titulo">Toma de signos</string>
+    <string name="toma_signos_temperatura">Temperatura</string>
+    <string name="toma_signos_frecuencia_cardiaca">Frec. cardiaca</string>
+    <string name="toma_signos_presion_arterial">Presión arterial</string>
+    <string name="toma_signos_saturacion">Saturación O₂</string>
+    <string name="toma_signos_peso">Peso</string>
+    <string name="toma_signos_frecuencia_respiratoria">Frec. respiratoria</string>
+    <string name="toma_signos_unidad_temperatura">°C</string>
+    <string name="toma_signos_unidad_frecuencia_cardiaca">lpm</string>
+    <string name="toma_signos_unidad_presion_arterial">mmHg</string>
+    <string name="toma_signos_unidad_saturacion">%</string>
+    <string name="toma_signos_unidad_peso">kg</string>
+    <string name="toma_signos_unidad_frecuencia_respiratoria">rpm</string>
+    <string name="toma_signos_observaciones">Observaciones de enfermería</string>
+    <string name="toma_signos_enviar_doctora">Enviar a la doctora</string>
+    <string name="toma_signos_nota">La valoración se añadirá al expediente del alumno.</string>
+    <string name="consulta_signos_vitales">Signos vitales</string>
+    <string name="comun_nav_alumnos">Alumnos</string>
+</resources>

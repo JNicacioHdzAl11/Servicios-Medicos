@@ -2,12 +2,14 @@ package com.example.servicios_medicos.vista
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.servicios_medicos.R
@@ -102,6 +104,32 @@ class DetalleCitaActivityN : AppCompatActivity() {
         txtFolioCita.text = folio
         txtMedico.text = medico
         txtConsultorio.text = consultorio
+        pintarEstado(txtEstadoCita, estado)
+    }
+
+    private fun pintarEstado(txtEstado: TextView, estado: String) { // pinta el estado de verde, rojo o gris
+        var color = R.color.color_texto_secundario
+        if (estado == "Pendiente") {
+            color = R.color.color_exito
+        }
+        if (estado == "Cancelada") {
+            color = R.color.color_peligro
+        }
+        txtEstado.setTextColor(ContextCompat.getColor(this, color))
+    }
+
+    fun activarCancelar(activo: Boolean) { // activa o apaga el boton cancelar cita
+        btnCancelarCita.isEnabled = activo
+        if (activo) {
+            btnCancelarCita.alpha = 1f
+        } else {
+            btnCancelarCita.alpha = 0.4f
+        }
+    }
+
+    fun mostrarVolverAAgendar() { // quita cancelar y cambia reprogramar por volver a agendar
+        btnCancelarCita.visibility = View.GONE
+        btnReprogramarCita.text = "Volver a agendar"
     }
 
     fun preguntarCancelar() { // abre una ventana para preguntar si quiere cancelar
@@ -122,14 +150,6 @@ class DetalleCitaActivityN : AppCompatActivity() {
         }
         ventana.show()
     }
-    fun activarCancelar(activo: Boolean) { // activa o apaga el boton cancelar cita
-        btnCancelarCita.isEnabled = activo
-        if (activo) {
-            btnCancelarCita.alpha = 1f
-        } else {
-            btnCancelarCita.alpha = 0.4f
-        }
-    }
 
     fun mostrarCargando(cargando: Boolean) { // cambia el boton cancelar mientras se cancela la cita
         if (cargando) {
@@ -140,9 +160,10 @@ class DetalleCitaActivityN : AppCompatActivity() {
         }
     }
 
-    fun abrirAgendarCita(token: String) { // abre agendar cita
+    fun abrirAgendarCita(token: String, motivo: String) { // abre agendar cita con el motivo de esta cita
         val intent = Intent(this, AgendarCitaActivityN::class.java)
         intent.putExtra("token", token)
+        intent.putExtra("motivo", motivo)
         startActivity(intent)
     }
 
@@ -154,4 +175,3 @@ class DetalleCitaActivityN : AppCompatActivity() {
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 }
-

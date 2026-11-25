@@ -2,8 +2,12 @@ package com.example.servicios_medicos.vista
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -27,7 +31,7 @@ class AgendarCitaActivityN : AppCompatActivity() {
     private lateinit var txtDiasLetras: List<TextView>
     private lateinit var txtDiasNumeros: List<TextView>
     private lateinit var txtFechaSeleccionada: TextView
-    private lateinit var btnHorarios: List<MaterialButton>
+    private lateinit var spnHorarios: Spinner
     private lateinit var txtResumenTitulo: TextView
     private lateinit var txtResumenHorario: TextView
     private lateinit var txtResumenMedico: TextView
@@ -83,14 +87,7 @@ class AgendarCitaActivityN : AppCompatActivity() {
             findViewById(R.id.tvDiaNumero7)
         )
         txtFechaSeleccionada = findViewById(R.id.tvFechaSeleccionada)
-        btnHorarios = listOf(
-            findViewById(R.id.btnHorario0900),
-            findViewById(R.id.btnHorario0930),
-            findViewById(R.id.btnHorario1000),
-            findViewById(R.id.btnHorario1030),
-            findViewById(R.id.btnHorario1100),
-            findViewById(R.id.btnHorario1130)
-        )
+        spnHorarios = findViewById(R.id.spnHorarios)
         txtResumenTitulo = findViewById(R.id.tvResumenTitulo)
         txtResumenHorario = findViewById(R.id.tvResumenHorario)
         txtResumenMedico = findViewById(R.id.tvResumenMedico)
@@ -102,7 +99,8 @@ class AgendarCitaActivityN : AppCompatActivity() {
         configurarListeners()
 
         val token = intent.getStringExtra("token")
-        presentador.iniciarPantalla(token)
+        val motivo = intent.getStringExtra("motivo")
+        presentador.iniciarPantalla(token, motivo)
     }
 
     private fun configurarListeners() { // dice que hace cada boton, dia, horario y el menu de abajo
@@ -112,7 +110,7 @@ class AgendarCitaActivityN : AppCompatActivity() {
 
         for (i in 0 until btnMotivosCita.size) {
             btnMotivosCita[i].setOnClickListener {
-                presentador.seleccionarMotivoCita(i)
+                presentador.elegirMotivo(i)
             }
         }
 
@@ -124,14 +122,15 @@ class AgendarCitaActivityN : AppCompatActivity() {
         }
         for (i in 0 until layDias.size) {
             layDias[i].setOnClickListener {
-                presentador.seleccionarDia(i)
+                presentador.elegirDia(i)
             }
         }
 
-        for (i in 0 until btnHorarios.size) {
-            btnHorarios[i].setOnClickListener {
-                presentador.seleccionarHorario(btnHorarios[i].text.toString())
+        spnHorarios.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                presentador.elegirHorario(position)
             }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
         btnConfirmarCita.setOnClickListener {
@@ -162,7 +161,7 @@ class AgendarCitaActivityN : AppCompatActivity() {
         finish()
     }
 
-    fun marcarMotivoCita(posicion: Int) { // marca el cuadrito del motivo que eligio el alumno
+    fun marcarMotivo(posicion: Int) { // marca el cuadrito del motivo que eligio el alumno
         for (i in 0 until btnMotivosCita.size) {
             if (i == posicion) {
                 btnMotivosCita[i].isChecked = true
@@ -176,15 +175,6 @@ class AgendarCitaActivityN : AppCompatActivity() {
         txtMes.text = texto
     }
 
-    fun activarSemanaAnterior(activo: Boolean) { // activa o apaga la flecha de semana anterior
-        btnSemanaAnterior.isEnabled = activo
-        if (activo) {
-            btnSemanaAnterior.alpha = 1f
-        } else {
-            btnSemanaAnterior.alpha = 0.3f
-        }
-    }
-
     fun mostrarSemana(dias: List<DiaSemanaN>) { // muestra los 7 dias de la semana
         for (i in 0 until dias.size) {
             txtDiasLetras[i].text = dias[i].letra
@@ -195,6 +185,24 @@ class AgendarCitaActivityN : AppCompatActivity() {
             } else {
                 layDias[i].alpha = 0.4f
             }
+        }
+    }
+
+    fun activarFlechaAtras(activo: Boolean) { // prende o apaga la flecha para regresar de semana
+        btnSemanaAnterior.isEnabled = activo
+        if (activo) {
+            btnSemanaAnterior.alpha = 1f
+        } else {
+            btnSemanaAnterior.alpha = 0.3f
+        }
+    }
+
+    fun activarFlechaAdelante(activo: Boolean) { // prende o apaga la flecha para avanzar de semana
+        btnSemanaSiguiente.isEnabled = activo
+        if (activo) {
+            btnSemanaSiguiente.alpha = 1f
+        } else {
+            btnSemanaSiguiente.alpha = 0.3f
         }
     }
 
@@ -215,32 +223,23 @@ class AgendarCitaActivityN : AppCompatActivity() {
         }
     }
 
-    fun mostrarFechaSeleccionada(texto: String) { // muestra el texto del dia elegido
+    fun mostrarDiaElegido(texto: String) { // muestra el texto del dia que eligio el alumno
         txtFechaSeleccionada.text = texto
     }
 
-    fun mostrarHorarios(horasLibres: List<String>) { // activa solo los horarios libres
-        for (i in 0 until btnHorarios.size) {
-            val hora = btnHorarios[i].text.toString()
-            btnHorarios[i].isChecked = false
-            if (horasLibres.contains(hora)) {
-                btnHorarios[i].isEnabled = true
-                btnHorarios[i].alpha = 1f
-            } else {
-                btnHorarios[i].isEnabled = false
-                btnHorarios[i].alpha = 0.4f
-            }
+    fun mostrarHorarios(horasLibres: List<String>) { // llena el spinner con las horas libres del dia
+        val opciones = mutableListOf<String>()
+        if (horasLibres.isEmpty()) {
+            opciones.add("Sin horarios disponibles")
+        } else {
+            opciones.add("Selecciona un horario")
         }
-    }
-
-    fun marcarHorario(hora: String) { // marca la hora que eligio el alumno
-        for (i in 0 until btnHorarios.size) {
-            if (btnHorarios[i].text.toString() == hora) {
-                btnHorarios[i].isChecked = true
-            } else {
-                btnHorarios[i].isChecked = false
-            }
+        for (hora in horasLibres) {
+            opciones.add(hora)
         }
+        val adapter = ArrayAdapter(this, R.layout.item_spinner, opciones)
+        adapter.setDropDownViewResource(R.layout.item_spinner_lista)
+        spnHorarios.adapter = adapter
     }
 
     fun mostrarResumen(titulo: String, horario: String, medico: String) { // muestra el resumen de la cita
@@ -267,6 +266,3 @@ class AgendarCitaActivityN : AppCompatActivity() {
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 }
-
-
-

@@ -1,4 +1,3 @@
-
 package com.example.servicios_medicos.modelo
 
 import com.google.gson.annotations.SerializedName
@@ -8,10 +7,14 @@ data class dataCrearCuentaC(
     val matricula: String,
     val correo: String,
     val contrasena: String,
-    val confirmar_contrasena: String
+    val confirmar_contrasena: String,
+    val id_area: Int,
+    val id_grupo: Int,
+    val id_cuatrimestre: Int
 )
 
 data class dataCrearCuentaRespuestaC(
+
     @SerializedName("status")
     val estado: Boolean = false,
 

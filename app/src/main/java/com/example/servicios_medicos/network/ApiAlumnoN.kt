@@ -3,7 +3,7 @@ package com.example.servicios_medicos.network
 import com.example.servicios_medicos.modelo.AgendarCitaRequestN
 import com.example.servicios_medicos.modelo.AgendarCitaResponseN
 import com.example.servicios_medicos.modelo.HorariosDisponiblesResponseN
-import com.example.servicios_medicos.modelo.dataInicioAlumnoN
+import com.example.servicios_medicos.Data.dataInicioAlumnoN
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

@@ -1,20 +1,60 @@
 package com.example.servicios_medicos.presentador
+
 import com.example.servicios_medicos.modelo.clsCrearCuentaModeloC
 import com.example.servicios_medicos.vista.CrearCuentaActivityC
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+
 class clsCrearCuentaPresentadorC(private val vista: CrearCuentaActivityC) {
 
     private val modelo = clsCrearCuentaModeloC()
+
+    fun cargarCatalogos() {
+
+        vista.mostrarCargandoCatalogos(true)
+
+        CoroutineScope(Dispatchers.Main).launch {
+
+            try {
+
+                val respuesta = modelo.obtenerCatalogos()
+                val resultado = respuesta.body()
+
+                if (respuesta.isSuccessful &&
+                    resultado?.estado == true &&
+                    resultado.datos != null) {
+
+                    vista.mostrarCatalogos(resultado.datos)
+
+                } else {
+
+                    vista.mostrarError(
+                        resultado?.mensaje ?: "No se pudieron cargar los campos"
+                    )
+                }
+
+            } catch (e: Exception) {
+
+                vista.mostrarError("Error de conexión con el servidor")
+
+            } finally {
+
+                vista.mostrarCargandoCatalogos(false)
+            }
+        }
+    }
 
     fun crearCuenta(
         nombre: String,
         matricula: String,
         correo: String,
         contrasena: String,
-        confirmar: String
+        confirmar: String,
+        idArea: Int,
+        idGrupo: Int,
+        idCuatrimestre: Int
     ) {
 
         if (nombre.isBlank() ||
@@ -26,29 +66,34 @@ class clsCrearCuentaPresentadorC(private val vista: CrearCuentaActivityC) {
             vista.mostrarError("Completa todos los campos")
             return
         }
-        if (nombre.trim().split(Regex("\\s+")).size < 2) {
-            vista.mostrarError(
-                "Escribe tu nombre y apellido paterno"
-            )
+
+        if (idArea <= 0 || idGrupo <= 0 || idCuatrimestre <= 0) {
+
+            vista.mostrarError("Selecciona los campos académicos")
             return
         }
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
+
+        if (nombre.trim().split(Regex("\\s+")).size < 2) {
+
+            vista.mostrarError("Escribe tu nombre y apellido paterno")
+            return
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(correo.trim()).matches()) {
 
             vista.mostrarError("Correo no válido")
             return
         }
 
         if (contrasena.length < 8) {
-            vista.mostrarError(
-                "La contraseña debe tener mínimo 8 caracteres"
-            )
+
+            vista.mostrarError("La contraseña debe tener mínimo 8 caracteres")
             return
         }
 
         if (contrasena != confirmar) {
-            vista.mostrarError(
-                "Las contraseñas no coinciden"
-            )
+
+            vista.mostrarError("Las contraseñas no coinciden")
             return
         }
 
@@ -63,32 +108,34 @@ class clsCrearCuentaPresentadorC(private val vista: CrearCuentaActivityC) {
                     matricula.trim(),
                     correo.trim(),
                     contrasena,
-                    confirmar
+                    confirmar,
+                    idArea,
+                    idGrupo,
+                    idCuatrimestre
                 )
 
                 val resultado = respuesta.body()
 
-                if (respuesta.isSuccessful &&
-                    resultado?.estado == true) {
+                if (respuesta.isSuccessful && resultado?.estado == true) {
 
                     vista.mostrarCuentaCreada()
 
                 } else {
 
-                    var mensaje = "No se pudo crear la cuenta"
+                    var mensaje = resultado?.mensaje ?: "No se pudo crear la cuenta"
 
-                    if (resultado != null) {
-                        mensaje = resultado.mensaje
-                    } else {
-                        val error = respuesta.errorBody()?.string()
+                    val error = respuesta.errorBody()?.string()
 
-                        if (error != null) {
-                            try {
-                                mensaje = JSONObject(error)
-                                    .optString("message", mensaje)
-                            } catch (e: Exception) {
-                                mensaje = "Error del servidor"
-                            }
+                    if (error != null) {
+
+                        try {
+
+                            mensaje = JSONObject(error)
+                                .optString("message", mensaje)
+
+                        } catch (e: Exception) {
+
+                            mensaje = "Error del servidor"
                         }
                     }
 
@@ -97,15 +144,12 @@ class clsCrearCuentaPresentadorC(private val vista: CrearCuentaActivityC) {
 
             } catch (e: Exception) {
 
-                vista.mostrarError(
-                    "Error de conexión con el servidor"
-                )
+                vista.mostrarError("Error de conexión con el servidor")
 
             } finally {
 
                 vista.mostrarCargando(false)
             }
-
         }
     }
 }

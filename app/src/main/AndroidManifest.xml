@@ -13,76 +13,94 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Servicios_medicos">
+
         <activity
             android:name=".vista.MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.LoginActivityC"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
         <activity
             android:name=".vista.CrearCuentaActivityC"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.RecuperarContrasenaActivityC"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.ConfiguracionActivityC"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.TerminosActivityC"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.PrivacidadActivityC"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.PreguntasFrecuentesActivityC"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.AlumnoMainActivityN"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.DetalleCitaActivityN"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.AgendarCitaActivityN"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.ComprobanteIngresoActivityN"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.DetalleCampaniaActivityN"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".Vista.EnfermeriaActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".EnfermeraMainJ"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".vista.EnfermeraMainActivityJ"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- Búsqueda de alumnos y toma de signos de enfermería. -->
+        <activity android:name=".vista.BuscarAlumnoActivityJ" android:exported="false" android:theme="@style/Theme.EnfermeriaJ" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".vista.TomaSignosActivityJ" android:exported="false" android:theme="@style/Theme.EnfermeriaJ" android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

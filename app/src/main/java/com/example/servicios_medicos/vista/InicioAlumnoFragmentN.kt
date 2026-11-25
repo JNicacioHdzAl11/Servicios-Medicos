@@ -20,6 +20,7 @@ class InicioAlumnoFragmentN : Fragment() {
     private lateinit var txtFechaHoy: TextView
     private lateinit var txtCitasProximasValor: TextView
     private lateinit var txtEstadoSalud: TextView
+    private lateinit var txtEstadoDetalle: TextView
     private lateinit var txtCita1Titulo: TextView
     private lateinit var txtCita1Estado: TextView
     private lateinit var txtCita1Fecha: TextView
@@ -34,9 +35,8 @@ class InicioAlumnoFragmentN : Fragment() {
     private lateinit var txtCampania2Detalle: TextView
     private lateinit var presentador: clsInicioAlumnoPresentadorN
     private var token = ""
-    private var regresoDeAgendar = false
 
-    override fun onCreateView( // carga el diseño XML del fragment
+    override fun onCreateView( // carga el diseño de la pantalla de inicio
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +44,7 @@ class InicioAlumnoFragmentN : Fragment() {
         return inflater.inflate(R.layout.fragment_inicio_alumno_n, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // enlaza el XML, crea el presentador y arranca la pantalla
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // conecta los elementos de la pantalla y arranca el inicio del alumno
         super.onViewCreated(view, savedInstanceState)
 
         txtSaludo = view.findViewById(R.id.txtSaludo)
@@ -52,6 +52,7 @@ class InicioAlumnoFragmentN : Fragment() {
         txtFechaHoy = view.findViewById(R.id.txtFechaHoy)
         txtCitasProximasValor = view.findViewById(R.id.txtCitasProximasValor)
         txtEstadoSalud = view.findViewById(R.id.txtEstadoSaludValor)
+        txtEstadoDetalle = view.findViewById(R.id.tvEstadoSaludEtiqueta)
         txtCita1Titulo = view.findViewById(R.id.txtCita1Titulo)
         txtCita1Estado = view.findViewById(R.id.txtCita1Estado)
         txtCita1Fecha = view.findViewById(R.id.txtCita1Fecha)
@@ -60,77 +61,82 @@ class InicioAlumnoFragmentN : Fragment() {
         btnSolicitarCita = view.findViewById(R.id.btnSolicitarCita)
         btnRegresar = view.findViewById(R.id.ibRegresar)
         btnAjustes = view.findViewById(R.id.ibAjustes)
+        btnAjustes.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val destino = Intent(requireContext(), ConfiguracionActivityC::class.java)
+                destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
+                destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
+                startActivity(destino)
+            }
+        })
         // los id del XML se quedan igual, solo cambia el nombre de la variable
         txtCampania1Titulo = view.findViewById(R.id.txtAvisoVacunacionTitulo)
         txtCampania1Detalle = view.findViewById(R.id.txtAvisoVacunacion)
         txtCampania2Titulo = view.findViewById(R.id.txtAvisoBienestarTitulo)
         txtCampania2Detalle = view.findViewById(R.id.txtAvisoBienestar)
 
-        btnRegresar.setOnClickListener { // regresa al login
+        configurarListeners()
+
+        presentador = clsInicioAlumnoPresentadorN(this)
+        val tokenRecibido = requireActivity().intent.getStringExtra("token")
+        if (tokenRecibido != null) {
+            token = tokenRecibido
+        }
+        presentador.iniciarPantalla(token)
+    }
+    private fun configurarListeners() { // dice que hace cada boton, regresar cierra la sesion y no deja volver atras
+        btnRegresar.setOnClickListener {
             val intent = Intent(requireContext(), LoginActivityC::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             requireActivity().finish()
         }
-        btnSolicitarCita.setOnClickListener { // abre agendar cita
+        btnSolicitarCita.setOnClickListener {
             val intent = Intent(requireContext(), AgendarCitaActivityN::class.java)
             intent.putExtra("token", token)
-            regresoDeAgendar = true
             startActivity(intent)
         }
-        txtVerTodasCitas.setOnClickListener { // abre mis citas desde el menu de abajo
+        txtVerTodasCitas.setOnClickListener {
             val menu = requireActivity().findViewById<BottomNavigationView>(R.id.bnvNavegacion)
             menu.selectedItemId = R.id.nav_citas
         }
-        presentador = clsInicioAlumnoPresentadorN(this)
-        val intent = requireActivity().intent
-        val tokenRecibido = intent.getStringExtra("token")
-        if (tokenRecibido != null) {
-            token = tokenRecibido
-        }
-        val nombre = intent.getStringExtra("nombre")
-        var matricula = intent.getStringExtra("matricula")
-        if (matricula == null) {
-            matricula = intent.getStringExtra("identificador")
-        }
-        presentador.iniciarPantalla(token, nombre, matricula)
     }
-    override fun onResume() { // al regresar de agendar cita se recargan los datos
+    override fun onResume() { // carga los datos cada vez que se ve la pantalla
         super.onResume()
-        if (regresoDeAgendar && token.isNotEmpty()) {
-            regresoDeAgendar = false
-            presentador.cargarDatosInicio(token)
-        }
+        presentador.cargarDatosInicio()
     }
-    fun mostrarSaludo(texto: String) { //muestra el saludo
+    fun mostrarSaludo(texto: String) { // muestra el saludo con el nombre del alumno
         txtSaludo.text = texto
     }
-    fun mostrarMatricula(texto: String) {// muestra la matricula del alumno
+    fun mostrarMatricula(texto: String) { // muestra la matricula del alumno
         txtMatricula.text = texto
     }
     fun mostrarFechaHoy(fecha: String) { // muestra la fecha de hoy
         txtFechaHoy.text = fecha
     }
-    fun mostrarResumen(citasProximas: String, estadoSalud: String) { // muestra cuantas citas proximas hay
+    fun mostrarResumen(citasProximas: String, estadoSalud: String, pendientes: String) { // muestra cuantas citas proximas hay, el estado del alumno y sus pendientes
         txtCitasProximasValor.text = citasProximas
         txtEstadoSalud.text = estadoSalud
+        txtEstadoDetalle.text = pendientes
     }
 
-    fun mostrarProximaCita(titulo: String, estado: String, fecha: String, medico: String) { // muestra la proxima cita
+    fun mostrarProximaCita(titulo: String, estado: String, fecha: String, medico: String) { // muestra la tarjeta de tu proxima cita
         txtCita1Titulo.text = titulo
         txtCita1Estado.text = estado
         txtCita1Fecha.text = fecha
         txtCita1Medico.text = medico
     }
-    fun mostrarCampania1(titulo: String, detalle: String) { // muestra la 1ra campaña
-        txtCampania1Titulo.text = titulo
-        txtCampania1Detalle.text = detalle
+    fun mostrarCampania(numero: Int, titulo: String, detalle: String) { // muestra la campaña 1 o 2 de salud
+        if (numero == 1) {
+            txtCampania1Titulo.text = titulo
+            txtCampania1Detalle.text = detalle
+        } else {
+            txtCampania2Titulo.text = titulo
+            txtCampania2Detalle.text = detalle
+        }
     }
-    fun mostrarCampania2(titulo: String, detalle: String) { // muestra la 2da campaña
-        txtCampania2Titulo.text = titulo
-        txtCampania2Detalle.text = detalle
-    }
-    fun mostrarError(mensaje: String) {// muestra el mensaje de error
+    fun mostrarError(mensaje: String) { // muestra un mensaje cuando algo sale mal
         Toast.makeText(requireContext(), mensaje, Toast.LENGTH_LONG).show()
     }
 }
+

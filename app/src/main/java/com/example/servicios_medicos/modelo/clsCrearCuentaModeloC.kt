@@ -1,4 +1,3 @@
-
 package com.example.servicios_medicos.modelo
 
 import com.example.servicios_medicos.network.RetrofitCliente
@@ -6,12 +5,21 @@ import retrofit2.Response
 
 class clsCrearCuentaModeloC {
 
+    suspend fun obtenerCatalogos(): Response<dataCatalogosRespuestaC> {
+
+        return RetrofitCliente.apiAutenticacion
+            .obtenerCatalogos()
+    }
+
     suspend fun crearCuenta(
         nombre: String,
         matricula: String,
         correo: String,
         contrasena: String,
-        confirmar: String
+        confirmar: String,
+        idArea: Int,
+        idGrupo: Int,
+        idCuatrimestre: Int
     ): Response<dataCrearCuentaRespuestaC> {
 
         val datos = dataCrearCuentaC(
@@ -19,7 +27,10 @@ class clsCrearCuentaModeloC {
             matricula,
             correo,
             contrasena,
-            confirmar
+            confirmar,
+            idArea,
+            idGrupo,
+            idCuatrimestre
         )
 
         return RetrofitCliente.apiAutenticacion
