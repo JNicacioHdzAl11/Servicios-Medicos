@@ -4,40 +4,26 @@ import com.example.servicios_medicos.network.RetrofitCliente
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class clsAgendarCitaModeloN {
-    suspend fun obtenerHorariosDisponibles(token: String, fecha: String): Response<HorariosDisponiblesResponseN> { // llama a la api horarios disponibles
-        return RetrofitCliente.apiAlumnoN.obtenerHorariosDisponibles("Bearer $token", fecha)
-    }
-    suspend fun agendarCita(token: String, fecha: String, hora: String, motivo: String): Response<AgendarCitaResponseN> { // llama a la api agendar cita
-        val solicitud = AgendarCitaRequestN(fecha, hora, motivo)
-        return RetrofitCliente.apiAlumnoN.agendarCita("Bearer $token", solicitud)
-    }
-    fun obtenerMotivosCita(): List<String> { // regresa la lista de motivos de la cita
+
+    fun listaDeMotivos(): List<String> { // regresa los motivos que puede elegir el alumno
         return listOf("Consulta general", "Nutrición", "Psicología", "Otro motivo")
     }
-    fun obtenerHorasLibres(datos: HorariosDisponiblesResponseN): List<String> { // saca las horas libres y las deja como 09:00
-        val horasLibres = mutableListOf<String>()
-        val contenido = datos.data
-        if (contenido != null) {
-            for (hora in contenido.horarios) {
-                if (hora.length >= 5) {
-                    horasLibres.add(hora.substring(0, 5))
-                }
-            }
-        }
-        return horasLibres
+
+    fun fechaDeHoy(): String { // regresa la fecha de hoy como la usa el servidor
+        val formato = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        return formato.format(Date())
     }
-    fun obtenerHoy(): Calendar { // regresa la fecha de hoy sin hora
-        val hoy = Calendar.getInstance()
-        hoy.set(Calendar.HOUR_OF_DAY, 0)
-        hoy.set(Calendar.MINUTE, 0)
-        hoy.set(Calendar.SECOND, 0)
-        hoy.set(Calendar.MILLISECOND, 0)
-        return hoy
+
+    fun horaDeAhorita(): String { // regresa la hora de ahorita
+        val formato = SimpleDateFormat("HH:mm", Locale.US)
+        return formato.format(Date())
     }
-    fun obtenerLunes(fecha: Calendar): Calendar { // busca el lunes de la semana
+
+    fun buscarLunesDeLaSemana(fecha: Calendar): Calendar { // va hacia atras hasta encontrar el lunes
         val lunes = Calendar.getInstance()
         lunes.time = fecha.time
         while (lunes.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
@@ -45,63 +31,125 @@ class clsAgendarCitaModeloN {
         }
         return lunes
     }
-    fun cambiarSemana(lunes: Calendar, cantidad: Int): Calendar { // avanza o regresa una semana
+
+    fun moverSemanas(lunes: Calendar, semanas: Int): Calendar { // suma las semanas que se le pidan al lunes
         val nuevoLunes = Calendar.getInstance()
         nuevoLunes.time = lunes.time
-        nuevoLunes.add(Calendar.DAY_OF_MONTH, 7 * cantidad)
+        nuevoLunes.add(Calendar.DAY_OF_MONTH, 7 * semanas)
         return nuevoLunes
     }
-    fun obtenerFechaDelDia(lunes: Calendar, numeroDia: Int): Calendar { // regresa la fecha de un dia de la semana
+
+    fun fechaDelDia(lunes: Calendar, numeroDia: Int): Calendar { // regresa la fecha de un dia de la semana
         val fecha = Calendar.getInstance()
         fecha.time = lunes.time
         fecha.add(Calendar.DAY_OF_MONTH, numeroDia)
         return fecha
     }
-    fun obtenerDiasSemana(lunes: Calendar): List<DiaSemanaN> { // arma los 7 dias de la semana del calendario
-        val letras = listOf("L", "M", "M", "J", "V", "S", "D")
-        val hoy = obtenerHoy()
-        val dias = mutableListOf<DiaSemanaN>()
-        for (i in 0 until 7) {
-            val fecha = obtenerFechaDelDia(lunes, i)
-            val numero = fecha.get(Calendar.DAY_OF_MONTH).toString()
-            val fechaServidor = convertirFechaServidor(fecha)
-            var habilitado = true
-            if (fecha.before(hoy)) {
-                habilitado = false
-            }
-            dias.add(DiaSemanaN(letras[i], numero, fechaServidor, habilitado))
-        }
-        return dias
-    }
-    fun convertirFechaServidor(fecha: Calendar): String { // convierte la fecha al formato del servidor
+
+    fun fechaParaServidor(fecha: Calendar): String { // cambia la fecha como la pide el servidor
         val formato = SimpleDateFormat("yyyy-MM-dd", Locale.US)
         return formato.format(fecha.time)
     }
-    fun convertirTextoAFecha(texto: String): Calendar { // convierte el texto  a fecha
-        val formato = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-        val fecha = Calendar.getInstance()
-        val fechaLeida = formato.parse(texto)
-        if (fechaLeida != null) {
-            fecha.time = fechaLeida
+
+    fun armarDiasDeLaSemana(lunes: Calendar): List<DiaSemanaN> { // arma los 7 dias, solo se puede de lunes a viernes y desde hoy
+        val letras = listOf("L", "M", "M", "J", "V", "S", "D")
+        val hoy = fechaDeHoy()
+        val dias = mutableListOf<DiaSemanaN>()
+        for (i in 0 until 7) {
+            val fecha = fechaDelDia(lunes, i)
+            val numero = fecha.get(Calendar.DAY_OF_MONTH).toString()
+            val textoFecha = fechaParaServidor(fecha)
+            var sePuede = true
+            if (textoFecha < hoy || i >= 5) {
+                sePuede = false
+            }
+            dias.add(DiaSemanaN(letras[i], numero, textoFecha, sePuede))
         }
-        return fecha
+        return dias
     }
-    fun obtenerTextoMes(fecha: Calendar): String { // arma el texto del mes
+
+    fun textoDelMes(fecha: Calendar): String { // arma el nombre del mes y el año
         val formato = SimpleDateFormat("MMMM yyyy", Locale("es", "MX"))
         val texto = formato.format(fecha.time)
         return ponerMayuscula(texto)
     }
-    fun obtenerTextoFechaSeleccionada(fecha: Calendar): String { // arma el texto del dia
+
+    fun textoDiaElegido(fecha: Calendar): String { // arma el texto del dia que eligio el alumno
         val formato = SimpleDateFormat("EEEE d 'de' MMMM", Locale("es", "MX"))
         val texto = formato.format(fecha.time)
         return ponerMayuscula(texto) + " · Horarios disponibles"
     }
-    fun obtenerTextoFechaCorta(fecha: Calendar): String { // arma la fecha corta como 12 nov 2026
-        val formato = SimpleDateFormat("d MMM yyyy", Locale("es", "MX"))
-        val texto = formato.format(fecha.time)
-        return texto.replace(".", "")
+
+    fun textoFechaCorta(fecha: Calendar): String { // arma la fecha corta igual que en mis citas
+        val dias = listOf("Dom.", "Lun.", "Mar.", "Mié.", "Jue.", "Vie.", "Sáb.")
+        val meses = listOf("ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic")
+        val dia = dias[fecha.get(Calendar.DAY_OF_WEEK) - 1]
+        val numero = fecha.get(Calendar.DAY_OF_MONTH)
+        val mes = meses[fecha.get(Calendar.MONTH)]
+        return dia + " " + numero + " " + mes
     }
-    fun calcularHoraFin(hora: String): String { // suma 30 minutos a la hora de la cita
+
+    private fun ponerMayuscula(texto: String): String { // pone en mayuscula la primera letra
+        if (texto.isEmpty()) {
+            return texto
+        }
+        return texto.substring(0, 1).uppercase() + texto.substring(1)
+    }
+
+    suspend fun tieneCitaEseDia(token: String, fecha: String): Boolean { // revisa si el alumno ya tiene una cita pendiente ese dia
+        val respuesta = RetrofitCliente.apiAlumnoN.listarCitas("Bearer $token")
+        val datos = respuesta.body()
+        if (respuesta.isSuccessful && datos != null) {
+            val citas = datos.data
+            if (citas != null) {
+                for (cita in citas) {
+                    if (cita.fecha == fecha && cita.estado == "Pendiente") {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+
+    suspend fun pedirHorarios(token: String, fecha: String): Response<HorariosDisponiblesResponseN> { // llama a la api horarios disponibles
+        return RetrofitCliente.apiAlumnoN.obtenerHorariosDisponibles("Bearer $token", fecha)
+    }
+
+    fun sacarHorasLibres(datos: HorariosDisponiblesResponseN, fecha: String): List<String> { // saca las horas libres sin las que ya pasaron hoy
+        val horasLibres = mutableListOf<String>()
+        val hoy = fechaDeHoy()
+        val ahorita = horaDeAhorita()
+        val contenido = datos.data
+        if (contenido != null) {
+            for (hora in contenido.horarios) {
+                if (hora.length >= 5) {
+                    val horaCorta = hora.substring(0, 5)
+                    if (fecha != hoy || horaCorta > ahorita) {
+                        horasLibres.add(horaCorta)
+                    }
+                }
+            }
+        }
+        return horasLibres
+    }
+
+    fun textoDoctora(datos: HorariosDisponiblesResponseN): String { // arma el nombre de la doctora y su consultorio
+        val contenido = datos.data
+        if (contenido != null) {
+            val doctora = contenido.doctora
+            val consultorio = contenido.consultorio
+            if (doctora != null && doctora.isNotEmpty()) {
+                if (consultorio != null && consultorio.isNotEmpty()) {
+                    return doctora + " · " + consultorio
+                }
+                return doctora
+            }
+        }
+        return "Médico por asignar · Servicio Médico"
+    }
+
+    fun sumarMediaHora(hora: String): String { // suma 30 minutos a la hora de la cita
         if (hora.length < 5) {
             return hora
         }
@@ -121,26 +169,27 @@ class clsAgendarCitaModeloN {
         }
         return textoHoras + ":" + textoMinutos
     }
-    fun obtenerResumen(motivo: String, fecha: String, hora: String): List<String> { // arma los 3 textos del resumen de la cita
-        val resumen = mutableListOf<String>()
-        if (fecha.isNotEmpty()) {
-            val fechaCalendario = convertirTextoAFecha(fecha)
-            resumen.add(motivo + " · " + obtenerTextoFechaCorta(fechaCalendario))
-        } else {
-            resumen.add(motivo + " · Selecciona una fecha")
+
+    fun textoResumenMotivo(motivo: String, textoFecha: String): String { // arma el motivo y la fecha del resumen
+        var texto = motivo
+        if (motivo.isEmpty()) {
+            texto = "Selecciona un motivo"
         }
-        if (hora.isNotEmpty()) {
-            resumen.add(hora + "–" + calcularHoraFin(hora) + " · Servicios Médicos")
-        } else {
-            resumen.add("Selecciona un horario")
+        if (textoFecha.isEmpty()) {
+            return texto + " · Selecciona una fecha"
         }
-        resumen.add("Médico por asignar · Campus")
-        return resumen
+        return texto + " · " + textoFecha
     }
-    private fun ponerMayuscula(texto: String): String { // pone en mayuscula la primera letra
-        if (texto.isEmpty()) {
-            return texto
+
+    fun textoResumenHorario(hora: String): String { // arma la hora de inicio y fin del resumen
+        if (hora.isEmpty()) {
+            return "Selecciona un horario"
         }
-        return texto.substring(0, 1).uppercase() + texto.substring(1)
+        return hora + "–" + sumarMediaHora(hora) + " · Servicio Médico"
+    }
+
+    suspend fun guardarCita(token: String, fecha: String, hora: String, motivo: String): Response<AgendarCitaResponseN> { // llama a la api agendar cita
+        val solicitud = AgendarCitaRequestN(fecha, hora, motivo)
+        return RetrofitCliente.apiAlumnoN.agendarCita("Bearer $token", solicitud)
     }
 }

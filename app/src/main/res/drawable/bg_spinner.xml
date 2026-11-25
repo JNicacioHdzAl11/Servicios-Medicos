@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-</selector>
+<!-- fondo blanco redondeado con borde y flecha para el spinner -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/color_fondo" />
+            <corners android:radius="12dp" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/color_borde" />
+        </shape>
+    </item>
+    <item
+        android:width="24dp"
+        android:height="24dp"
+        android:end="12dp"
+        android:gravity="end|center_vertical"
+        android:drawable="@android:drawable/arrow_down_float" />
+</layer-list>

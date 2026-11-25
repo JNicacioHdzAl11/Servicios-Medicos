@@ -548,81 +548,20 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnHorario0900"
-                        style="@style/SaludCampus.BotonOpcion"
+                    <Spinner
+                        android:id="@+id/spnHorarios"
                         android:layout_width="0dp"
                         android:layout_height="48dp"
-                        android:checked="false"
-                        android:text="@string/agendar_horario_0900"
                         android:layout_marginTop="12dp"
-                        app:layout_constraintEnd_toStartOf="@id/btnHorario0930"
+                        android:background="@drawable/bg_spinner"
+                        android:popupBackground="@drawable/bg_spinner_lista"
+                        android:spinnerMode="dropdown"
+                        android:dropDownVerticalOffset="52dp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvPaso3Titulo" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnHorario0930"
-                        style="@style/SaludCampus.BotonOpcion"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:checked="false"
-                        android:text="@string/agendar_horario_0930"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintEnd_toStartOf="@id/btnHorario1000"
-                        app:layout_constraintStart_toEndOf="@id/btnHorario0900"
-                        app:layout_constraintTop_toBottomOf="@id/tvPaso3Titulo" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnHorario1000"
-                        style="@style/SaludCampus.BotonOpcion"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:checked="false"
-                        android:text="@string/agendar_horario_1000"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/btnHorario0930"
-                        app:layout_constraintTop_toBottomOf="@id/tvPaso3Titulo" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnHorario1030"
-                        style="@style/SaludCampus.BotonOpcion"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:checked="true"
-                        android:text="@string/agendar_horario_1030"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintEnd_toStartOf="@id/btnHorario1100"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/btnHorario0900" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnHorario1100"
-                        style="@style/SaludCampus.BotonOpcion"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:checked="false"
-                        android:text="@string/agendar_horario_1100"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintEnd_toStartOf="@id/btnHorario1130"
-                        app:layout_constraintStart_toEndOf="@id/btnHorario1030"
-                        app:layout_constraintTop_toBottomOf="@id/btnHorario0900" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnHorario1130"
-                        style="@style/SaludCampus.BotonOpcion"
-                        android:layout_width="0dp"
-                        android:layout_height="48dp"
-                        android:checked="false"
-                        android:text="@string/agendar_horario_1130"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/btnHorario1100"
-                        app:layout_constraintTop_toBottomOf="@id/btnHorario0900" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -712,19 +651,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cvResumen" />
 
-            <TextView
-                android:id="@+id/tvNota"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:lineSpacingExtra="2sp"
-                android:text="@string/agendar_nota"
-                android:textColor="@color/color_texto_secundario"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnConfirmarCita" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
@@ -758,4 +684,6 @@
         app:menu="@menu/menu_navegacion_alumno_citas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 

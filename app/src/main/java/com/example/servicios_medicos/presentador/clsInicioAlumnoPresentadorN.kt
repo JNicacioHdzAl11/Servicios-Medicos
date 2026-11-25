@@ -1,85 +1,79 @@
 package com.example.servicios_medicos.presentador
 
 import com.example.servicios_medicos.modelo.clsInicioAlumnoModeloN
+import com.example.servicios_medicos.Data.dataInicioAlumnoN
 import com.example.servicios_medicos.vista.InicioAlumnoFragmentN
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class clsInicioAlumnoPresentadorN(private val vista: InicioAlumnoFragmentN) {
     private val modelo = clsInicioAlumnoModeloN()
-    fun iniciarPantalla(token: String?, nombre: String?, matricula: String?) { // guarda el token y muestra los datos iniciales
-        if (nombre != null && nombre.isNotEmpty()) {
-            vista.mostrarSaludo("¡Hola, $nombre!")
-        } else {
-            vista.mostrarSaludo("¡Hola, Alumno!")
-        }
+    private var token = ""
 
-        if (matricula != null && matricula.isNotEmpty()) {
-            vista.mostrarMatricula("Matrícula: $matricula")
-        } else {
-            vista.mostrarMatricula("Matrícula: Sin registro")
-        }
-        val fechaHoy = obtenerFechaHoy()
-        vista.mostrarFechaHoy(fechaHoy)
-
-        if (token != null && token.isNotEmpty()) {
-            cargarDatosInicio(token)
+    fun iniciarPantalla(tokenSesion: String?) { // guarda el token y muestra la fecha de hoy
+        vista.mostrarFechaHoy(modelo.obtenerFechaHoy())
+        if (tokenSesion != null && tokenSesion.isNotEmpty()) {
+            token = tokenSesion
         } else {
             vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
         }
     }
-    fun cargarDatosInicio(token: String) { // pide los datos de inicio al modelo y los manda a la vista
+
+    fun cargarDatosInicio() { // pide los datos de inicio y las citas sin congelar la pantalla
+        if (token.isEmpty()) {
+            return
+        }
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val respuesta = modelo.obtenerDatosInicio(token)
-
-                if (respuesta.isSuccessful) {
-                    val datos = respuesta.body()
-
-                    if (datos != null && datos.status) {
-                        val infoAlumno = modelo.obtenerInfoAlumno(datos)
-                        if (infoAlumno.size == 2) {
-                            if (infoAlumno[0].isNotEmpty()) {
-                                vista.mostrarSaludo("¡Hola, " + infoAlumno[0] + "!")
-                            }
-                            if (infoAlumno[1].isNotEmpty()) {
-                                vista.mostrarMatricula("Matrícula: " + infoAlumno[1])
-                            }
-                        }
-
-                        val totalCitas = modelo.calcularTotalCitas(token)
-                        vista.mostrarResumen(totalCitas.toString(), "Activo")
-
-                        val cita = modelo.obtenerProximaCita(datos)
-                        vista.mostrarProximaCita(cita[0], cita[1], cita[2], cita[3])
-
-                        val campania1 = modelo.obtenerCampania1(datos)
-                        vista.mostrarCampania1(campania1[0], campania1[1])
-
-                        val campania2 = modelo.obtenerCampania2(datos)
-                        vista.mostrarCampania2(campania2[0], campania2[1])
-                    } else {
-                        vista.mostrarError("No pudimos cargar tu información. Intenta de nuevo.")
-                    }
+                val datos = respuesta.body()
+                if (respuesta.isSuccessful && datos != null && datos.status) {
+                    mostrarDatos(datos)
+                    val citas = modelo.listarCitas(token)
+                    val totalCitas = modelo.contarCitasProximas(citas)
+                    val textoPendientes = modelo.calcularPendientes(citas)
+                    vista.mostrarResumen(totalCitas.toString(), "Activo", textoPendientes)
                 } else if (respuesta.code() == 401) {
                     vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
                 } else {
-                    vista.mostrarError("El servicio no está disponible. Intenta más tarde.")
+                    vista.mostrarError("No pudimos cargar tu información. Intenta de nuevo.")
                 }
             } catch (e: Exception) {
                 vista.mostrarError("Revisa tu conexión a internet e intenta de nuevo.")
             }
         }
     }
-    private fun obtenerFechaHoy(): String { // arma el texto de la fecha de hoy
-        val formato = SimpleDateFormat("EEEE, d 'de' MMMM", Locale("es", "MX"))
-        val fecha = formato.format(Date())
-        val primeraLetra = fecha.substring(0, 1).uppercase()
-        val restoTexto = fecha.substring(1)
-        return primeraLetra + restoTexto
+
+    private fun mostrarDatos(datos: dataInicioAlumnoN) { // manda a la vista el alumno, la proxima cita y las campañas
+        val contenido = datos.data
+        if (contenido == null) {
+            return
+        }
+
+        val alumno = contenido.alumno
+        if (alumno != null) {
+            vista.mostrarSaludo("¡Hola, " + alumno.nombreCompleto + "!")
+            vista.mostrarMatricula("Matrícula: " + alumno.matricula)
+        }
+
+        val cita = contenido.proximaCita
+        if (cita != null) {
+            vista.mostrarProximaCita(cita.motivo, cita.estado, "Fecha: " + cita.fecha, "Hora: " + cita.hora)
+        } else {
+            vista.mostrarProximaCita("Sin citas programadas", "Sin cita", "Sin fecha", "Sin horario asignado")
+        }
+
+        val campanias = contenido.campaniasActivas
+        for (i in 0 until 2) {
+            if (campanias.size > i) {
+                val campania = campanias[i]
+                val detalle = "Lugar: " + campania.lugar + " (" + campania.fechaInicio + " - " + campania.fechaFin + ")"
+                vista.mostrarCampania(i + 1, campania.titulo, detalle)
+            } else {
+                vista.mostrarCampania(i + 1, "Sin campañas", "No hay campañas por ahora")
+            }
+        }
     }
 }
+

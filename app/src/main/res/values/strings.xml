@@ -221,7 +221,7 @@
     <string name="agendar_horario_1100">11:00</string>
     <string name="agendar_horario_1130">11:30</string>
     <string name="agendar_descripcion">Elige el servicio, la fecha y el horario de tu consulta.</string>
-    <string name="agendar_paso1">1. Selecciona una especialidad</string>
+    <string name="agendar_paso1">1. Selecciona un motivo</string>
     <string name="agendar_label_servicio">Servicio médico</string>
     <string name="agendar_paso2">2. Elige una fecha</string>
     <string name="agendar_fecha_seleccionada">Jueves 12 de noviembre · Horarios disponibles</string>
