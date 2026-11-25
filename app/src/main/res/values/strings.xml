@@ -33,7 +33,7 @@
 
     <!-- Crear cuenta -->
     <string name="crear_cuenta_titulo">Crea tu cuenta</string>
-    <string name="crear_cuenta_subtitulo">Regístrate para acceder al portal de alumnos de tu universidad.</string>
+    <string name="crear_cuenta_subtitulo">Regístrate para acceder al portal de enfermería de tu universidad.</string>
     <string name="crear_cuenta_label_nombre">Nombre completo</string>
     <string name="crear_cuenta_hint_nombre">Tu nombre y apellidos</string>
     <string name="crear_cuenta_label_matricula">Matrícula</string>
@@ -162,39 +162,37 @@
     <!-- Mi perfil -->
     <string name="comun_cd_foto_perfil">Foto de perfil</string>
     <string name="comun_cd_ajustes">Ajustes</string>
-    <string name="comun_nombre_alumno">Valeria Romero</string>
-    <string name="perfil_titulo">Mi perfil</string>
-    <string name="perfil_matricula">Matrícula 20230351</string>
-    <string name="perfil_tipo_cuenta">Alumno · Cuenta institucional</string>
-    <string name="perfil_datos_academicos">Datos académicos</string>
-    <string name="perfil_carrera">Carrera</string>
-    <string name="perfil_carrera_valor">Ingeniería en Sistemas</string>
-    <string name="perfil_grupo">Grupo</string>
-    <string name="perfil_grupo_valor">7A</string>
-    <string name="perfil_turno">Turno</string>
-    <string name="perfil_turno_valor">Matutino</string>
-    <string name="perfil_semestre">Semestre</string>
-    <string name="perfil_semestre_valor">Séptimo</string>
-    <string name="perfil_datos_personales">Datos personales</string>
-    <string name="perfil_editar">Editar</string>
-    <string name="perfil_edad">Edad</string>
-    <string name="perfil_edad_valor">21 años</string>
-    <string name="perfil_telefono">Teléfono</string>
-    <string name="perfil_telefono_valor">55 1234 5678</string>
-    <string name="perfil_correo">Correo institucional</string>
-    <string name="perfil_correo_valor">valeria.romero@universidad.edu.mx</string>
-    <string name="perfil_contacto_emergencia">Contacto de emergencia</string>
-    <string name="perfil_contacto_nombre">Nombre</string>
-    <string name="perfil_contacto_nombre_valor">Laura Romero · Madre</string>
-    <string name="perfil_contacto_telefono_valor">55 8765 4321</string>
-    <string name="perfil_btn_cerrar_sesion">Cerrar sesión</string>
-    <string name="perfil_nota">Datos de ejemplo · Mantén tu información actualizada.</string>
 
-    <!-- Agendar nueva cita -->
-    <string name="cita_consulta_general">Consulta general</string>
-    <string name="comun_mes_noviembre">Noviembre 2026</string>
+    <!-- Mis citas -->
+    <string name="citas_proximas">Próximas</string>
+    <string name="citas_historial">Historial</string>
+    <string name="citas_descripcion">Organiza tus próximas visitas al servicio médico.</string>
     <string name="comun_cd_semana_anterior">Semana anterior</string>
     <string name="comun_cd_semana_siguiente">Semana siguiente</string>
+    <string name="citas_agendadas">Citas agendadas</string>
+    <string name="citas_nota">Llega 10 minutos antes con tu credencial vigente.</string>
+    <string name="citas_titulo">Mis citas</string>
+    <!-- Citas e inicio del alumno (faltantes) -->
+    <string name="cita_fecha_consulta_general">Jueves, 12 de noviembre · 10:30</string>
+    <string name="cita_medico_consulta_general">Dra. Sofía Reyes · Consultorio 1</string>
+    <string name="citas_ver_detalle">Ver detalle</string>
+    <string name="cita_seguimiento_nutricional">Seguimiento nutricional</string>
+    <string name="cita_fecha_seguimiento">Viernes, 20 de noviembre · 09:00</string>
+    <string name="cita_medico_seguimiento">Lic. Carlos Méndez · Consultorio 3</string>
+    <string name="comun_btn_solicitar_cita">Solicitar nueva cita</string>
+
+    <!-- Agendar nueva cita -->
+    <string name="agendar_titulo">Agendar nueva cita</string>
+    <string name="agendar_descripcion">Elige el servicio, la fecha y el horario de tu consulta.</string>
+    <string name="agendar_paso1">1. Selecciona una especialidad</string>
+    <string name="agendar_label_servicio">Servicio médico</string>
+    <string name="cita_consulta_general">Consulta general</string>
+    <string name="agendar_nutricion">Nutrición</string>
+    <string name="agendar_psicologia">Psicología</string>
+    <string name="agendar_odontologia">Odontología</string>
+    <string name="agendar_otro_motivo">Otro motivo</string>
+    <string name="agendar_paso2">2. Elige una fecha</string>
+    <string name="comun_mes_noviembre">Noviembre 2026</string>
     <string name="comun_dia_letra_1">L</string>
     <string name="comun_dia_numero_1">9</string>
     <string name="comun_dia_letra_2">M</string>
@@ -209,156 +207,172 @@
     <string name="comun_dia_numero_6">14</string>
     <string name="comun_dia_letra_7">D</string>
     <string name="comun_dia_numero_7">15</string>
-    <string name="agendar_titulo">Agendar nueva cita</string>
-    <string name="agendar_nutricion">Nutrición</string>
-    <string name="agendar_psicologia">Psicología</string>
-    <string name="agendar_odontologia">Odontología</string>
-    <string name="agendar_otro_motivo">Otro motivo</string>
+    <string name="agendar_fecha_seleccionada">Jueves 12 de noviembre · Horarios disponibles</string>
+    <string name="agendar_paso3">3. Selecciona un horario</string>
     <string name="agendar_horario_0900">09:00</string>
     <string name="agendar_horario_0930">09:30</string>
     <string name="agendar_horario_1000">10:00</string>
     <string name="agendar_horario_1030">10:30</string>
     <string name="agendar_horario_1100">11:00</string>
     <string name="agendar_horario_1130">11:30</string>
-    <string name="agendar_descripcion">Elige el servicio, la fecha y el horario de tu consulta.</string>
-    <string name="agendar_paso1">1. Selecciona una especialidad</string>
-    <string name="agendar_label_servicio">Servicio médico</string>
-    <string name="agendar_paso2">2. Elige una fecha</string>
-    <string name="agendar_fecha_seleccionada">Jueves 12 de noviembre · Horarios disponibles</string>
-    <string name="agendar_paso3">3. Selecciona un horario</string>
     <string name="agendar_resumen_titulo">Consulta general · 12 nov 2026</string>
     <string name="agendar_resumen_horario">10:30–11:00 · Consultorio 1</string>
     <string name="agendar_resumen_medico">Dra. Sofía Reyes · Campus</string>
     <string name="agendar_btn_confirmar">Confirmar cita</string>
     <string name="agendar_nota">Recibirás la confirmación en tu correo institucional.</string>
 
+    <!-- Mi expediente -->
+    <string name="expediente_padecimientos">Padecimientos</string>
+    <string name="expediente_cirugias">Cirugías</string>
+    <string name="expediente_tratamiento">Tratamiento habitual</string>
+    <string name="expediente_tipo_sangre">Tipo de sangre</string>
+    <string name="expediente_alergias">Alergias</string>
+    <string name="expediente_alergias_nota">Informar en consulta</string>
+    <string name="expediente_antecedentes">Antecedentes relevantes</string>
+    <string name="expediente_consultas_recientes">Consultas recientes</string>
+    <string name="expediente_ver_historial">Ver historial</string>
+    <string name="expediente_nota">Tus datos son confidenciales. El expediente completo se entrega mediante solicitud.</string>
+    <string name="expediente_titulo">Mi expediente</string>
+
+    <!-- Comprobante de ingreso -->
+    <string name="comprobante_titulo">Comprobante de ingreso</string>
+    <string name="comprobante_descripcion">Presenta este comprobante al acudir a tu consulta médica.</string>
+    <string name="comprobante_seguro_estudiantil">Seguro estudiantil</string>
+    <string name="comprobante_vigencia_activa">Vigencia activa · Semestre 2026-2</string>
+    <string name="comprobante_folio">Folio · SEG-2026-0351</string>
+    <string name="comprobante_inicio_vigencia">Inicio de vigencia</string>
+    <string name="comprobante_inicio_vigencia_valor">01 de septiembre de 2026</string>
+    <string name="comprobante_fin_vigencia">Fin de vigencia</string>
+    <string name="comprobante_fin_vigencia_valor">31 de diciembre de 2026</string>
+    <string name="comprobante_qr_titulo">Código QR de verificación</string>
+    <string name="comprobante_cd_qr">Código QR del comprobante de ingreso</string>
+    <string name="comprobante_qr_nota">Muestra este código en recepción al llegar a tu cita.</string>
+    <string name="comprobante_btn_descargar">Descargar comprobante (PDF)</string>
+    <string name="comprobante_antes_titulo">Antes de tu consulta</string>
+    <string name="comprobante_antes_texto">Llega 10 minutos antes con tu credencial universitaria y este comprobante vigente.</string>
+    <string name="comprobante_nota">Documento válido únicamente dentro de Servicios Médicos.</string>>
+
+    <!-- Campañas de salud -->
+    <string name="campanias_descripcion">Prevención y bienestar para tu vida universitaria.</string>
+    <string name="campanias_ver_informacion">Ver información</string>
+    <string name="campanias_mas">Más campañas de salud</string>
+    <string name="campanias_nota">Consulta las convocatorias de salud preventiva vigentes para la comunidad universitaria</string>
+    <string name="campanias_titulo">Campañas de salud</string>
+
+    <!-- Mi perfil -->
+    <string name="perfil_carrera">Carrera</string>
+    <string name="perfil_grupo">Grupo</string>
+    <string name="perfil_turno">Turno</string>
+    <string name="perfil_semestre">Semestre</string>
+    <string name="perfil_edad">Edad</string>
+    <string name="perfil_telefono">Teléfono</string>
+    <string name="perfil_nombre">Nombre</string>
+    <string name="perfil_datos_academicos">Datos académicos</string>
+    <string name="perfil_datos_personales">Datos personales</string>
+    <string name="perfil_editar">Editar</string>
+    <string name="perfil_correo_institucional">Correo institucional</string>
+    <string name="perfil_contacto_emergencia">Contacto de emergencia</string>
+    <string name="perfil_cerrar_sesion">Cerrar sesión</string>
+    <string name="perfil_nota">Mantén tu información actualizada.</string>
+    <string name="perfil_titulo">Mi perfil</string>
+    <!-- Detalle de campaña (faltante) -->
+    <string name="detalle_campania_antes">Antes de acudir</string>
+
     <!-- Detalle de cita -->
     <string name="cita_estado_confirmada">Confirmada</string>
     <string name="detalle_cita_titulo">Detalle de cita</string>
-    <string name="detalle_cita_fecha">Jueves, 12 de noviembre</string>
-    <string name="detalle_cita_horario">10:30–11:00</string>
-    <string name="detalle_cita_folio">Folio de cita · CIT-2026-1112-0351</string>
     <string name="detalle_cita_atencion">Tu atención médica</string>
-    <string name="detalle_cita_medico">Médico asignado</string>
-    <string name="detalle_cita_medico_valor">Dra. Sofía Reyes</string>
+    <string name="detalle_cita_medico_asignado">Médico asignado</string>
     <string name="detalle_cita_consultorio">Consultorio</string>
-    <string name="detalle_cita_consultorio_valor">1</string>
     <string name="detalle_cita_ubicacion">Ubicación</string>
-    <string name="detalle_cita_ubicacion_valor">Servicios Médicos</string>
     <string name="detalle_cita_sede">Sede</string>
-    <string name="detalle_cita_sede_valor">Campus · Planta baja</string>
     <string name="detalle_cita_antes">Antes de tu cita</string>
     <string name="detalle_cita_indicacion1">Llega 10 minutos antes de tu horario.</string>
     <string name="detalle_cita_indicacion2">Presenta tu credencial y comprobante de afiliación.</string>
     <string name="detalle_cita_indicacion3">Lleva estudios previos y tu lista de medicamentos.</string>
     <string name="detalle_cita_indicacion4">No es necesario acudir en ayuno.</string>
-    <string name="detalle_cita_btn_reprogramar">Reprogramar cita</string>
-    <string name="detalle_cita_btn_cancelar">Cancelar cita</string>
+    <string name="detalle_cita_reprogramar">Reprogramar cita</string>
+    <string name="detalle_cita_cancelar">Cancelar cita</string>
     <string name="detalle_cita_nota">Si no puedes asistir, cancela con anticipación para liberar el horario.</string>
 
-    <!-- Mis citas -->
-    <string name="cita_fecha_consulta_general">Jue. 12 nov · 10:30–11:00</string>
-    <string name="cita_medico_consulta_general">Dra. Sofía Reyes · Consultorio 1</string>
-    <string name="comun_btn_solicitar_cita">Solicitar nueva cita</string>
-    <string name="citas_titulo">Mis citas</string>
-    <string name="citas_tab_proximas">Próximas (2)</string>
-    <string name="citas_tab_historial">Historial</string>
-    <string name="citas_descripcion">Organiza tus próximas visitas al servicio médico.</string>
-    <string name="citas_seccion_agendadas">Citas agendadas</string>
-    <string name="citas_ver_detalle">Ver detalle</string>
-    <string name="cita_seguimiento_nutricional">Seguimiento nutricional</string>
-    <string name="cita_fecha_seguimiento">Jue. 19 nov · 09:00–09:30</string>
-    <string name="cita_medico_seguimiento">Lic. Elena Torres · Consultorio 2</string>
-    <string name="citas_nota">Llega 10 minutos antes con tu credencial vigente.</string>
-
-    <!-- Mi expediente -->
-    <string name="expediente_titulo">Mi expediente</string>
-    <string name="expediente_actualizacion">Matrícula 20230351 · Actualizado el 10 nov 2026</string>
-    <string name="expediente_tipo_sangre">Tipo de sangre</string>
-    <string name="expediente_tipo_sangre_valor">O+</string>
-    <string name="expediente_alergias">Alergias</string>
-    <string name="expediente_alergias_valor">Penicilina</string>
-    <string name="expediente_alergias_nota">Informar en consulta</string>
-    <string name="expediente_antecedentes">Antecedentes relevantes</string>
-    <string name="expediente_padecimientos">Padecimientos</string>
-    <string name="expediente_padecimientos_valor">Asma leve</string>
-    <string name="expediente_cirugias">Cirugías</string>
-    <string name="expediente_cirugias_valor">Sin antecedentes</string>
-    <string name="expediente_tratamiento">Tratamiento habitual</string>
-    <string name="expediente_tratamiento_valor">Sin registro activo</string>
-    <string name="expediente_seccion_consultas">Consultas recientes</string>
-    <string name="expediente_ver_historial">Ver historial</string>
-    <string name="expediente_consulta1_fecha">03 nov 2026</string>
-    <string name="expediente_consulta1_titulo">Revisión general</string>
-    <string name="expediente_consulta_medico">Dra. Sofía Reyes · Consulta concluida</string>
-    <string name="expediente_descargar_receta">Descargar receta</string>
-    <string name="expediente_consulta2_fecha">15 oct 2026</string>
-    <string name="expediente_consulta2_titulo">Consulta de seguimiento</string>
-    <string name="expediente_nota">Tus datos son confidenciales. El expediente completo se entrega mediante solicitud.</string>
-
-    <!-- Campañas de salud -->
-    <string name="campanias_titulo">Campañas de salud</string>
-    <string name="campanias_destacada_titulo">Vacunación Universitaria</string>
-    <string name="campanias_destacada_tipo">Jornada preventiva</string>
-    <string name="campanias_destacada_descripcion">Protege tu salud. Acude con tu credencial y cartilla de vacunación.</string>
-    <string name="campanias_destacada_fecha">12–16 de noviembre de 2026</string>
-    <string name="campanias_destacada_lugar">09:00–14:00 · Explanada central, campus</string>
-    <string name="campanias_ver_informacion">Ver información</string>
-    <string name="campanias_descripcion">Prevención y bienestar para tu vida universitaria.</string>
+    <!-- Campañas y Citas (tabs y secciones) -->
     <string name="campanias_seccion_mas">Más campañas de salud</string>
-    <string name="campanias_bucal">Salud bucal</string>
-    <string name="campanias_bucal_fecha">17 nov · 09:00–13:00</string>
-    <string name="campanias_bucal_desc">Valoración y orientación · Consultorio 2</string>
-    <string name="campanias_sangre">Donación de sangre</string>
-    <string name="campanias_sangre_fecha">19 nov · 08:00–12:00</string>
-    <string name="campanias_sangre_desc">Jornada solidaria · Unidad móvil</string>
-    <string name="campanias_mental">Salud mental</string>
-    <string name="campanias_mental_fecha">23–27 nov · 10:00–15:00</string>
-    <string name="campanias_mental_desc">Orientación y apoyo · Bienestar estudiantil</string>
-    <string name="campanias_nota">Consulta las convocatorias de salud preventiva vigentes para la comunidad universitaria</string>
+    <string name="citas_tab_proximas">Próximas</string>
+    <string name="citas_tab_historial">Historial</string>
+    <string name="citas_seccion_agendadas">Citas agendadas</string>
 
-    <!-- Información de campaña -->
-    <string name="detalle_campania_titulo">Información de Campaña</string>
-    <string name="detalle_campania_etiqueta_preventiva">Preventiva</string>
-    <string name="detalle_campania_etiqueta_gratuita">Gratuita</string>
-    <string name="detalle_campania_etiqueta_comunidad">Comunidad UTHH</string>
-    <string name="detalle_campania_categoria">Salud preventiva · 2026</string>
-    <string name="detalle_campania_nombre">Jornada de Vacunación Universitaria 2026</string>
-    <string name="detalle_campania_lema">Prevención y bienestar para la comunidad universitaria.</string>
+    <!-- Detalle de campaña -->
     <string name="detalle_campania_fechas">Fechas</string>
-    <string name="detalle_campania_fechas_valor">12 al 16 de noviembre de 2026.</string>
     <string name="detalle_campania_horario">Horario</string>
-    <string name="detalle_campania_horario_valor">09:00 a 14:00 hrs.</string>
     <string name="detalle_campania_ubicacion">Ubicación</string>
-    <string name="detalle_campania_ubicacion_valor">Explanada central, Edificio de Servicios Médicos.</string>
     <string name="detalle_campania_consiste">¿En qué consiste?</string>
-    <string name="detalle_campania_consiste_texto">Esta jornada busca prevenir enfermedades y fortalecer la protección de la comunidad universitaria. Se ofrecerán vacunas contra Influenza, Tétanos y Hepatitis B, así como orientación médica para revisar tu esquema de vacunación y resolver dudas sobre su aplicación.</string>
     <string name="detalle_campania_requisitos">Requisitos para acudir</string>
-    <string name="detalle_campania_requisito1">Presentar credencial de estudiante física o digital.</string>
-    <string name="detalle_campania_requisito2">Llevar cartilla nacional de salud, si se cuenta con ella.</string>
-    <string name="detalle_campania_requisito3">Acudir con ropa cómoda y sin fiebre.</string>
     <string name="detalle_campania_recomendaciones">Recomendaciones</string>
-    <string name="detalle_campania_antes">Antes de acudir</string>
-    <string name="detalle_campania_antes_texto">Hidrátate, desayuna e informa al personal médico si tienes alergias, tomas medicamentos o presentaste alguna reacción a vacunas.</string>
+    <string name="detalle_campania_antes_acudir">Antes de acudir</string>
     <string name="detalle_campania_despues">Después de la aplicación</string>
-    <string name="detalle_campania_despues_texto">Permanece en observación el tiempo indicado y sigue las recomendaciones del personal. Si presentas molestias intensas o persistentes, busca atención médica.</string>
-    <string name="detalle_campania_btn_infografia">Descargar infografía informativa (PDF)</string>
+    <string name="detalle_campania_descargar">Descargar infografía informativa (PDF)</string>
+    <string name="detalle_campania_titulo">Información de Campaña</string>
     <string name="detalle_campania_cd_compartir">Compartir campaña</string>
-    <!-- Comprobante de ingreso -->
-    <string name="comprobante_titulo">Comprobante de ingreso</string>
-    <string name="comprobante_descripcion">Presenta este comprobante al acudir a tu consulta médica.</string>
-    <string name="comprobante_seguro_estudiantil">Seguro estudiantil</string>
-    <string name="comprobante_vigencia_activa">Vigencia activa</string>
-    <string name="comprobante_folio">FOL-00000</string>
-    <string name="comprobante_inicio_vigencia">Inicio de vigencia</string>
-    <string name="comprobante_inicio_vigencia_valor">01/01/2026</string>
-    <string name="comprobante_fin_vigencia">Fin de vigencia</string>
-    <string name="comprobante_fin_vigencia_valor">31/12/2026</string>
-    <string name="comprobante_qr_titulo">Código QR de acceso</string>
-    <string name="comprobante_cd_qr">Código QR</string>
-    <string name="comprobante_qr_nota">Escanea este código en recepción</string>
-    <string name="comprobante_btn_descargar">Descargar comprobante</string>
-    <string name="comprobante_antes_titulo">Antes de tu consulta</string>
-    <string name="comprobante_antes_texto">Llega 10 minutos antes con tu credencial vigente.</string>
-    <string name="comprobante_nota">Este documento es válido únicamente para atención médica interna.</string>
+
+    <!-- Ítems de lista -->
+    <string name="item_ver_detalle">Ver detalle</string>
+    <string name="item_descargar_receta">Descargar receta</string>
+    <string name="item_ver_receta_anterior">Ver receta anterior</string>
+
+    <!-- Expediente del alumno (personal médico) -->
+    <string name="expediente_jm_tipo_sangre">Tipo de sangre</string>
+    <string name="expediente_jm_enfermedades_cronicas">Enfermedades crónicas</string>
+    <string name="expediente_jm_antecedentes">Antecedentes</string>
+    <string name="expediente_jm_alergenos">Alérgenos</string>
+    <string name="expediente_jm_cirugias_previas">Cirugías previas</string>
+    <string name="expediente_jm_historial">Historial de Consultas Recientes</string>
+    <string name="expediente_jm_iniciar_consulta">Iniciar Nueva Consulta</string>
+    <string name="expediente_jm_nota">Expediente confidencial</string>
+    <string name="expediente_jm_titulo">Expediente del Alumno</string>
+    <string name="comun_cd_foto_personal">Foto del personal médico</string>
+
+    <!-- Consulta médica (personal médico) -->
+    <string name="consulta_motivo">Motivo de consulta</string>
+    <string name="consulta_padecimiento">Antecedentes / Padecimiento actual</string>
+    <string name="consulta_sintomas">Síntomas manifestados</string>
+    <string name="consulta_diagnostico">Diagnóstico médico</string>
+    <string name="consulta_signos_vitales">Signos vitales</string>
+    <string name="consulta_presion_arterial">Presión arterial</string>
+    <string name="consulta_temperatura">Temperatura</string>
+    <string name="consulta_frecuencia_cardiaca">Frecuencia cardiaca</string>
+    <string name="consulta_spo2">SpO₂</string>
+    <string name="consulta_guardar_generar_receta">Guardar y Generar Receta</string>
+    <string name="consulta_nota">La valoración se guardará en el expediente del alumno.</string>
+    <string name="consulta_titulo">Consulta Médica</string>
+
+    <!-- Navegación del personal médico -->
+    <string name="comun_nav_alumnos">Alumnos</string>
+    <string name="comun_nav_recetas">Recetas</string>
+    <string name="comun_nav_configuracion">Configuración</string>
+
+    <!-- Generación de receta (personal médico) -->
+    <string name="receta_hint_buscar">Buscar por nombre o principio activo</string>
+    <string name="receta_indicaciones">Indicaciones médicas / Recomendaciones</string>
+    <string name="receta_medicamentos">Medicamentos recetados</string>
+    <string name="receta_agregar_medicamento">Agregar Medicamento</string>
+    <string name="receta_cancelar">Cancelar</string>
+    <string name="receta_guardar_borrador">Guardar Borrador</string>
+    <string name="receta_crear_emitir">Crear y Emitir Receta</string>
+    <string name="receta_titulo">Generación de Receta</string>
+
+    <!-- Ítems de lista -->
+    <string name="item_cd_quitar_medicamento">Quitar medicamento</string>
+    <string name="item_dosis">Dosis</string>
+    <string name="item_frecuencia">Frecuencia</string>
+    <string name="item_duracion">Duración</string>
+
+    <!-- Inicio de enfermería -->
+    <string name="comun_nav_inventario">Inventario</string>
+    <string name="inicio_enfermera_titulo">Salud universitaria</string>
+    <string name="inicio_enfermera_citas_hoy">Citas de hoy</string>
+    <string name="inicio_enfermera_atenciones">Atenciones</string>
+    <string name="inicio_enfermera_en_consulta">En consulta</string>
+    <string name="inicio_enfermera_en_atencion">En atención</string>
+    <string name="inicio_enfermera_atenciones_recientes">Atenciones recientes</string>
+    <string name="inicio_enfermera_nota_datos">Datos simulados · Vista del personal de enfermería</string>
 </resources>

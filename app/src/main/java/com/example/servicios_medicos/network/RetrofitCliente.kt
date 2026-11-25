@@ -19,4 +19,12 @@ object RetrofitCliente {
 
     val apiAlumnoN: ApiAlumnoN =
         retrofit.create(ApiAlumnoN::class.java)
+
+    val apiExpediente: ApiServiceExpediente =
+        retrofit.create(ApiServiceExpediente::class.java)
+
+
+
+    val apiCampanias: ApiCampania =
+        retrofit.create(ApiCampania::class.java)
 }

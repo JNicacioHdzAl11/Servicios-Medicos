@@ -478,7 +478,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/txtCita1Titulo"
+                        android:id="@+id/tvCita1Titulo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
@@ -486,23 +486,23 @@
                         android:textColor="@color/color_texto_principal"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@id/txtCita1Estado"
+                        app:layout_constraintEnd_toStartOf="@id/tvCita1Estado"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/txtCita1Estado"
+                        android:id="@+id/tvCita1Estado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cita_estado_confirmada"
                         android:textColor="@color/color_exito"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        app:layout_constraintBaseline_toBaselineOf="@id/txtCita1Titulo"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvCita1Titulo"
                         app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
-                        android:id="@+id/txtCita1Fecha"
+                        android:id="@+id/tvCita1Fecha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -515,10 +515,10 @@
                         app:drawableTint="@color/color_enlace"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtCita1Titulo" />
+                        app:layout_constraintTop_toBottomOf="@id/tvCita1Titulo" />
 
                     <TextView
-                        android:id="@+id/txtCita1Medico"
+                        android:id="@+id/tvCita1Medico"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -528,7 +528,7 @@
                         android:textSize="13sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtCita1Fecha" />
+                        app:layout_constraintTop_toBottomOf="@id/tvCita1Fecha" />
 
                     <TextView
                         android:id="@+id/tvCita1VerDetalle"
@@ -548,7 +548,7 @@
                         app:drawableEndCompat="@drawable/ic_chevron_derecha"
                         app:drawableTint="@color/color_enlace"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtCita1Medico" />
+                        app:layout_constraintTop_toBottomOf="@id/tvCita1Medico" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

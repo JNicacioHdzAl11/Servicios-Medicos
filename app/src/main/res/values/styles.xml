@@ -49,4 +49,75 @@
         <item name="chipCornerRadius">10dp</item>
         <item name="chipMinHeight">32dp</item>
     </style>
+    <!-- Botones de pantalla (alto 56dp, radio 12dp) -->
+    <style name="SaludCampus.BotonPrimario" parent="Widget.Material3.Button">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_boton_primario_texto</item>
+        <item name="backgroundTint">@color/color_boton_primario</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">8dp</item>
+        <item name="iconSize">20dp</item>
+        <item name="iconTint">@color/color_boton_primario_texto</item>
+    </style>
+
+    <style name="SaludCampus.BotonContorno" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_enlace</item>
+        <item name="backgroundTint">@color/color_fondo</item>
+        <item name="strokeColor">@color/color_enlace</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="SaludCampus.BotonPeligro" parent="SaludCampus.BotonContorno">
+        <item name="android:textColor">@color/color_peligro</item>
+        <item name="strokeColor">@color/color_peligro_borde</item>
+    </style>
+
+    <!-- Enlaces de texto con ícono opcional ("Ver todas", "Ver detalle", "Descargar receta") -->
+    <style name="SaludCampus.BotonEnlace" parent="Widget.Material3.Button.TextButton">
+        <item name="android:minHeight">36dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_enlace</item>
+        <item name="iconTint">@color/color_enlace</item>
+        <item name="iconSize">16dp</item>
+        <item name="iconPadding">4dp</item>
+    </style>
+
+    <!-- Chips seleccionables (filtro de citas y especialidades) -->
+    <style name="SaludCampus.ChipOpcion" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/selector_opcion_texto</item>
+        <item name="chipBackgroundColor">@color/selector_opcion_fondo</item>
+        <item name="chipStrokeColor">@color/selector_opcion_borde</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">12dp</item>
+        <item name="chipMinHeight">44dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="chipStartPadding">16dp</item>
+        <item name="chipEndPadding">16dp</item>
+    </style>
+
+    <style name="SaludCampus.ChipFiltro" parent="SaludCampus.ChipOpcion">
+        <item name="android:textStyle">bold</item>
+        <item name="chipStartPadding">32dp</item>
+        <item name="chipEndPadding">32dp</item>
+    </style>
 </resources>

@@ -50,7 +50,7 @@ class AgendarCitaActivityN : AppCompatActivity() {
             findViewById(R.id.btnConsultaGeneral),
             findViewById(R.id.btnNutricion),
             findViewById(R.id.btnPsicologia),
-            findViewById(R.id.btnOtroMotivo)
+            //findViewById(R.id.btnOtroMotivo)
         )
         txtMes = findViewById(R.id.tvMes)
         btnSemanaAnterior = findViewById(R.id.ibSemanaAnterior)

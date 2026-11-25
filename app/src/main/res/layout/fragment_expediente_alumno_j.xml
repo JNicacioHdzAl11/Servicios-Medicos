@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_fondo_secundario"
-    tools:context=".expedienteAlumnoJ">
+    tools:context=".vista.expedienteAlumnoJ">
 
-    <!-- Encabezado: regresar y título -->
+    <!-- Barra superior -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clEncabezado"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/color_fondo"
         android:minHeight="64dp"
-        android:paddingStart="8dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="8dp"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/ibRegresar"
+            android:id="@+id/btnRegresar"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -35,11 +33,11 @@
             app:tint="@color/color_enlace" />
 
         <TextView
-            android:id="@+id/tvTitulo"
+            android:id="@+id/txtTitulo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/expediente_titulo"
@@ -47,12 +45,12 @@
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ibAjustes"
-            app:layout_constraintStart_toEndOf="@id/ibRegresar"
+            app:layout_constraintEnd_toStartOf="@id/btnAjustes"
+            app:layout_constraintStart_toEndOf="@id/btnRegresar"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/ibAjustes"
+            android:id="@+id/btnAjustes"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -74,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clEncabezado" />
 
-    <!-- Contenido desplazable -->
+    <!-- Contenido -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsvContenido"
         android:layout_width="0dp"
@@ -90,14 +88,14 @@
             android:id="@+id/clContenido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="24dp"
-            android:paddingTop="24dp"
+            android:paddingBottom="32dp"
             android:paddingEnd="24dp"
-            android:paddingBottom="32dp">
+            android:paddingStart="24dp"
+            android:paddingTop="24dp">
 
             <!-- Datos del alumno -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvAlumno"
+                android:id="@+id/cardAlumno"
                 style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -116,30 +114,32 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tvNombreAlumno"
+                        android:id="@+id/txtNombreAlumno"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="2sp"
-                        android:text="@string/comun_nombre_alumno"
+                        android:text=""
                         android:textColor="@color/color_texto_principal"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Valeria Romero" />
 
                     <TextView
-                        android:id="@+id/tvActualizacion"
+                        android:id="@+id/txtMatriculaActualizacion"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="2sp"
-                        android:text="@string/expediente_actualizacion"
+                        android:text=""
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvNombreAlumno" />
+                        app:layout_constraintTop_toBottomOf="@id/txtNombreAlumno"
+                        tools:text="Matrícula 20230351 · Actualizado el 10 nov 2026" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -147,19 +147,19 @@
 
             <!-- Datos clínicos clave -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvTipoSangre"
+                android:id="@+id/cardTipoSangre"
                 style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginEnd="6dp"
                 android:layout_marginTop="16dp"
                 app:cardBackgroundColor="@color/color_fondo"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="0dp"
-                app:layout_constraintEnd_toStartOf="@id/cvAlergias"
+                app:layout_constraintBottom_toBottomOf="@id/cardAlergias"
+                app:layout_constraintEnd_toStartOf="@id/cardAlergias"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cvAlumno"
-                android:layout_marginEnd="6dp"
-                app:layout_constraintBottom_toBottomOf="@id/cvAlergias"
+                app:layout_constraintTop_toBottomOf="@id/cardAlumno"
                 app:strokeColor="@color/color_borde"
                 app:strokeWidth="1dp">
 
@@ -169,7 +169,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tvTipoSangreEtiqueta"
+                        android:id="@+id/txtTipoSangreEtiqueta"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="2sp"
@@ -181,36 +181,37 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvTipoSangre"
+                        android:id="@+id/txtTipoSangre"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="2sp"
-                        android:text="@string/expediente_tipo_sangre_valor"
+                        android:text=""
                         android:textColor="@color/color_enlace"
                         android:textSize="26sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvTipoSangreEtiqueta" />
+                        app:layout_constraintTop_toBottomOf="@id/txtTipoSangreEtiqueta"
+                        tools:text="O+" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvAlergias"
+                android:id="@+id/cardAlergias"
                 style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
                 android:layout_marginTop="16dp"
                 app:cardBackgroundColor="@color/color_fondo"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/cvTipoSangre"
-                app:layout_constraintTop_toBottomOf="@id/cvAlumno"
-                android:layout_marginStart="6dp"
+                app:layout_constraintStart_toEndOf="@id/cardTipoSangre"
+                app:layout_constraintTop_toBottomOf="@id/cardAlumno"
                 app:strokeColor="@color/color_borde"
                 app:strokeWidth="1dp">
 
@@ -220,7 +221,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tvAlergiasEtiqueta"
+                        android:id="@+id/txtAlergiasEtiqueta"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="2sp"
@@ -232,21 +233,22 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvAlergias"
+                        android:id="@+id/txtAlergias"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="2sp"
-                        android:text="@string/expediente_alergias_valor"
+                        android:text=""
                         android:textColor="@color/color_texto_principal"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvAlergiasEtiqueta" />
+                        app:layout_constraintTop_toBottomOf="@id/txtAlergiasEtiqueta"
+                        tools:text="Penicilina" />
 
                     <TextView
-                        android:id="@+id/tvAlergiasNota"
+                        android:id="@+id/txtAlergiasNota"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -256,7 +258,7 @@
                         android:textSize="11sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvAlergias" />
+                        app:layout_constraintTop_toBottomOf="@id/txtAlergias" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -264,7 +266,7 @@
 
             <!-- Antecedentes -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvAntecedentes"
+                android:id="@+id/cardAntecedentes"
                 style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -274,7 +276,7 @@
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cvAlergias"
+                app:layout_constraintTop_toBottomOf="@id/cardAlergias"
                 app:strokeColor="@color/color_borde"
                 app:strokeWidth="1dp">
 
@@ -284,7 +286,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/tvAntecedentesTitulo"
+                        android:id="@+id/txtAntecedentesTitulo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="2sp"
@@ -297,7 +299,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvPadecimientosEtiqueta"
+                        android:id="@+id/txtPadecimientosEtiqueta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -305,24 +307,25 @@
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvAntecedentesTitulo" />
+                        app:layout_constraintTop_toBottomOf="@id/txtAntecedentesTitulo" />
 
                     <TextView
-                        android:id="@+id/tvPadecimientos"
+                        android:id="@+id/txtPadecimientos"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:gravity="end"
-                        android:text="@string/expediente_padecimientos_valor"
+                        android:text=""
                         android:textColor="@color/color_texto_principal"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        app:layout_constraintBaseline_toBaselineOf="@id/tvPadecimientosEtiqueta"
+                        app:layout_constraintBaseline_toBaselineOf="@id/txtPadecimientosEtiqueta"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tvPadecimientosEtiqueta" />
+                        app:layout_constraintStart_toEndOf="@id/txtPadecimientosEtiqueta"
+                        tools:text="Asma leve" />
 
                     <TextView
-                        android:id="@+id/tvCirugiasEtiqueta"
+                        android:id="@+id/txtCirugiasEtiqueta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -330,24 +333,25 @@
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvPadecimientosEtiqueta" />
+                        app:layout_constraintTop_toBottomOf="@id/txtPadecimientosEtiqueta" />
 
                     <TextView
-                        android:id="@+id/tvCirugias"
+                        android:id="@+id/txtCirugias"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:gravity="end"
-                        android:text="@string/expediente_cirugias_valor"
+                        android:text=""
                         android:textColor="@color/color_texto_principal"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        app:layout_constraintBaseline_toBaselineOf="@id/tvCirugiasEtiqueta"
+                        app:layout_constraintBaseline_toBaselineOf="@id/txtCirugiasEtiqueta"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tvCirugiasEtiqueta" />
+                        app:layout_constraintStart_toEndOf="@id/txtCirugiasEtiqueta"
+                        tools:text="Sin antecedentes" />
 
                     <TextView
-                        android:id="@+id/tvTratamientoEtiqueta"
+                        android:id="@+id/txtTratamientoEtiqueta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -355,235 +359,75 @@
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvCirugiasEtiqueta" />
+                        app:layout_constraintTop_toBottomOf="@id/txtCirugiasEtiqueta" />
 
                     <TextView
-                        android:id="@+id/tvTratamiento"
+                        android:id="@+id/txtTratamiento"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:gravity="end"
-                        android:text="@string/expediente_tratamiento_valor"
+                        android:text=""
                         android:textColor="@color/color_texto_principal"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        app:layout_constraintBaseline_toBaselineOf="@id/tvTratamientoEtiqueta"
+                        app:layout_constraintBaseline_toBaselineOf="@id/txtTratamientoEtiqueta"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tvTratamientoEtiqueta" />
+                        app:layout_constraintStart_toEndOf="@id/txtTratamientoEtiqueta"
+                        tools:text="Sin registro activo" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Consultas recientes -->
             <TextView
-                android:id="@+id/tvSeccionConsultas"
+                android:id="@+id/txtSeccionConsultas"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@string/expediente_seccion_consultas"
+                android:text="@string/expediente_consultas_recientes"
                 android:textColor="@color/color_texto_principal"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/tvVerHistorial"
+                app:layout_constraintEnd_toStartOf="@id/btnVerHistorial"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cvAntecedentes" />
+                app:layout_constraintTop_toBottomOf="@id/cardAntecedentes" />
 
-            <TextView
-                android:id="@+id/tvVerHistorial"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerHistorial"
+                style="@style/SaludCampus.BotonEnlace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:paddingStart="8dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
                 android:text="@string/expediente_ver_historial"
-                android:textColor="@color/color_enlace"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvSeccionConsultas"
+                app:layout_constraintBaseline_toBaselineOf="@id/txtSeccionConsultas"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvConsulta1"
-                style="@style/Widget.Material3.CardView.Outlined"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvConsultasRecientes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/color_fondo"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSeccionConsultas"
-                app:strokeColor="@color/color_borde"
-                app:strokeWidth="1dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/tvConsulta1Fecha"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:lineSpacingExtra="2sp"
-                        android:text="@string/expediente_consulta1_fecha"
-                        android:textColor="@color/color_texto_secundario"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvConsulta1Titulo"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:lineSpacingExtra="2sp"
-                        android:text="@string/expediente_consulta1_titulo"
-                        android:textColor="@color/color_texto_principal"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvConsulta1Fecha" />
-
-                    <TextView
-                        android:id="@+id/tvConsulta1Medico"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:lineSpacingExtra="2sp"
-                        android:text="@string/expediente_consulta_medico"
-                        android:textColor="@color/color_texto_secundario"
-                        android:textSize="13sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvConsulta1Titulo" />
-
-                    <TextView
-                        android:id="@+id/tvConsulta1DescargarReceta"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:drawablePadding="8dp"
-                        android:focusable="true"
-                        android:gravity="center_vertical"
-                        android:minHeight="32dp"
-                        android:text="@string/expediente_descargar_receta"
-                        android:textColor="@color/color_enlace"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        app:drawableEndCompat="@drawable/ic_descargar"
-                        app:drawableTint="@color/color_enlace"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvConsulta1Medico" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvConsulta2"
-                style="@style/Widget.Material3.CardView.Outlined"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardBackgroundColor="@color/color_fondo"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cvConsulta1"
-                app:strokeColor="@color/color_borde"
-                app:strokeWidth="1dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/tvConsulta2Fecha"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:lineSpacingExtra="2sp"
-                        android:text="@string/expediente_consulta2_fecha"
-                        android:textColor="@color/color_texto_secundario"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvConsulta2Titulo"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:lineSpacingExtra="2sp"
-                        android:text="@string/expediente_consulta2_titulo"
-                        android:textColor="@color/color_texto_principal"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvConsulta2Fecha" />
-
-                    <TextView
-                        android:id="@+id/tvConsulta2Medico"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:lineSpacingExtra="2sp"
-                        android:text="@string/expediente_consulta_medico"
-                        android:textColor="@color/color_texto_secundario"
-                        android:textSize="13sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvConsulta2Titulo" />
-
-                    <TextView
-                        android:id="@+id/tvConsulta2DescargarReceta"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:drawablePadding="8dp"
-                        android:focusable="true"
-                        android:gravity="center_vertical"
-                        android:minHeight="32dp"
-                        android:text="@string/expediente_descargar_receta"
-                        android:textColor="@color/color_enlace"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        app:drawableEndCompat="@drawable/ic_descargar"
-                        app:drawableTint="@color/color_enlace"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvConsulta2Medico" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+                app:layout_constraintTop_toBottomOf="@id/txtSeccionConsultas"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_consulta" />
 
             <TextView
-                android:id="@+id/tvNota"
+                android:id="@+id/txtNota"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="4dp"
                 android:lineSpacingExtra="2sp"
                 android:text="@string/expediente_nota"
                 android:textColor="@color/color_texto_secundario"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cvConsulta2" />
+                app:layout_constraintTop_toBottomOf="@id/rvConsultasRecientes" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

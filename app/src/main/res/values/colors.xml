@@ -23,5 +23,11 @@
     <!-- Nuevos: pantallas del alumno (_n y _j) -->
     <color name="color_exito">#FF0F8A5F</color>
     <color name="color_fondo_verde_claro">#FFE6F6EF</color>
+    <color name="color_fondo_peligro_claro">#FFFDE2E2</color>
 
+    <!-- Nuevos: inicio de enfermería (tarjetas métricas) -->
+    <color name="color_metrica_azul_fondo">#FFEFF6FF</color>
+    <color name="color_metrica_azul">#FF1D74F5</color>
+    <color name="color_metrica_verde_fondo">#FFECFDF5</color>
+    <color name="color_metrica_verde">#FF059669</color>
 </resources>

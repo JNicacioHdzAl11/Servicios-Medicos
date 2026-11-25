@@ -39,17 +39,17 @@ class DetalleCitaActivityN : AppCompatActivity() {
             insets
         }
 
-        btnRegresar = findViewById(R.id.ibRegresar)
-        txtTipoCita = findViewById(R.id.tvTipoCita)
-        txtEstadoCita = findViewById(R.id.tvEstadoCita)
-        txtFechaCita = findViewById(R.id.tvFechaCita)
-        txtHorarioCita = findViewById(R.id.tvHorarioCita)
-        txtFolioCita = findViewById(R.id.tvFolioCita)
-        txtMedico = findViewById(R.id.tvMedico)
-        txtConsultorio = findViewById(R.id.tvConsultorio)
-        btnReprogramarCita = findViewById(R.id.btnReprogramarCita)
-        btnCancelarCita = findViewById(R.id.btnCancelarCita)
-        bnvNavegacion = findViewById(R.id.bnvNavegacion)
+//        btnRegresar = findViewById(R.id.ibRegresar)
+//        txtTipoCita = findViewById(R.id.tvTipoCita)
+//        txtEstadoCita = findViewById(R.id.tvEstadoCita)
+//        txtFechaCita = findViewById(R.id.tvFechaCita)
+//        txtHorarioCita = findViewById(R.id.tvHorarioCita)
+//        txtFolioCita = findViewById(R.id.tvFolioCita)
+//        txtMedico = findViewById(R.id.tvMedico)
+//        txtConsultorio = findViewById(R.id.tvConsultorio)
+//        btnReprogramarCita = findViewById(R.id.btnReprogramarCita)
+//        btnCancelarCita = findViewById(R.id.btnCancelarCita)
+//        bnvNavegacion = findViewById(R.id.bnvNavegacion)
 
         presentador = clsDetalleCitaPresentadorN(this)
 

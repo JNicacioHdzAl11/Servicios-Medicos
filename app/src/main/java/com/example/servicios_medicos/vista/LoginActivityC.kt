@@ -13,7 +13,6 @@ import com.example.servicios_medicos.modelo.dataUsuarioC
 import com.example.servicios_medicos.presentador.clsLoginPresentadorC
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import android.content.Intent
 
 class LoginActivityC : AppCompatActivity() {
     private lateinit var etCorreo: TextInputEditText
