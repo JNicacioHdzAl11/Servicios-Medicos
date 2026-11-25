@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- Login -->
     <string name="app_name">Servicios Médicos</string>
     <string name="login_cd_logo">Logotipo de Servicios Médicos de la UTHH</string>
@@ -83,6 +85,44 @@
     <string name="configuracion_btn_cerrar_sesion">Cerrar sesión</string>
     <string name="configuracion_pie_portal">Salud Campus · Portal del alumno</string>
 
+    <!-- Fragment: Correo institucional -->
+    <string name="ajustes_correo_titulo">Correo institucional</string>
+    <string name="ajustes_correo_descripcion">Consulta el correo asociado a tu cuenta.</string>
+    <string name="ajustes_correo_seccion">Información de la cuenta</string>
+    <string name="ajustes_correo_label">Correo institucional</string>
+    <string name="ajustes_correo_valor">Sin correo registrado</string>
+    <string name="ajustes_correo_estado">Correo institucional</string>
+    <string name="ajustes_correo_nota">Si necesitas modificar tu correo institucional, contacta al personal autorizado.</string>
+
+    <!-- Fragment: Cambiar contraseña -->
+    <string name="ajustes_contrasena_titulo">Cambiar contraseña</string>
+    <string name="ajustes_contrasena_descripcion">Protege el acceso a tu cuenta.</string>
+    <string name="ajustes_contrasena_seccion">Actualizar contraseña</string>
+    <string name="ajustes_contrasena_instrucciones">Ingresa tu contraseña actual y establece una nueva.</string>
+    <string name="ajustes_contrasena_actual">Contraseña actual</string>
+    <string name="ajustes_contrasena_actual_hint">Ingresa tu contraseña actual</string>
+    <string name="ajustes_contrasena_nueva">Nueva contraseña</string>
+    <string name="ajustes_contrasena_nueva_hint">Ingresa tu nueva contraseña</string>
+    <string name="ajustes_contrasena_confirmar">Confirmar contraseña</string>
+    <string name="ajustes_contrasena_confirmar_hint">Repite tu nueva contraseña</string>
+    <string name="ajustes_contrasena_requisitos">Utiliza al menos 8 caracteres, letras y números.</string>
+    <string name="ajustes_contrasena_guardar">Actualizar contraseña</string>
+    <string name="ajustes_contrasena_nota">Mantén tu contraseña segura y evita compartirla con otras personas.</string>
+
+    <!-- Fragment: Contacto de emergencia -->
+    <string name="ajustes_emergencia_titulo">Contacto de emergencia</string>
+    <string name="ajustes_emergencia_descripcion">Administra tu contacto de emergencia.</string>
+    <string name="ajustes_emergencia_seccion">Información del contacto</string>
+    <string name="ajustes_emergencia_instrucciones">Ingresa los datos de la persona que debemos contactar en caso de emergencia.</string>
+    <string name="ajustes_emergencia_nombre">Nombre completo</string>
+    <string name="ajustes_emergencia_nombre_hint">Nombre del contacto</string>
+    <string name="ajustes_emergencia_parentesco">Parentesco</string>
+    <string name="ajustes_emergencia_parentesco_hint">Ej. Madre, padre o familiar</string>
+    <string name="ajustes_emergencia_telefono">Número de teléfono</string>
+    <string name="ajustes_emergencia_telefono_hint">Ingresa un número de teléfono</string>
+    <string name="ajustes_emergencia_guardar">Guardar contacto</string>
+    <string name="ajustes_emergencia_nota">Mantén actualizada esta información para facilitar la comunicación en caso de emergencia.</string>
+
     <!-- Términos del servicio -->
     <string name="terminos_titulo">Términos del servicio</string>
     <string name="terminos_subtitulo">Lineamientos del servicio médico universitario</string>
@@ -129,7 +169,6 @@
     <string name="faq_pregunta1">¿Cómo agendo una cita?</string>
     <string name="faq_respuesta1">Entra a Citas y selecciona “Solicitar nueva cita”. Elige especialidad, fecha y horario; después confirma. Verás la cita en Próximas.</string>
     <string name="faq_pregunta2">¿Puedo reprogramar o cancelar?</string>
-    <!-- Respuestas 2, 4, 5 y 6: el boceto las muestra cerradas, falta su texto -->
     <string name="faq_respuesta2"></string>
     <string name="faq_pregunta3">¿Qué hago en una urgencia?</string>
     <string name="faq_respuesta3">Acude al servicio médico del campus o pide apoyo al personal. Si hay riesgo inmediato, llama al 911; no esperes una cita.</string>
@@ -141,6 +180,7 @@
     <string name="faq_respuesta6"></string>
     <string name="faq_dudas_titulo">¿Aún tienes dudas?</string>
     <string name="faq_dudas_texto">Visita Servicios Médicos en la planta baja del campus.\nLunes a viernes, 08:00–18:00.</string>
+
     <!-- Inicio del alumno -->
     <string name="inicio_titulo">Salud universitaria</string>
     <string name="inicio_saludo">Hola, Valeria</string>
@@ -344,6 +384,7 @@
     <string name="detalle_campania_despues_texto">Permanece en observación el tiempo indicado y sigue las recomendaciones del personal. Si presentas molestias intensas o persistentes, busca atención médica.</string>
     <string name="detalle_campania_btn_infografia">Descargar infografía informativa (PDF)</string>
     <string name="detalle_campania_cd_compartir">Compartir campaña</string>
+
     <!-- Comprobante de ingreso -->
     <string name="comprobante_titulo">Comprobante de ingreso</string>
     <string name="comprobante_descripcion">Presenta este comprobante al acudir a tu consulta médica.</string>
@@ -361,4 +402,5 @@
     <string name="comprobante_antes_titulo">Antes de tu consulta</string>
     <string name="comprobante_antes_texto">Llega 10 minutos antes con tu credencial vigente.</string>
     <string name="comprobante_nota">Este documento es válido únicamente para atención médica interna.</string>
+
 </resources>
