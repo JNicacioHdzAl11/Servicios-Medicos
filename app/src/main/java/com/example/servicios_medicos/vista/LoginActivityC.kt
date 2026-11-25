@@ -23,33 +23,16 @@ class LoginActivityC : AppCompatActivity() {
     private lateinit var presentador: clsLoginPresentadorC
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
         enableEdgeToEdge()
-
         setContentView(R.layout.activity_login_c)
 
         ViewCompat.setOnApplyWindowInsetsListener(
             findViewById(R.id.main),
             object : OnApplyWindowInsetsListener {
-
-                override fun onApplyWindowInsets(
-                    v: View,
-                    insets: WindowInsetsCompat
-                ): WindowInsetsCompat {
-
-                    val systemBars = insets.getInsets(
-                        WindowInsetsCompat.Type.systemBars()
-                    )
-
-                    v.setPadding(
-                        systemBars.left,
-                        systemBars.top,
-                        systemBars.right,
-                        systemBars.bottom
-                    )
-
+                override fun onApplyWindowInsets(v: View, insets: WindowInsetsCompat): WindowInsetsCompat {
+                    val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                    v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
                     return insets
                 }
             }
