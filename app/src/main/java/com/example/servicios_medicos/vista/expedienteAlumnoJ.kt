@@ -15,7 +15,6 @@ import com.example.servicios_medicos.adapters.consultaAdapter
 import com.example.servicios_medicos.modelo.dataConsultaJ
 import com.example.servicios_medicos.modelo.dataExpedienteJN
 import com.example.servicios_medicos.modelo.dataSolicitudExpedienteJ
-import com.example.servicios_medicos.presentador.clsExpedienteAlumPresentadorJM
 import com.google.android.material.button.MaterialButton
 
 class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {

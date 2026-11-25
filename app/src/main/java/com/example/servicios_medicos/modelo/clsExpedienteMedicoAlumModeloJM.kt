@@ -1,59 +1,61 @@
 package com.example.servicios_medicos.modelo
 
-import com.example.servicios_medicos.Data.ConsultaItemJM
 import com.example.servicios_medicos.Data.dataExpedienteJM
-import com.example.servicios_medicos.Data.dataRecetaJM
 import com.example.servicios_medicos.network.RetrofitCliente
 import retrofit2.Response
 
-class clsExpedienteAlumModeloJM {
+class clsExpedienteMedicoAlumModeloJM {
 
-    suspend fun obtenerExpedientePorMatricula(token: String, matricula: String): Response<dataExpedienteJM> { // llama a la api expediente por matricula
-        return RetrofitCliente.apiExpedienteJM.obtenerExpedientePorMatricula("Bearer $token", matricula)
+    suspend fun obtenerExpedientePorMatricula(token: String, matricula: String): Response<dataExpedienteJM> { // pide el expediente clinico del alumno por matricula
+        return RetrofitCliente.apiServiceExpedienteJM.obtenerExpedientePorMatricula("Bearer $token", matricula)
     }
 
-    suspend fun obtenerRecetaAnterior(token: String, idConsulta: Int): Response<dataRecetaJM> { // llama a la api obtener receta
-        return RetrofitCliente.apiExpedienteJM.obtenerReceta("Bearer $token", idConsulta)
-    }
-
-    fun armarIniciales(nombreCompleto: String): String { // arma las iniciales del alumno
+    fun armarIniciales(nombreCompleto: String?): String { // toma las dos primeras iniciales del nombre del alumno
+        if (nombreCompleto == null || nombreCompleto.trim().isEmpty()) {
+            return "--"
+        }
         val partes = nombreCompleto.trim().split(" ").filter { it.isNotEmpty() }
-        if (partes.isEmpty()) {
-            return "AL"
+        if (partes.size >= 2) {
+            return (partes[0].substring(0, 1) + partes[1].substring(0, 1)).uppercase()
         }
-        if (partes.size == 1) {
-            return partes[0].take(2).uppercase()
-        }
-        return (partes[0].take(1) + partes[1].take(1)).uppercase()
+        return partes[0].take(2).uppercase()
     }
 
-    fun formatearMatriculaEdad(matricula: String, edad: String): String { // arma el texto de matricula y edad
-        if (edad.isNotEmpty()) {
-            return "Matrícula $matricula · $edad"
+    fun formatearMatriculaEdad(matricula: String?, edad: Int): String { // junta la matricula y la edad en una sola linea
+        val mat = matricula?.trim().orEmpty()
+        if (mat.isNotEmpty() && edad > 0) {
+            return "Matrícula $mat · $edad años"
         }
-        return "Matrícula $matricula"
+        if (mat.isNotEmpty()) {
+            return "Matrícula $mat"
+        }
+        if (edad > 0) {
+            return "$edad años"
+        }
+        return "Sin matrícula registrada"
     }
 
-    fun formatearAlertaAlergia(alergias: String): String { // arma el texto de alerta de alergia
-        val valor = resolverTexto(alergias, "Ninguna")
-        return "Alergia: $valor"
+    fun formatearAlertaAlergia(alergias: String?): String { // arma el texto de alerta de alergias del paciente
+        if (alergias != null && alergias.trim().isNotEmpty()) {
+            return "Alergia: " + alergias.trim()
+        }
+        return "Sin alergias registradas"
     }
 
-    fun resolverTexto(valor: String, respaldo: String): String { // regresa el valor o el texto de respaldo si esta vacio
-        if (valor.isNotEmpty()) {
-            return valor
+    fun resolverTexto(valor: String?, respaldo: String): String { // devuelve el valor si existe o un texto por defecto
+        if (valor != null && valor.trim().isNotEmpty()) {
+            return valor.trim()
         }
         return respaldo
     }
 
-    fun obtenerConsultaPorIndice(consultas: List<ConsultaItemJM>, indice: Int): ConsultaItemJM? { // regresa la consulta en el indice indicado
-        if (indice >= 0 && consultas.size > indice) {
+    fun obtenerConsultaPorIndice(
+        consultas: List<Any>,
+        indice: Int
+    ): Any? { // devuelve la consulta reciente segun su posicion
+        if (indice >= 0 && indice < consultas.size) {
             return consultas[indice]
         }
         return null
-    }
-
-    fun formatearResumenReceta(medicamentos: String, indicaciones: String): String { // arma el texto de resumen de receta
-        return "$medicamentos · $indicaciones"
     }
 }
