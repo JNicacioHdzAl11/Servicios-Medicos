@@ -1,88 +1,75 @@
 package com.example.servicios_medicos.modelo
 
+import com.example.servicios_medicos.Data.dataInicioAlumnoN
 import com.example.servicios_medicos.network.RetrofitCliente
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class clsInicioAlumnoModeloN {
+
     suspend fun obtenerDatosInicio(token: String): Response<dataInicioAlumnoN> { // llama a la api inicio alumno
         return RetrofitCliente.apiAlumnoN.obtenerInicioAlumno("Bearer $token")
     }
-    fun obtenerInfoAlumno(datos: dataInicioAlumnoN): List<String> { // saca el nombre y su matricula
-        val info = mutableListOf<String>()
-        val contenido = datos.data
-        if (contenido != null) {
-            val alumno = contenido.alumno
-            if (alumno != null) {
-                info.add(alumno.nombreCompleto)
-                info.add(alumno.matricula)
+
+    suspend fun listarCitas(token: String): List<CitaDetalleN> { // pide las citas del alumno y regresa la lista
+        val respuesta = RetrofitCliente.apiAlumnoN.listarCitas("Bearer $token")
+        val datos = respuesta.body()
+        if (respuesta.isSuccessful && datos != null) {
+            val citas = datos.data
+            if (citas != null) {
+                return citas
             }
         }
-        return info
+        return emptyList()
     }
-    suspend fun calcularTotalCitas(token: String): Int { // cuenta las citas proximas con la api listar citas
-        val modeloCitas = clsCitasModeloN()
-        val respuesta = modeloCitas.listarCitas(token)
-        if (respuesta.isSuccessful) {
-            val datos = respuesta.body()
-            if (datos != null) {
-                val citas = datos.data
-                if (citas != null) {
-                    val citasProximas = modeloCitas.obtenerCitasProximas(citas)
-                    return citasProximas.size
+
+    fun contarCitasProximas(citas: List<CitaDetalleN>): Int { // cuenta las citas que siguen y no estan canceladas
+        val hoy = obtenerHoyServidor()
+        var total = 0
+        for (cita in citas) {
+            val fecha = cita.fecha
+            if (fecha != null && fecha >= hoy && cita.estado != "Cancelada") {
+                total = total + 1
+            }
+        }
+        return total
+    }
+
+    fun calcularPendientes(citas: List<CitaDetalleN>): String { // revisa si el alumno tiene citas vencidas o una cita hoy
+        val hoy = obtenerHoyServidor()
+        var citasVencidas = 0
+        var tieneCitaHoy = false
+        for (cita in citas) {
+            val fecha = cita.fecha
+            if (fecha != null && cita.estado == "Pendiente") {
+                if (fecha < hoy) {
+                    citasVencidas = citasVencidas + 1
+                }
+                if (fecha == hoy) {
+                    tieneCitaHoy = true
                 }
             }
         }
-        return 0
-    }
-    fun obtenerProximaCita(datos: dataInicioAlumnoN): List<String> { // arma los textos de la proxima cita
-        val resultado = mutableListOf<String>()
-        val contenido = datos.data
-        if (contenido != null) {
-            val cita = contenido.proximaCita
-            if (cita != null) {
-                resultado.add(cita.motivo)
-                resultado.add(cita.estado)
-                resultado.add("Fecha: " + cita.fecha)
-                resultado.add("Hora: " + cita.hora)
-                return resultado
-            }
+        var textoPendientes = "Sin pendientes"
+        if (citasVencidas > 0) {
+            textoPendientes = "Citas vencidas: " + citasVencidas
+        } else if (tieneCitaHoy) {
+            textoPendientes = "Tienes cita hoy"
         }
-        resultado.add("Sin citas programadas")
-        resultado.add("Sin cita")
-        resultado.add("Sin fecha")
-        resultado.add("Sin horario asignado")
-        return resultado
+        return textoPendientes
     }
-    fun obtenerCampania1(datos: dataInicioAlumnoN): List<String> { // arma el titulo y detalle de la 1ra campaña
-        val campania = mutableListOf<String>()
-        val contenido = datos.data
-        if (contenido != null) {
-            if (contenido.campaniasActivas.size >= 1) {
-                val campania1 = contenido.campaniasActivas[0]
-                val detalle = "Lugar: " + campania1.lugar + " (" + campania1.fechaInicio + " - " + campania1.fechaFin + ")"
-                campania.add(campania1.titulo)
-                campania.add(detalle)
-                return campania
-            }
-        }
-        campania.add("Sin campañas")
-        campania.add("No hay campañas disponibles")
-        return campania
+
+    fun obtenerHoyServidor(): String { // regresa la fecha de hoy igual que la manda el servidor
+        val formato = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        return formato.format(Date())
     }
-    fun obtenerCampania2(datos: dataInicioAlumnoN): List<String> { // arma el titulo y detalle de la 2da campaña
-        val campania = mutableListOf<String>()
-        val contenido = datos.data
-        if (contenido != null) {
-            if (contenido.campaniasActivas.size >= 2) {
-                val campania2 = contenido.campaniasActivas[1]
-                val detalle = "Lugar: " + campania2.lugar + " (" + campania2.fechaInicio + " - " + campania2.fechaFin + ")"
-                campania.add(campania2.titulo)
-                campania.add(detalle)
-                return campania
-            }
-        }
-        campania.add("Sin campañas")
-        campania.add("No hay más campañas por ahora")
-        return campania
+
+    fun obtenerFechaHoy(): String { // arma el texto de la fecha de hoy para el saludo
+        val formato = SimpleDateFormat("EEEE, d 'de' MMMM", Locale("es", "MX"))
+        val fecha = formato.format(Date())
+        return fecha.substring(0, 1).uppercase() + fecha.substring(1)
     }
 }
+
