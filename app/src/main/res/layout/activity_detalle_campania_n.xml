@@ -37,7 +37,6 @@
             android:id="@+id/txtTitulo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:ellipsize="end"
             android:gravity="center"
@@ -47,21 +46,8 @@
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnCompartir"
             app:layout_constraintStart_toEndOf="@id/btnRegresar"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btnCompartir"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/detalle_campania_cd_compartir"
-            android:src="@drawable/ic_compartir"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/color_enlace" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

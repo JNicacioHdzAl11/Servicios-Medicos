@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -9,20 +8,23 @@
     android:background="@color/color_fondo_secundario"
     tools:context=".vista.DetalleCitaActivityN">
 
-    <!-- Barra superior -->
+    <!-- Encabezado: regresar y título -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clEncabezado"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/color_fondo"
         android:minHeight="64dp"
-        android:padding="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/btnRegresar"
+            android:id="@+id/ibRegresar"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
@@ -34,11 +36,11 @@
             app:tint="@color/color_enlace" />
 
         <TextView
-            android:id="@+id/txtTitulo"
+            android:id="@+id/tvTitulo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/detalle_cita_titulo"
@@ -47,7 +49,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btnRegresar"
+            app:layout_constraintStart_toEndOf="@id/ibRegresar"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -61,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clEncabezado" />
 
-    <!-- Contenido -->
+    <!-- Contenido desplazable -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsvContenido"
         android:layout_width="0dp"
@@ -77,28 +79,27 @@
             android:id="@+id/clContenido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="32dp"
-            android:paddingEnd="24dp"
             android:paddingStart="24dp"
-            android:paddingTop="24dp">
+            android:paddingTop="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="32dp">
 
             <TextView
-                android:id="@+id/txtServicio"
+                android:id="@+id/tvTipoCita"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="2sp"
-                android:text=""
+                android:text="@string/cita_consulta_general"
                 android:textColor="@color/color_texto_principal"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Consulta general" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Fecha y horario -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardFechaCita"
+                android:id="@+id/cvFechaCita"
                 style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -108,7 +109,7 @@
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtServicio"
+                app:layout_constraintTop_toBottomOf="@id/tvTipoCita"
                 app:strokeColor="@color/color_fondo_azul_claro"
                 app:strokeWidth="1dp">
 
@@ -118,62 +119,58 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/txtEstado"
+                        android:id="@+id/tvEstadoCita"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="2sp"
-                        android:text=""
+                        android:text="@string/cita_estado_confirmada"
                         android:textColor="@color/color_exito"
                         android:textSize="12sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Confirmada" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/txtFechaCita"
+                        android:id="@+id/tvFechaCita"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="2sp"
-                        android:text=""
+                        android:text="@string/detalle_cita_fecha"
                         android:textColor="@color/color_texto_principal"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtEstado"
-                        tools:text="Jueves, 12 de noviembre" />
+                        app:layout_constraintTop_toBottomOf="@id/tvEstadoCita" />
 
                     <TextView
-                        android:id="@+id/txtHorario"
+                        android:id="@+id/tvHorarioCita"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:lineSpacingExtra="2sp"
-                        android:text=""
+                        android:text="@string/detalle_cita_horario"
                         android:textColor="@color/color_enlace"
                         android:textSize="26sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtFechaCita"
-                        tools:text="10:30–11:00" />
+                        app:layout_constraintTop_toBottomOf="@id/tvFechaCita" />
 
                     <TextView
-                        android:id="@+id/txtFolio"
+                        android:id="@+id/tvFolioCita"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:lineSpacingExtra="2sp"
-                        android:text=""
+                        android:text="@string/detalle_cita_folio"
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="11sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtHorario"
-                        tools:text="Folio de cita · CIT-2026-1112-0351" />
+                        app:layout_constraintTop_toBottomOf="@id/tvHorarioCita" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -181,7 +178,7 @@
 
             <!-- Atención médica -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardAtencion"
+                android:id="@+id/cvAtencion"
                 style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -191,7 +188,7 @@
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardFechaCita"
+                app:layout_constraintTop_toBottomOf="@id/cvFechaCita"
                 app:strokeColor="@color/color_borde"
                 app:strokeWidth="1dp">
 
@@ -201,7 +198,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/txtAtencionTitulo"
+                        android:id="@+id/tvAtencionTitulo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="2sp"
@@ -214,33 +211,32 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/txtMedicoEtiqueta"
+                        android:id="@+id/tvMedicoEtiqueta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="@string/detalle_cita_medico_asignado"
+                        android:text="@string/detalle_cita_medico"
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtAtencionTitulo" />
+                        app:layout_constraintTop_toBottomOf="@id/tvAtencionTitulo" />
 
                     <TextView
-                        android:id="@+id/txtMedico"
+                        android:id="@+id/tvMedico"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:gravity="end"
-                        android:text=""
+                        android:text="@string/detalle_cita_medico_valor"
                         android:textColor="@color/color_texto_principal"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        app:layout_constraintBaseline_toBaselineOf="@id/txtMedicoEtiqueta"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvMedicoEtiqueta"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/txtMedicoEtiqueta"
-                        tools:text="Dra. Sofía Reyes" />
+                        app:layout_constraintStart_toEndOf="@id/tvMedicoEtiqueta" />
 
                     <TextView
-                        android:id="@+id/txtConsultorioEtiqueta"
+                        android:id="@+id/tvConsultorioEtiqueta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -248,25 +244,24 @@
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtMedicoEtiqueta" />
+                        app:layout_constraintTop_toBottomOf="@id/tvMedicoEtiqueta" />
 
                     <TextView
-                        android:id="@+id/txtConsultorio"
+                        android:id="@+id/tvConsultorio"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:gravity="end"
-                        android:text=""
+                        android:text="@string/detalle_cita_consultorio_valor"
                         android:textColor="@color/color_texto_principal"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        app:layout_constraintBaseline_toBaselineOf="@id/txtConsultorioEtiqueta"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvConsultorioEtiqueta"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/txtConsultorioEtiqueta"
-                        tools:text="1" />
+                        app:layout_constraintStart_toEndOf="@id/tvConsultorioEtiqueta" />
 
                     <TextView
-                        android:id="@+id/txtUbicacionEtiqueta"
+                        android:id="@+id/tvUbicacionEtiqueta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -274,25 +269,24 @@
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtConsultorioEtiqueta" />
+                        app:layout_constraintTop_toBottomOf="@id/tvConsultorioEtiqueta" />
 
                     <TextView
-                        android:id="@+id/txtUbicacion"
+                        android:id="@+id/tvUbicacion"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:gravity="end"
-                        android:text=""
+                        android:text="@string/detalle_cita_ubicacion_valor"
                         android:textColor="@color/color_texto_principal"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        app:layout_constraintBaseline_toBaselineOf="@id/txtUbicacionEtiqueta"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvUbicacionEtiqueta"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/txtUbicacionEtiqueta"
-                        tools:text="Servicios Médicos" />
+                        app:layout_constraintStart_toEndOf="@id/tvUbicacionEtiqueta" />
 
                     <TextView
-                        android:id="@+id/txtSedeEtiqueta"
+                        android:id="@+id/tvSedeEtiqueta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -300,22 +294,21 @@
                         android:textColor="@color/color_texto_secundario"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtUbicacionEtiqueta" />
+                        app:layout_constraintTop_toBottomOf="@id/tvUbicacionEtiqueta" />
 
                     <TextView
-                        android:id="@+id/txtSede"
+                        android:id="@+id/tvSede"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:gravity="end"
-                        android:text=""
+                        android:text="@string/detalle_cita_sede_valor"
                         android:textColor="@color/color_texto_principal"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        app:layout_constraintBaseline_toBaselineOf="@id/txtSedeEtiqueta"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvSedeEtiqueta"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/txtSedeEtiqueta"
-                        tools:text="Campus · Planta baja" />
+                        app:layout_constraintStart_toEndOf="@id/tvSedeEtiqueta" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -323,7 +316,7 @@
 
             <!-- Antes de tu cita -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardAntesCita"
+                android:id="@+id/cvAntesCita"
                 style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -333,7 +326,7 @@
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardAtencion"
+                app:layout_constraintTop_toBottomOf="@id/cvAtencion"
                 app:strokeColor="@color/color_borde"
                 app:strokeWidth="1dp">
 
@@ -343,7 +336,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        android:id="@+id/txtAntesCitaTitulo"
+                        android:id="@+id/tvAntesCitaTitulo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="2sp"
@@ -356,7 +349,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/txtIndicacion1"
+                        android:id="@+id/tvIndicacion1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -369,10 +362,10 @@
                         app:drawableTint="@color/color_texto_secundario"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtAntesCitaTitulo" />
+                        app:layout_constraintTop_toBottomOf="@id/tvAntesCitaTitulo" />
 
                     <TextView
-                        android:id="@+id/txtIndicacion2"
+                        android:id="@+id/tvIndicacion2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -385,10 +378,10 @@
                         app:drawableTint="@color/color_texto_secundario"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtIndicacion1" />
+                        app:layout_constraintTop_toBottomOf="@id/tvIndicacion1" />
 
                     <TextView
-                        android:id="@+id/txtIndicacion3"
+                        android:id="@+id/tvIndicacion3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -401,10 +394,10 @@
                         app:drawableTint="@color/color_texto_secundario"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtIndicacion2" />
+                        app:layout_constraintTop_toBottomOf="@id/tvIndicacion2" />
 
                     <TextView
-                        android:id="@+id/txtIndicacion4"
+                        android:id="@+id/tvIndicacion4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -417,7 +410,7 @@
                         app:drawableTint="@color/color_texto_secundario"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtIndicacion3" />
+                        app:layout_constraintTop_toBottomOf="@id/tvIndicacion3" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -425,28 +418,48 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnReprogramarCita"
-                style="@style/SaludCampus.BotonContorno"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/detalle_cita_reprogramar"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/detalle_cita_btn_reprogramar"
+                android:textAllCaps="false"
+                android:textColor="@color/color_enlace"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/color_fondo"
+                app:cornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardAntesCita" />
+                app:layout_constraintTop_toBottomOf="@id/cvAntesCita"
+                app:strokeColor="@color/color_enlace"
+                app:strokeWidth="1dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCancelarCita"
-                style="@style/SaludCampus.BotonPeligro"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
-                android:text="@string/detalle_cita_cancelar"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/detalle_cita_btn_cancelar"
+                android:textAllCaps="false"
+                android:textColor="@color/color_peligro"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/color_fondo"
+                app:cornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnReprogramarCita" />
+                app:layout_constraintTop_toBottomOf="@id/btnReprogramarCita"
+                app:strokeColor="@color/color_peligro_borde"
+                app:strokeWidth="1dp" />
 
             <TextView
-                android:id="@+id/txtNota"
+                android:id="@+id/tvNota"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -462,7 +475,7 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Navegación inferior -->
+    <!-- Navegación inferior del alumno -->
     <View
         android:id="@+id/vDivisorNavegacion"
         android:layout_width="0dp"
