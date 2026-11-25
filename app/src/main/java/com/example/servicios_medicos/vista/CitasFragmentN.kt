@@ -50,6 +50,14 @@ class CitasFragmentN : Fragment() {
 
         btnRegresar = view.findViewById(R.id.ibRegresar)
         btnAjustes = view.findViewById(R.id.ibAjustes)
+        btnAjustes.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val destino = Intent(requireContext(), ConfiguracionActivityC::class.java)
+                destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
+                destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
+                startActivity(destino)
+            }
+        })
         btnProximas = view.findViewById(R.id.btnProximas)
         btnHistorial = view.findViewById(R.id.btnHistorial)
         txtMes = view.findViewById(R.id.tvMes)

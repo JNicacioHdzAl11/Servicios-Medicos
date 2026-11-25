@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardAlumno"
+    style="@style/Widget.Material3.CardView.Outlined"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="@color/color_fondo"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/color_borde"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:id="@+id/txtIniciales"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_iniciales_circular"
+            android:gravity="center"
+            android:importantForAccessibility="no"
+            android:text=""
+            android:textColor="@color/color_enlace"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="LF" />
+
+        <TextView
+            android:id="@+id/txtNombreAlumno"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/color_texto_principal"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtIniciales"
+            app:layout_constraintTop_toTopOf="@id/txtIniciales"
+            tools:text="Luis Fernández" />
+
+        <TextView
+            android:id="@+id/txtMatricula"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textColor="@color/color_texto_secundario"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/txtNombreAlumno"
+            app:layout_constraintStart_toStartOf="@id/txtNombreAlumno"
+            app:layout_constraintTop_toBottomOf="@id/txtNombreAlumno"
+            tools:text="Matrícula 20240128" />
+
+        <TextView
+            android:id="@+id/txtCarreraGrupo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text=""
+            android:textColor="@color/color_texto_secundario"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/txtNombreAlumno"
+            app:layout_constraintStart_toStartOf="@id/txtNombreAlumno"
+            app:layout_constraintTop_toBottomOf="@id/txtMatricula"
+            tools:text="Ing. en Sistemas · 5.º A" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnIniciarAtencion"
+            style="@style/SaludCampus.BotonEnlace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/buscar_alumno_iniciar_atencion"
+            app:icon="@drawable/ic_chevron_derecha"
+            app:iconGravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtCarreraGrupo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

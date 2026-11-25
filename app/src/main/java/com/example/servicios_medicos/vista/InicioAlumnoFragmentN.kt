@@ -61,6 +61,15 @@ class InicioAlumnoFragmentN : Fragment() {
         btnSolicitarCita = view.findViewById(R.id.btnSolicitarCita)
         btnRegresar = view.findViewById(R.id.ibRegresar)
         btnAjustes = view.findViewById(R.id.ibAjustes)
+        btnAjustes.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val destino = Intent(requireContext(), ConfiguracionActivityC::class.java)
+                destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
+                destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
+                startActivity(destino)
+            }
+        })
+        // los id del XML se quedan igual, solo cambia el nombre de la variable
         txtCampania1Titulo = view.findViewById(R.id.txtAvisoVacunacionTitulo)
         txtCampania1Detalle = view.findViewById(R.id.txtAvisoVacunacion)
         txtCampania2Titulo = view.findViewById(R.id.txtAvisoBienestarTitulo)
