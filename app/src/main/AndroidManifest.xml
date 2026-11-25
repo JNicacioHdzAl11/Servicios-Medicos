@@ -49,6 +49,40 @@
             android:name=".vista.PreguntasFrecuentesActivityC"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+<<<<<<< Updated upstream
+=======
+
+        <activity
+            android:name=".vista.AlumnoMainActivityN"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".vista.DetalleCitaActivityN"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".vista.AgendarCitaActivityN"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".vista.ComprobanteIngresoActivityN"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".vista.DetalleCampaniaActivityN"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".vista.EnfermeriaActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+>>>>>>> Stashed changes
     </application>
 
 </manifest>

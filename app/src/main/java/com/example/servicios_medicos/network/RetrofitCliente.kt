@@ -16,5 +16,28 @@ object RetrofitCliente {
             .build()
             .create(ApiAutenticacionC::class.java)
 
+<<<<<<< Updated upstream
     }
 }
+=======
+    val apiAutenticacion: ApiAutenticacionC =
+        retrofit.create(ApiAutenticacionC::class.java)
+
+    val apiAlumnoN: ApiAlumnoN =
+        retrofit.create(ApiAlumnoN::class.java)
+
+    val apiRecetaJM: ApiRecetaJM=
+        retrofit.create(ApiRecetaJM::class.java)
+
+    val apiConsultaJM: ApiConsultaJM by lazy {
+        retrofit.create(ApiConsultaJM::class.java)
+    }
+
+    val apiExpedienteAlumJM: ApiExpedienteAlumJM by lazy {
+        retrofit.create(ApiExpedienteAlumJM::class.java)
+    }
+    val apiExpedienteJM: ApiExpedienteJM by lazy {
+        retrofit.create(ApiExpedienteJM::class.java)
+    }
+}
+>>>>>>> Stashed changes

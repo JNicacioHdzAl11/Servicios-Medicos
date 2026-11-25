@@ -1,4 +1,7 @@
 package com.example.servicios_medicos.presentador
 
-class clsRecetaPresentadorJM {
+import com.example.servicios_medicos.vista.RecetaActivityJM
+
+class clsRecetaPresentadorJM( private val vista: RecetaActivityJM) {
+
 }
