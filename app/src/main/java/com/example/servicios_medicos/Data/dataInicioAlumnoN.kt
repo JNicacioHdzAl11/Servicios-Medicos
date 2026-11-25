@@ -30,24 +30,9 @@ data class AlumnoInicioModeloN(
 
     @SerializedName("nombre_completo")
     val nombreCompleto: String = "",
-
-    @SerializedName("telefono")
-    val telefono: String = "",
-
-    @SerializedName("area")
-    val area: String = "",
-
-    @SerializedName("cuatrimestre")
-    val cuatrimestre: String = "",
-
-    @SerializedName("grupo")
-    val grupo: String = ""
 )
 
 data class CitaModeloN(
-    @SerializedName("id_cita")
-    val idCita: Int = 0,
-
     @SerializedName("fecha")
     val fecha: String = "",
 
@@ -62,9 +47,6 @@ data class CitaModeloN(
 )
 
 data class CampaniaModeloN(
-    @SerializedName("id_campania")
-    val idCampania: Int = 0,
-
     @SerializedName("titulo")
     val titulo: String = "",
 
@@ -76,7 +58,4 @@ data class CampaniaModeloN(
 
     @SerializedName("lugar")
     val lugar: String = "",
-
-    @SerializedName("imagen_url")
-    val imagenUrl: String = ""
 )
