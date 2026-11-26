@@ -1,12 +1,12 @@
 package com.example.servicios_medicos.network
 
-import com.example.servicios_medicos.Data.PeticionConsultaJM
-import com.example.servicios_medicos.Data.PeticionRecetaJM
-import com.example.servicios_medicos.Data.dataDetalleConsultaJM
-import com.example.servicios_medicos.Data.dataExpedienteJM
-import com.example.servicios_medicos.Data.dataPerfilJM
-import com.example.servicios_medicos.Data.dataRecetaJM
-import com.example.servicios_medicos.Data.dataRespuestaP3JM
+import com.example.servicios_medicos.modelo.PeticionConsultaJM
+import com.example.servicios_medicos.modelo.PeticionRecetaJM
+import com.example.servicios_medicos.modelo.dataDetalleConsultaJM
+import com.example.servicios_medicos.modelo.dataExpedienteAlumno
+import com.example.servicios_medicos.modelo.dataPerfilJN
+import com.example.servicios_medicos.modelo.dataRecetaJM
+import com.example.servicios_medicos.modelo.dataRespuestaP3JM
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -19,18 +19,18 @@ interface ApiServiceExpedienteJM {
     @GET("expediente/obtener_perfil.php")
     suspend fun obtenerPerfil(
         @Header("Authorization") tokenBearer: String
-    ): Response<dataPerfilJM>
+    ): Response<dataPerfilJN>
 
     @GET("expediente/obtener_expediente.php")
     suspend fun obtenerExpedienteAlumno(
         @Header("Authorization") tokenBearer: String
-    ): Response<dataExpedienteJM>
+    ): Response<dataExpedienteAlumno>
 
     @GET("expediente/obtener_expediente.php")
     suspend fun obtenerExpedientePorMatricula(
         @Header("Authorization") tokenBearer: String,
         @Query("matricula") matricula: String
-    ): Response<dataExpedienteJM>
+    ): Response<dataExpedienteAlumno>
 
     @GET("expediente/obtener_receta.php")
     suspend fun obtenerReceta(

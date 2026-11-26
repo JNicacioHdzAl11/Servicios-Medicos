@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.servicios_medicos.Data.MedicamentoRecetaJM
+import com.example.servicios_medicos.modelo.MedicamentoRecetaJM
 import com.example.servicios_medicos.R
 import com.example.servicios_medicos.presentador.clsRecetaPresentadorJM
 import com.google.android.material.button.MaterialButton
@@ -105,14 +105,14 @@ class RecetaActivityJM : AppCompatActivity() {
             .inflate(R.layout.item_medicamento_receta, rvMedicamentosReceta, false)
         rvMedicamentosReceta.addView(itemMedicamentoView)
 
-        cvMedicamentoItem = itemMedicamentoView.findViewById(R.id.cvMedicamentoItem)
-        tvNombreMedicamento = itemMedicamentoView.findViewById(R.id.tvNombreMedicamento)
-        tvPresentacionVia = itemMedicamentoView.findViewById(R.id.tvPresentacionVia)
-        btnEliminarMedicamento = itemMedicamentoView.findViewById(R.id.btnEliminarMedicamento)
-        tvDosis = itemMedicamentoView.findViewById(R.id.tvDosis)
-        tvFrecuencia = itemMedicamentoView.findViewById(R.id.tvFrecuencia)
-        tvDuracion = itemMedicamentoView.findViewById(R.id.tvDuracion)
-        tvNotaMedicamento = itemMedicamentoView.findViewById(R.id.tvNotaMedicamento)
+        cvMedicamentoItem = itemMedicamentoView as MaterialCardView
+        tvNombreMedicamento = itemMedicamentoView.findViewById(R.id.txtNombreMedicamentoItem)
+        tvPresentacionVia = itemMedicamentoView.findViewById(R.id.txtPresentacionViaItem)
+        btnEliminarMedicamento = itemMedicamentoView.findViewById(R.id.btnEliminarMedicamentoItem)
+        tvDosis = itemMedicamentoView.findViewById(R.id.txtDosisItem)
+        tvFrecuencia = itemMedicamentoView.findViewById(R.id.txtFrecuenciaItem)
+        tvDuracion = itemMedicamentoView.findViewById(R.id.txtDuracionItem)
+        tvNotaMedicamento = itemMedicamentoView.findViewById(R.id.txtNotaMedicamentoItem)
     }
 
     private fun configurarListeners() {

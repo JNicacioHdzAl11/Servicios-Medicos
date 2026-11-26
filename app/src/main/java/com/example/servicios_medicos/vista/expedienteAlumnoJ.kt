@@ -15,6 +15,7 @@ import com.example.servicios_medicos.adapters.consultaAdapter
 import com.example.servicios_medicos.modelo.dataConsultaJ
 import com.example.servicios_medicos.modelo.dataExpedienteJN
 import com.example.servicios_medicos.modelo.dataSolicitudExpedienteJ
+import com.example.servicios_medicos.presentador.clsExpedienteMedicoAlumPresentadorJM
 import com.google.android.material.button.MaterialButton
 
 class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
@@ -37,7 +38,7 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
     private lateinit var rvConsultasRecientes: RecyclerView
     private lateinit var adapterConsultas: consultaAdapter
 
-    private lateinit var presentador: clsExpedienteAlumPresentadorJM
+    private lateinit var presentador: clsExpedienteMedicoAlumPresentadorJM
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +54,7 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
         enlazarVistas(view)
         configurarListeners()
 
-        presentador = clsExpedienteAlumPresentadorJM(this)
+        presentador = clsExpedienteMedicoAlumPresentadorJM(this)
 
         val token = requireActivity().intent.getStringExtra("token") ?: ""
         if (token.isNotEmpty()) {

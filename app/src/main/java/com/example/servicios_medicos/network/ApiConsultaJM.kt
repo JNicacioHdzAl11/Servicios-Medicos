@@ -1,8 +1,8 @@
 package com.example.servicios_medicos.network
 
-import com.example.servicios_medicos.modelo.PeticionGuardarConsulta
-import com.example.servicios_medicos.modelo.dataConsultaMedicaJM
-import com.example.servicios_medicos.modelo.dataRespuestaConsulta
+import com.example.servicios_medicos.modelo.PeticionConsultaJM
+import com.example.servicios_medicos.modelo.dataDetalleConsultaJM
+import com.example.servicios_medicos.modelo.dataRespuestaP3JM
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,11 +16,11 @@ interface ApiConsultaJM {
     suspend fun obtenerDatosConsulta(
         @Header("Authorization") tokenBearer: String,
         @Query("matricula") matricula: String
-    ): Response<dataConsultaMedicaJM>
+    ): Response<dataDetalleConsultaJM>
 
     @POST("expediente/actualizar_datos.php")
     suspend fun guardarConsultaMedica(
         @Header("Authorization") tokenBearer: String,
-        @Body peticion: PeticionGuardarConsulta
-    ): Response<dataRespuestaConsulta>
+        @Body peticion: PeticionConsultaJM
+    ): Response<dataRespuestaP3JM>
 }

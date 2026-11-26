@@ -1,7 +1,7 @@
 package com.example.servicios_medicos.presentador
 
-import com.example.servicios_medicos.Data.MedicamentoRecetaJM
-import com.example.servicios_medicos.Data.dataRecetaJM
+import com.example.servicios_medicos.modelo.dataRecetaJM
+import com.example.servicios_medicos.modelo.MedicamentoRecetaJM
 import com.example.servicios_medicos.modelo.clsRecetaModeloJM
 import com.example.servicios_medicos.vista.RecetaActivityJM
 import kotlinx.coroutines.CoroutineScope

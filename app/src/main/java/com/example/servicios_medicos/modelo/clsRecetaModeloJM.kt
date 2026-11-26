@@ -1,9 +1,5 @@
 package com.example.servicios_medicos.modelo
 
-import com.example.servicios_medicos.Data.MedicamentoRecetaJM
-import com.example.servicios_medicos.Data.PeticionRecetaJM
-import com.example.servicios_medicos.Data.dataRecetaJM
-import com.example.servicios_medicos.Data.dataRespuestaP3JM
 import com.example.servicios_medicos.network.RetrofitCliente
 import retrofit2.Response
 

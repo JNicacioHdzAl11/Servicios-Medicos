@@ -1,13 +1,11 @@
 package com.example.servicios_medicos.modelo
 
-import com.example.servicios_medicos.Data.dataExpedienteJM
-import com.example.servicios_medicos.Data.dataRespuestaP3JM
 import com.example.servicios_medicos.network.RetrofitCliente
 import retrofit2.Response
 
 class clsExpedienteAlumnoModeloJM {
 
-    suspend fun obtenerExpedienteAlumno(token: String): Response<dataExpedienteJM> { // pide el expediente del alumno autenticado
+    suspend fun obtenerExpedienteAlumno(token: String): Response<dataExpedienteAlumno> { // pide el expediente del alumno autenticado
         return RetrofitCliente.apiServiceExpedienteJM.obtenerExpedienteAlumno("Bearer $token")
     }
 

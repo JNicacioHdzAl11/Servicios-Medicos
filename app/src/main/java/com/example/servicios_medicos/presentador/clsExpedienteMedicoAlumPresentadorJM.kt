@@ -1,7 +1,7 @@
 package com.example.servicios_medicos.presentador
 
-import com.example.servicios_medicos.Data.dataExpedienteJM
 import com.example.servicios_medicos.modelo.clsExpedienteMedicoAlumModeloJM
+import com.example.servicios_medicos.modelo.dataExpedienteAlumno
 import com.example.servicios_medicos.vista.ExpedienteMedicoAlumActivityJM
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,7 +53,7 @@ class clsExpedienteMedicoAlumPresentadorJM(private val vista: ExpedienteMedicoAl
         return consultasRecientes
     }
 
-    private fun mostrarDatos(datos: dataExpedienteJM) { // manda a la vista la tarjeta del paciente, antecedentes e historial
+    private fun mostrarDatos(datos: dataExpedienteAlumno) { // manda a la vista la tarjeta del paciente, antecedentes e historial
         val textoMatricula = if (matricula.isNotEmpty()) "Matrícula $matricula" else "Sin matrícula registrada"
         vista.mostrarIniciales(modelo.armarIniciales(textoMatricula))
         vista.mostrarNombrePaciente("Expediente del alumno")

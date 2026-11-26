@@ -2,23 +2,35 @@ package com.example.servicios_medicos.modelo
 
 import com.google.gson.annotations.SerializedName
 
-data class dataConsultaMedicaJM(
-    @SerializedName("status")
-    val status: Boolean = false,
+data class PeticionConsultaJM(
+    @SerializedName("id_cita")
+    val idCita: Int = 0,
 
-    @SerializedName("message")
-    val message: String = "",
+    @SerializedName("matricula")
+    val matricula: String = "",
 
-    @SerializedName("data")
-    val data: ConsultaMedicaData? = null
+    @SerializedName("motivo_consulta")
+    val motivoConsulta: String = "",
+
+    @SerializedName("padecimiento_actual")
+    val padecimientoActual: String = "",
+
+    @SerializedName("sintomas_manifestados")
+    val sintomasManifestados: String = "",
+
+    @SerializedName("diagnostico_medico")
+    val diagnosticoMedico: String = ""
 )
 
-data class ConsultaMedicaData(
+data class dataDetalleConsultaJM(
     @SerializedName("id_consulta")
     val idConsulta: Int = 0,
 
-    @SerializedName("nombre_paciente")
-    val nombrePaciente: String = "",
+    @SerializedName("matricula")
+    val matricula: String = "",
+
+    @SerializedName("nombre_alumno")
+    val nombreAlumno: String = "",
 
     @SerializedName("detalle_alumno")
     val detalleAlumno: String = "",
@@ -41,6 +53,9 @@ data class ConsultaMedicaData(
     @SerializedName("spo2")
     val spo2: String = "",
 
+    @SerializedName("fecha")
+    val fecha: String = "",
+
     @SerializedName("motivo_consulta")
     val motivoConsulta: String = "",
 
@@ -51,30 +66,13 @@ data class ConsultaMedicaData(
     val sintomasManifestados: String = "",
 
     @SerializedName("diagnostico_medico")
-    val diagnosticoMedico: String = ""
+    val diagnosticoMedico: String = "",
+
+    @SerializedName("id_receta")
+    val idReceta: Int? = null
 )
 
-data class PeticionGuardarConsulta(
-    @SerializedName("id_consulta")
-    val idConsulta: Int,
-
-    @SerializedName("matricula")
-    val matricula: String,
-
-    @SerializedName("motivo_consulta")
-    val motivoConsulta: String,
-
-    @SerializedName("padecimiento_actual")
-    val padecimientoActual: String,
-
-    @SerializedName("sintomas_manifestados")
-    val sintomasManifestados: String,
-
-    @SerializedName("diagnostico_medico")
-    val diagnosticoMedico: String
-)
-
-data class dataRespuestaConsulta(
+data class dataRespuestaP3JM(
     @SerializedName("status")
     val status: Boolean = false,
 
@@ -82,5 +80,11 @@ data class dataRespuestaConsulta(
     val message: String = "",
 
     @SerializedName("id_consulta")
-    val idConsulta: Int? = null
+    val idConsulta: Int? = null,
+
+    @SerializedName("id_receta")
+    val idReceta: Int? = null,
+
+    @SerializedName("data")
+    val data: dataDetalleConsultaJM? = null
 )

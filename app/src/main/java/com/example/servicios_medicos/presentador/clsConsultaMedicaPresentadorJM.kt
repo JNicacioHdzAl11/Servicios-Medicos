@@ -1,7 +1,7 @@
 package com.example.servicios_medicos.presentador
 
-import com.example.servicios_medicos.Data.dataDetalleConsultaJM
 import com.example.servicios_medicos.modelo.clsConsultaMedicaModeloJM
+import com.example.servicios_medicos.modelo.dataDetalleConsultaJM
 import com.example.servicios_medicos.vista.ConsultaMedicaActivityJM
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,15 +32,15 @@ class clsConsultaMedicaPresentadorJM(private val vista: ConsultaMedicaActivityJM
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val respuesta = modelo.obtenerDetalleConsulta(token, idConsulta)
-                val datos = respuesta.body()
-                if (respuesta.isSuccessful && datos != null && datos.status) {
-                    mostrarDatosConsulta(datos)
+                val detalle = respuesta.body()
+                if (respuesta.isSuccessful && detalle != null) {
+                    mostrarDatosConsulta(detalle)
                 } else if (respuesta.code() == 401) {
                     vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
                 } else {
                     vista.mostrarError("No pudimos cargar los datos de la consulta. Intenta de nuevo.")
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 vista.mostrarError("Revisa tu conexión a internet e intenta de nuevo.")
             }
         }
@@ -87,15 +87,13 @@ class clsConsultaMedicaPresentadorJM(private val vista: ConsultaMedicaActivityJM
                         ?: "No se pudo guardar la consulta. Intenta de nuevo."
                     vista.mostrarError(mensajeError)
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 vista.mostrarError("Revisa tu conexión a internet e intenta de nuevo.")
             }
         }
     }
 
-    private fun mostrarDatosConsulta(datos: dataDetalleConsultaJM) { // manda a la vista el resumen, signos vitales y campos clinicos
-        val detalle = datos.data ?: return
-
+    private fun mostrarDatosConsulta(detalle: dataDetalleConsultaJM) { // manda a la vista el resumen, signos vitales y campos clinicos
         if (detalle.idConsulta > 0) {
             idConsulta = detalle.idConsulta
         }

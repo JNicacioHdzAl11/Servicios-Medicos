@@ -2,7 +2,7 @@ package com.example.servicios_medicos.modelo
 
 import com.google.gson.annotations.SerializedName
 
-data class dataExpedienteAlumJM(
+data class dataExpedienteAlumno(
     @SerializedName("status")
     val status: Boolean = false,
 
@@ -10,65 +10,64 @@ data class dataExpedienteAlumJM(
     val message: String = "",
 
     @SerializedName("data")
-    val data: ExpedienteMedicoData? = null
+    val data: ExpedienteAlumnoData? = null
 )
 
-data class ExpedienteMedicoData(
-    @SerializedName("iniciales")
-    val iniciales: String = "",
+data class ExpedienteAlumnoData(
+    @SerializedName("expediente")
+    val expediente: ExpedienteDetalleModelo? = null,
 
-    @SerializedName("nombre_paciente")
-    val nombrePaciente: String = "",
+    @SerializedName("consultas_recientes")
+    val consultasRecientes: List<ConsultaRecienteModelo> = emptyList()
+)
+
+data class ExpedienteDetalleModelo(
+    @SerializedName("nombre_completo")
+    val nombreCompleto: String = "",
 
     @SerializedName("matricula")
     val matricula: String = "",
 
-    @SerializedName("edad")
-    val edad: String = "",
-
-    @SerializedName("carrera_grupo")
-    val carreraGrupo: String = "",
-
-    @SerializedName("alergia")
-    val alergia: String = "",
+    @SerializedName("fecha_actualizacion")
+    val fechaActualizacion: String = "",
 
     @SerializedName("tipo_sangre")
     val tipoSangre: String = "",
 
-    @SerializedName("enfermedades_cronicas")
-    val enfermedadesCronicas: String = "",
+    @SerializedName("alergias")
+    val alergias: String = "",
 
-    @SerializedName("alergenos_detalle")
-    val alergenosDetalle: String = "",
+    @SerializedName("padecimientos")
+    val padecimientos: String = "",
 
-    @SerializedName("cirugias_previas")
-    val cirugiasPrevias: String = "",
+    @SerializedName("cirugias")
+    val cirugias: String = "",
 
     @SerializedName("tratamiento_habitual")
-    val tratamientoHabitual: String = "",
-
-    @SerializedName("consultas_recientes")
-    val consultasRecientes: List<ConsultaMedicoModelo> = emptyList()
+    val tratamientoHabitual: String = ""
 )
 
-data class ConsultaMedicoModelo(
+data class ConsultaRecienteModelo(
     @SerializedName("id_consulta")
     val idConsulta: Int = 0,
 
-    @SerializedName("fecha_hora")
-    val fechaHora: String = "",
-
-    @SerializedName("estado")
-    val estado: String = "",
+    @SerializedName("fecha")
+    val fecha: String = "",
 
     @SerializedName("motivo")
     val motivo: String = "",
 
-    @SerializedName("diagnostico")
-    val diagnostico: String = ""
+    @SerializedName("medico")
+    val medico: String = "",
+
+    @SerializedName("estado")
+    val estado: String = "",
+
+    @SerializedName("id_receta")
+    val idReceta: Int? = null
 )
 
-data class dataRecetaAnteriorMedico(
+data class dataHistorialConsultas(
     @SerializedName("status")
     val status: Boolean = false,
 
@@ -76,16 +75,48 @@ data class dataRecetaAnteriorMedico(
     val message: String = "",
 
     @SerializedName("data")
-    val receta: RecetaAnteriorDetalle? = null
+    val consultas: List<ConsultaRecienteModelo> = emptyList()
 )
 
-data class RecetaAnteriorDetalle(
+data class dataRecetaConsulta(
+    @SerializedName("status")
+    val status: Boolean = false,
+
+    @SerializedName("message")
+    val message: String = "",
+
+    @SerializedName("data")
+    val receta: RecetaDetalleModelo? = null
+)
+
+data class RecetaDetalleModelo(
     @SerializedName("id_receta")
     val idReceta: Int = 0,
+
+    @SerializedName("id_consulta")
+    val idConsulta: Int = 0,
+
+    @SerializedName("nombre_paciente")
+    val nombrePaciente: String = "",
+
+    @SerializedName("matricula_carrera_cuatrimestre")
+    val matriculaCarreraCuatrimestre: String = "",
+
+    @SerializedName("fecha_medico")
+    val fechaMedico: String = "",
+
+    @SerializedName("alergia_registrada")
+    val alergiaRegistrada: String = "",
+
+    @SerializedName("indicaciones")
+    val indicaciones: String = "",
 
     @SerializedName("medicamentos")
     val medicamentos: String = "",
 
-    @SerializedName("indicaciones")
-    val indicaciones: String = ""
+    @SerializedName("lista_medicamentos")
+    val listaMedicamentos: List<MedicamentoRecetaJM> = emptyList(),
+
+    @SerializedName("url_pdf")
+    val urlPdf: String = ""
 )
