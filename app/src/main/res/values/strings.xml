@@ -212,6 +212,7 @@
     <string name="citas_agendadas">Citas agendadas</string>
     <string name="citas_nota">Llega 10 minutos antes con tu credencial vigente.</string>
     <string name="citas_titulo">Mis citas</string>
+    <!-- Citas e inicio del alumno (faltantes) -->
     <string name="cita_fecha_consulta_general">Jueves, 12 de noviembre · 10:30</string>
     <string name="cita_medico_consulta_general">Dra. Sofía Reyes · Consultorio 1</string>
     <string name="citas_ver_detalle">Ver detalle</string>
@@ -254,6 +255,12 @@
     <string name="agendar_horario_1030">10:30</string>
     <string name="agendar_horario_1100">11:00</string>
     <string name="agendar_horario_1130">11:30</string>
+    <string name="agendar_descripcion">Elige el servicio, la fecha y el horario de tu consulta.</string>
+    <string name="agendar_paso1">1. Selecciona un motivo</string>
+    <string name="agendar_label_servicio">Servicio médico</string>
+    <string name="agendar_paso2">2. Elige una fecha</string>
+    <string name="agendar_fecha_seleccionada">Jueves 12 de noviembre · Horarios disponibles</string>
+    <string name="agendar_paso3">3. Selecciona un horario</string>
     <string name="agendar_resumen_titulo">Consulta general · 12 nov 2026</string>
     <string name="agendar_resumen_horario">10:30–11:00 · Consultorio 1</string>
     <string name="agendar_resumen_medico">Dra. Sofía Reyes · Campus</string>
@@ -289,7 +296,7 @@
     <string name="comprobante_btn_descargar">Descargar comprobante (PDF)</string>
     <string name="comprobante_antes_titulo">Antes de tu consulta</string>
     <string name="comprobante_antes_texto">Llega 10 minutos antes con tu credencial universitaria y este comprobante vigente.</string>
-    <string name="comprobante_nota">Documento válido únicamente dentro de Servicios Médicos.</string>
+    <string name="comprobante_nota">Documento válido únicamente dentro de Servicios Médicos.</string>>
 
     <!-- Campañas de salud -->
     <string name="campanias_descripcion">Prevención y bienestar para tu vida universitaria.</string>
@@ -314,6 +321,8 @@
     <string name="perfil_cerrar_sesion">Cerrar sesión</string>
     <string name="perfil_nota">Mantén tu información actualizada.</string>
     <string name="perfil_titulo">Mi perfil</string>
+    <!-- Detalle de campaña (faltante) -->
+    <string name="detalle_campania_antes">Antes de acudir</string>
 
     <!-- Detalle de cita -->
     <string name="cita_estado_confirmada">Confirmada</string>
@@ -345,7 +354,7 @@
     <string name="detalle_campania_consiste">¿En qué consiste?</string>
     <string name="detalle_campania_requisitos">Requisitos para acudir</string>
     <string name="detalle_campania_recomendaciones">Recomendaciones</string>
-    <string name="detalle_campania_antes">Antes de acudir</string>
+    <string name="detalle_campania_antes_acudir">Antes de acudir</string>
     <string name="detalle_campania_despues">Después de la aplicación</string>
     <string name="detalle_campania_descargar">Descargar infografía informativa (PDF)</string>
     <string name="detalle_campania_titulo">Información de Campaña</string>

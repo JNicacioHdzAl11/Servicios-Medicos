@@ -27,7 +27,4 @@ object RetrofitCliente {
 
     val apiCampanias: ApiCampania =
         retrofit.create(ApiCampania::class.java)
-
-    val apiServiceExpedienteJM: ApiServiceExpedienteJM =
-        retrofit.create(ApiServiceExpedienteJM::class.java)
 }
