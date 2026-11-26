@@ -28,6 +28,7 @@ import com.google.android.material.navigation.NavigationBarView
 class DetalleCampaniaActivityN : AppCompatActivity() {
 
     private lateinit var btnRegresar: ImageButton
+    private lateinit var btnCompartir: ImageButton
 
     private lateinit var txtCategoria: TextView
     private lateinit var txtNombreCampania: TextView
@@ -63,7 +64,24 @@ class DetalleCampaniaActivityN : AppCompatActivity() {
             }
         })
 
+        enlazarVistas()
+        configurarListeners()
+
+        presentador = clsDetalleCampaniaPresentadorN(this)
+
+        val token = intent.getStringExtra("token") ?: ""
+        val idCampania = intent.getIntExtra("id_campania", 0)
+
+        if (token.isNotEmpty() && idCampania > 0) {
+            presentador.cargarDetalleCampania(token, idCampania)
+        } else {
+            mostrarError("No se recibieron los datos de la campaña")
+        }
+    }
+
+    private fun enlazarVistas() {
         btnRegresar = findViewById(R.id.btnRegresar)
+        btnCompartir = findViewById(R.id.btnCompartir)
 
         txtCategoria = findViewById(R.id.txtCategoria)
         txtNombreCampania = findViewById(R.id.txtNombreCampania)
@@ -86,21 +104,7 @@ class DetalleCampaniaActivityN : AppCompatActivity() {
         bnvNavegacion = findViewById(R.id.bnvNavegacion)
 
         bnvNavegacion.selectedItemId = R.id.nav_campanias
-
-
-        presentador = clsDetalleCampaniaPresentadorN(this)
-
-        val token = intent.getStringExtra("token") ?: ""
-        val idCampania = intent.getIntExtra("id_campania", 0)
-
-        if (token.isNotEmpty() && idCampania > 0) {
-            presentador.cargarDetalleCampania(token, idCampania)
-        } else {
-            mostrarError("No se recibieron los datos de la campaña")
-        }
     }
-
-
 
     private fun configurarListeners() {
         btnRegresar.setOnClickListener(object : View.OnClickListener {
@@ -109,8 +113,24 @@ class DetalleCampaniaActivityN : AppCompatActivity() {
             }
         })
 
+        btnCompartir.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val c = campaniaActual
+                if (c != null) {
+                    val textoCompartir = "${c.titulo}\n" +
+                            "Fechas: ${formatearFechasDetalle(c.fechaInicio, c.fechaFin)}\n" +
+                            "Horario: ${c.horario}\n" +
+                            "Lugar: ${c.lugar}\n\n" +
+                            c.descripcion
 
-
+                    val intentCompartir = Intent(Intent.ACTION_SEND)
+                    intentCompartir.type = "text/plain"
+                    intentCompartir.putExtra(Intent.EXTRA_SUBJECT, c.titulo)
+                    intentCompartir.putExtra(Intent.EXTRA_TEXT, textoCompartir)
+                    startActivity(Intent.createChooser(intentCompartir, "Compartir campaña"))
+                }
+            }
+        })
 
         btnDescargarInfografia.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
@@ -141,6 +161,7 @@ class DetalleCampaniaActivityN : AppCompatActivity() {
 
     fun mostrarCargando(cargando: Boolean) {
         btnDescargarInfografia.isEnabled = !cargando
+        btnCompartir.isEnabled = !cargando
     }
 
     fun mostrarDetalleCampania(detalle: dataDetalleCampaniaJN) {
