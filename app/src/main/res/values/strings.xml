@@ -223,15 +223,13 @@
 
     <!-- Agendar nueva cita -->
     <string name="agendar_titulo">Agendar nueva cita</string>
-    <string name="agendar_descripcion">Elige el servicio, la fecha y el horario de tu consulta.</string>
-    <string name="agendar_paso1">1. Selecciona una especialidad</string>
-    <string name="agendar_label_servicio">Servicio médico</string>
+
     <string name="cita_consulta_general">Consulta general</string>
     <string name="agendar_nutricion">Nutrición</string>
     <string name="agendar_psicologia">Psicología</string>
     <string name="agendar_odontologia">Odontología</string>
     <string name="agendar_otro_motivo">Otro motivo</string>
-    <string name="agendar_paso2">2. Elige una fecha</string>
+
     <string name="comun_mes_noviembre">Noviembre 2026</string>
     <string name="comun_dia_letra_1">L</string>
     <string name="comun_dia_numero_1">9</string>
@@ -247,8 +245,6 @@
     <string name="comun_dia_numero_6">14</string>
     <string name="comun_dia_letra_7">D</string>
     <string name="comun_dia_numero_7">15</string>
-    <string name="agendar_fecha_seleccionada">Jueves 12 de noviembre · Horarios disponibles</string>
-    <string name="agendar_paso3">3. Selecciona un horario</string>
     <string name="agendar_horario_0900">09:00</string>
     <string name="agendar_horario_0930">09:30</string>
     <string name="agendar_horario_1000">10:00</string>
@@ -421,4 +417,16 @@
     <string name="inicio_enfermera_en_atencion">En atención</string>
     <string name="inicio_enfermera_atenciones_recientes">Atenciones recientes</string>
     <string name="inicio_enfermera_nota_datos">Datos simulados · Vista del personal de enfermería</string>
+
+    <string name="detalle_cita_fecha">Jueves, 12 de noviembre</string>
+    <string name="detalle_cita_horario">10:30–11:00</string>
+    <string name="detalle_cita_folio">Folio de cita · CIT-2026-1112-0351</string>
+
+    <string name="detalle_cita_medico">Médico asignado</string>
+    <string name="detalle_cita_medico_valor">Dra. Sofía Reyes</string>
+    <string name="detalle_cita_consultorio_valor">1</string>
+    <string name="detalle_cita_ubicacion_valor">Servicios Médicos</string>
+    <string name="detalle_cita_sede_valor">Campus · Planta baja</string>
+    <string name="detalle_cita_btn_reprogramar">Reprogramar cita</string>
+    <string name="detalle_cita_btn_cancelar">Cancelar cita</string>
 </resources>
