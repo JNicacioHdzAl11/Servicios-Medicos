@@ -35,4 +35,6 @@
     <string name="toma_signos_observaciones">Observaciones de enfermería</string>
     <string name="toma_signos_enviar_doctora">Enviar a la doctora</string>
     <string name="toma_signos_nota">La valoración se añadirá al expediente del alumno.</string>
+    <string name="consulta_signos_vitales">Signos vitales</string>
+    <string name="comun_nav_alumnos">Alumnos</string>
 </resources>

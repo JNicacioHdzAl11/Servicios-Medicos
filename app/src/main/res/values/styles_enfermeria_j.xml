@@ -7,9 +7,13 @@
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:windowBackground">@color/color_fondo_secundario</item>
     </style>
-
+    <style name="SaludCampus.BotonEnlace" parent="Widget.Material3.Button.TextButton">
+        <item name="android:textColor">@color/color_enlace</item><item name="iconTint">@color/color_enlace</item>
+    </style>
+    <style name="SaludCampus.BotonPrimario" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/color_boton_primario</item><item name="android:textColor">@color/color_boton_primario_texto</item><item name="cornerRadius">12dp</item>
+    </style>
     <style name="SaludCampus.CampoTexto" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="boxBackgroundColor">@color/color_fondo</item>
-        <item name="boxStrokeColor">@color/selector_campo_borde</item>
+        <item name="boxBackgroundColor">@color/color_fondo</item><item name="boxStrokeColor">@color/selector_campo_borde</item>
     </style>
 </resources>
