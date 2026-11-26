@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
 import com.example.servicios_medicos.modelo.dataConsultaJ
-import com.google.android.material.button.MaterialButton
 
 class consultaAdapter(
     private var listaConsultas: List<dataConsultaJ> = emptyList(),
@@ -37,34 +36,44 @@ class consultaAdapter(
     override fun getItemCount(): Int = listaConsultas.size
 
     inner class ConsultaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val txtFecha: TextView = itemView.findViewById(R.id.txtFecha)
-        private val txtServicio: TextView = itemView.findViewById(R.id.txtServicio)
-        private val txtMedico: TextView = itemView.findViewById(R.id.txtMedico)
-        private val btnDescargarReceta: MaterialButton = itemView.findViewById(R.id.btnDescargarReceta)
+        private val txtFechaConsultaItem: TextView = itemView.findViewById(R.id.txtFechaConsultaItem)
+        private val txtEstadoConsultaItem: TextView = itemView.findViewById(R.id.txtEstadoConsultaItem)
+        private val txtMotivoConsultaItem: TextView = itemView.findViewById(R.id.txtMotivoConsultaItem)
+        private val txtMedicoDiagnosticoItem: TextView = itemView.findViewById(R.id.txtMedicoDiagnosticoItem)
+        private val txtAccionRecetaItem: TextView = itemView.findViewById(R.id.txtAccionRecetaItem)
 
         fun bind(consulta: dataConsultaJ) {
-            txtFecha.text = formatearFechaCorta(consulta.fechaConsulta)
-            txtServicio.text = if (consulta.motivo.isNotBlank()) consulta.motivo else "Consulta médica"
-
-            val doctoraTexto = if (!consulta.doctora.isNullOrBlank()) consulta.doctora.trim() else "Médico asignado"
-            txtMedico.text = "$doctoraTexto · Consulta concluida"
-
-            if (consulta.tieneReceta && consulta.idReceta != null) {
-                btnDescargarReceta.visibility = View.VISIBLE
-                btnDescargarReceta.setOnClickListener(object : View.OnClickListener {
-                    override fun onClick(v: View?) {
-                        listener.onDescargarRecetaClick(consulta)
-                    }
-                })
+            txtFechaConsultaItem.text = formatearFechaCorta(consulta.fechaConsulta)
+            txtEstadoConsultaItem.text = if (consulta.tieneReceta && consulta.idReceta != null) {
+                "Finalizada"
             } else {
-                btnDescargarReceta.visibility = View.GONE
+                "Concluida"
+            }
+            txtMotivoConsultaItem.text = if (consulta.motivo.isNotBlank()) {
+                consulta.motivo
+            } else {
+                "Consulta médica"
             }
 
-            itemView.setOnClickListener(object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    listener.onConsultaItemClick(consulta)
+            val doctoraTexto = if (!consulta.doctora.isNullOrBlank()) {
+                consulta.doctora.trim()
+            } else {
+                "Médico asignado"
+            }
+            txtMedicoDiagnosticoItem.text = "$doctoraTexto · Consulta concluida"
+
+            if (consulta.tieneReceta && consulta.idReceta != null) {
+                txtAccionRecetaItem.visibility = View.VISIBLE
+                txtAccionRecetaItem.setOnClickListener {
+                    listener.onDescargarRecetaClick(consulta)
                 }
-            })
+            } else {
+                txtAccionRecetaItem.visibility = View.GONE
+            }
+
+            itemView.setOnClickListener {
+                listener.onConsultaItemClick(consulta)
+            }
         }
 
         private fun formatearFechaCorta(fechaRaw: String): String {
@@ -80,7 +89,7 @@ class consultaAdapter(
                 val mes = meses[partes[1]] ?: partes[1]
                 val anio = partes[0]
                 "$dia $mes $anio"
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 fechaRaw
             }
         }
