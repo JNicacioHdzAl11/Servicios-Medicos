@@ -94,11 +94,12 @@
 
         <activity
             android:name=".vista.EnfermeraMainActivityJ"
+            android:theme="@style/Theme.EnfermeriaJ.Navegacion"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
         <!-- Búsqueda de alumnos y toma de signos de enfermería. -->
-        <activity android:name=".vista.BuscarAlumnoActivityJ" android:exported="false" android:theme="@style/Theme.EnfermeriaJ" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".vista.BuscarAlumnoActivityJ" android:exported="false" android:theme="@style/Theme.EnfermeriaJ.Navegacion" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".vista.TomaSignosActivityJ" android:exported="false" android:theme="@style/Theme.EnfermeriaJ" android:windowSoftInputMode="adjustResize" />
 
     </application>

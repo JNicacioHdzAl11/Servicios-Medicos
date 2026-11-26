@@ -35,4 +35,9 @@
     <string name="toma_signos_observaciones">Observaciones de enfermería</string>
     <string name="toma_signos_enviar_doctora">Enviar a la doctora</string>
     <string name="toma_signos_nota">La valoración se añadirá al expediente del alumno.</string>
+    <string name="enfermera_nueva_atencion_j">Nueva atención</string>
+    <string name="enfermera_resumen_dia_j">Resumen del día</string>
+    <string name="enfermera_citas_pendientes_hoy_j">Citas pendientes hoy</string>
+    <string name="enfermera_valoraciones_sesion_j">Valoraciones de sesión</string>
+    <string name="enfermera_nota_resumen_j">Citas pendientes del servidor · Valoraciones guardadas durante esta sesión. — indica que no se pudieron consultar las citas.</string>
 </resources>

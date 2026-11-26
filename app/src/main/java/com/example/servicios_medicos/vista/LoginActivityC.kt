@@ -136,7 +136,7 @@ class LoginActivityC : AppCompatActivity() {
 
             val intent = Intent(
                 this,
-                BuscarAlumnoActivityJ::class.java
+                EnfermeraMainActivityJ::class.java
             )
 
             intent.putExtra("id_usuario", usuario.idUsuario)

@@ -82,6 +82,7 @@ class BuscarAlumnoActivityJ : AppCompatActivity() {
         rvAlumnos.adapter = adaptador
 
         configurarSpinner()
+        if (intent.getBooleanExtra("solo_citas", false)) spTipoBusqueda.setSelection(1)
         configurarListeners()
         configurarNavegacion()
 

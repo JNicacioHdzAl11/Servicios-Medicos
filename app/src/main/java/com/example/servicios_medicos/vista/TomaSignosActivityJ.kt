@@ -269,6 +269,8 @@ class TomaSignosActivityJ : AppCompatActivity() {
 
     fun mostrarGuardado(mensaje: String) {
 
+        com.example.servicios_medicos.modelo.clsResumenEnfermeriaModeloJ.registrar(token, intent.getStringExtra("nombre").orEmpty())
+
         Toast.makeText(
             this,
             mensaje,
