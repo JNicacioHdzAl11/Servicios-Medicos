@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Bordes suaves de las tarjetas de métricas (Inicio de enfermería) -->
+    <color name="color_metrica_azul_borde">#FFDBEAFE</color>
+    <color name="color_metrica_verde_borde">#FFD1FAE5</color>
+</resources>

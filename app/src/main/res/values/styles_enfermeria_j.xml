@@ -10,4 +10,13 @@
     <style name="SaludCampus.CampoTexto" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="boxBackgroundColor">@color/color_fondo</item><item name="boxStrokeColor">@color/selector_campo_borde</item>
     </style>
+    <style name="Theme.EnfermeriaJ.Navegacion" parent="Theme.EnfermeriaJ">
+        <item name="android:windowAnimationStyle">@style/SaludCampus.AnimacionNavegacionEnfermeria</item>
+    </style>
+    <style name="SaludCampus.AnimacionNavegacionEnfermeria" parent="">
+        <item name="android:activityOpenEnterAnimation">@anim/enfermeria_sin_desplazamiento</item>
+        <item name="android:activityOpenExitAnimation">@anim/enfermeria_sin_desplazamiento</item>
+        <item name="android:activityCloseEnterAnimation">@anim/enfermeria_sin_desplazamiento</item>
+        <item name="android:activityCloseExitAnimation">@anim/enfermeria_sin_desplazamiento</item>
+    </style>
 </resources>

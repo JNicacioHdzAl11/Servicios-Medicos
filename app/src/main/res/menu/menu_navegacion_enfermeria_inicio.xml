@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_inicio"
+        android:checked="true"
+        android:icon="@drawable/ic_inicio"
+        android:title="@string/comun_nav_inicio" />
+    <item
+        android:id="@+id/nav_alumnos"
+        android:icon="@drawable/ic_alumnos"
+        android:title="@string/comun_nav_alumnos" />
+    <item
+        android:id="@+id/nav_campanias"
+        android:icon="@drawable/ic_campania"
+        android:title="@string/comun_nav_campanias" />
+</menu>

@@ -1,474 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_fondo_secundario"
-    tools:context=".vista.InicioEnfermeraFragment">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/color_fondo_secundario" tools:context=".vista.InicioEnfermera">
 
     <!-- Barra superior -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clEncabezado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/color_fondo"
-        android:minHeight="64dp"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/clEncabezado" android:layout_width="0dp" android:layout_height="wrap_content" android:background="@color/color_fondo" android:minHeight="64dp" android:padding="8dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/txtTitulo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/inicio_enfermera_titulo"
-            android:textColor="@color/color_texto_principal"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnConfiguracion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <TextView android:id="@+id/txtTitulo" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_marginEnd="8dp" android:ellipsize="end" android:maxLines="1" android:text="@string/inicio_enfermera_titulo" android:textColor="@color/color_texto_principal" android:textSize="22sp" android:textStyle="bold" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/btnConfiguracion" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
 
-        <ImageButton
-            android:id="@+id/btnConfiguracion"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/comun_cd_ajustes"
-            android:src="@drawable/ic_ajustes"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/color_enlace" />
+        <ImageButton android:id="@+id/btnConfiguracion" android:layout_width="48dp" android:layout_height="48dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="@string/comun_cd_ajustes" android:src="@drawable/ic_ajustes" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" app:tint="@color/color_enlace"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/vDivisorEncabezado"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/color_borde"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clEncabezado" />
 
     <!-- Contenido desplazable -->
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nsvContenido"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        android:overScrollMode="never"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vDivisorEncabezado">
+    <androidx.core.widget.NestedScrollView android:id="@+id/nsvContenido" android:layout_width="0dp" android:layout_height="0dp" android:fillViewport="true" android:overScrollMode="never" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/clEncabezado" app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clContenido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="24dp"
-            android:paddingTop="24dp"
-            android:paddingEnd="24dp"
-            android:paddingBottom="32dp">
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/clContenido" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="24dp" android:paddingTop="24dp" android:paddingEnd="24dp" android:paddingBottom="32dp">
 
-            <!-- Perfil de la enfermera -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardPerfilEnfermera"
-                style="@style/Widget.Material3.CardView.Outlined"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/color_fondo"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/color_borde"
-                app:strokeWidth="1dp">
+            <!-- Saludo de la enfermera -->
+            <com.google.android.material.imageview.ShapeableImageView android:id="@+id/imgFotoEnfermera" android:layout_width="56dp" android:layout_height="56dp" android:background="@color/color_fondo_azul_claro" android:contentDescription="@string/comun_cd_foto_personal" android:scaleType="centerCrop" app:layout_constraintBottom_toBottomOf="@id/txtFechaActual" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="@id/txtSaludoEnfermera" app:shapeAppearanceOverlay="@style/SaludCampus.FormaAvatar" tools:src="@drawable/ic_alumnos" android:src="@drawable/ic_alumnos"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
+            <TextView android:id="@+id/txtSaludoEnfermera" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:ellipsize="end" android:maxLines="1" android:text="" android:textColor="@color/color_texto_principal" android:textSize="22sp" android:textStyle="bold" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/imgFotoEnfermera" app:layout_constraintTop_toTopOf="parent" tools:text="Buenos días, Ana"/>
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/imgFotoEnfermera"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:background="@color/color_fondo_azul_claro"
-                        android:contentDescription="@string/comun_cd_foto_personal"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:shapeAppearanceOverlay="@style/SaludCampus.FormaAvatar"
-                        tools:src="@drawable/ic_alumnos" />
+            <TextView android:id="@+id/txtCedulaEnfermera" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:ellipsize="end" android:maxLines="1" android:text="" android:textColor="@color/color_texto_secundario" android:textSize="12sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="@id/txtSaludoEnfermera" app:layout_constraintTop_toBottomOf="@id/txtSaludoEnfermera" tools:text="Enfermera · Cédula 10384521"/>
 
-                    <TextView
-                        android:id="@+id/txtSaludoEnfermera"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text=""
-                        android:textColor="@color/color_texto_principal"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@id/txtCedulaEnfermera"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/imgFotoEnfermera"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_chainStyle="packed"
-                        tools:text="Buenos días, Ana" />
+            <TextView android:id="@+id/txtFechaActual" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:ellipsize="end" android:maxLines="1" android:text="" android:textColor="@color/color_texto_secundario" android:textSize="12sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="@id/txtSaludoEnfermera" app:layout_constraintTop_toBottomOf="@id/txtCedulaEnfermera" tools:text="Martes, 10 de noviembre de 2026"/>
 
-                    <TextView
-                        android:id="@+id/txtCedulaEnfermera"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text=""
-                        android:textColor="@color/color_texto_secundario"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toTopOf="@id/txtFechaActual"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/txtSaludoEnfermera"
-                        app:layout_constraintTop_toBottomOf="@id/txtSaludoEnfermera"
-                        tools:text="Enfermera · Cédula 10384521" />
-
-                    <TextView
-                        android:id="@+id/txtFechaActual"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text=""
-                        android:textColor="@color/color_texto_secundario"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/txtSaludoEnfermera"
-                        app:layout_constraintTop_toBottomOf="@id/txtCedulaEnfermera"
-                        tools:text="Martes, 10 de noviembre de 2026" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+            <androidx.constraintlayout.widget.Barrier android:id="@+id/barrierSaludo" android:layout_width="wrap_content" android:layout_height="wrap_content" app:barrierDirection="bottom" app:constraint_referenced_ids="imgFotoEnfermera,txtFechaActual"/>
 
             <!-- Métricas del día -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardCitasHoy"
-                style="@style/Widget.Material3.CardView.Outlined"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="6dp"
-                app:cardBackgroundColor="@color/color_metrica_azul_fondo"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toStartOf="@id/cardAtencionesHoy"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardPerfilEnfermera"
-                app:strokeColor="@color/color_metrica_azul_fondo"
-                app:strokeWidth="1dp">
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnNuevaAtencionJ" android:layout_width="0dp" android:layout_height="56dp" android:layout_marginTop="20dp" android:text="@string/enfermera_nueva_atencion_j" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@id/barrierSaludo" app:icon="@drawable/ic_mas" style="@style/SaludCampus.BotonPrimario"/><TextView android:id="@+id/txtResumenDiaJ" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="@string/enfermera_resumen_dia_j" android:textColor="@color/color_texto_principal" android:textSize="18sp" android:textStyle="bold" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@id/btnNuevaAtencionJ"/><com.google.android.material.card.MaterialCardView android:id="@+id/cardCitasHoy" style="@style/Widget.Material3.CardView.Outlined" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="112dp" android:layout_marginTop="16dp" android:layout_marginEnd="6dp" app:cardBackgroundColor="@color/color_metrica_azul_fondo" app:cardCornerRadius="12dp" app:cardElevation="0dp" app:layout_constraintEnd_toStartOf="@id/cardAtencionesHoy" app:layout_constraintHorizontal_chainStyle="spread" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/txtResumenDiaJ" app:strokeColor="@color/color_metrica_azul_borde" app:strokeWidth="1dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
+                <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp">
 
-                    <TextView
-                        android:id="@+id/txtTotalCitasHoy"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/color_metrica_azul"
-                        android:textSize="28sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="12" />
+                    <TextView android:id="@+id/txtTotalCitasHoy" android:layout_width="0dp" android:layout_height="wrap_content" android:text="" android:textColor="@color/color_metrica_azul" android:textSize="30sp" android:textStyle="bold" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" tools:text="12"/>
 
-                    <TextView
-                        android:id="@+id/txtEtiquetaCitasHoy"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/inicio_enfermera_citas_hoy"
-                        android:textColor="@color/color_metrica_azul"
-                        android:textSize="13sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtTotalCitasHoy" />
+                    <TextView android:id="@+id/txtEtiquetaCitasHoy" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="@string/enfermera_citas_pendientes_hoy_j" android:textColor="@color/color_metrica_azul" android:textSize="13sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/txtTotalCitasHoy"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardAtencionesHoy"
-                style="@style/Widget.Material3.CardView.Outlined"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="6dp"
-                app:cardBackgroundColor="@color/color_metrica_verde_fondo"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:layout_constraintBottom_toBottomOf="@id/cardCitasHoy"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/cardCitasHoy"
-                app:layout_constraintTop_toTopOf="@id/cardCitasHoy"
-                app:strokeColor="@color/color_metrica_verde_fondo"
-                app:strokeWidth="1dp">
+            <com.google.android.material.card.MaterialCardView android:id="@+id/cardAtencionesHoy" style="@style/Widget.Material3.CardView.Outlined" android:layout_width="0dp" android:layout_height="wrap_content" android:minHeight="112dp" android:layout_marginStart="6dp" app:cardBackgroundColor="@color/color_metrica_verde_fondo" app:cardCornerRadius="12dp" app:cardElevation="0dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/cardCitasHoy" app:layout_constraintTop_toTopOf="@id/cardCitasHoy" app:strokeColor="@color/color_metrica_verde_borde" app:strokeWidth="1dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
+                <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="16dp">
 
-                    <TextView
-                        android:id="@+id/txtTotalAtenciones"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/color_metrica_verde"
-                        android:textSize="28sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="08" />
+                    <TextView android:id="@+id/txtTotalAtenciones" android:layout_width="0dp" android:layout_height="wrap_content" android:text="" android:textColor="@color/color_metrica_verde" android:textSize="30sp" android:textStyle="bold" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" tools:text="08"/>
 
-                    <TextView
-                        android:id="@+id/txtEtiquetaAtenciones"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/inicio_enfermera_atenciones"
-                        android:textColor="@color/color_metrica_verde"
-                        android:textSize="13sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtTotalAtenciones" />
+                    <TextView android:id="@+id/txtEtiquetaAtenciones" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="@string/enfermera_valoraciones_sesion_j" android:maxLines="2" android:textColor="@color/color_metrica_verde" android:textSize="13sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/txtTotalAtenciones"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
             <!-- En consulta -->
-            <TextView
-                android:id="@+id/txtTituloEnConsulta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/inicio_enfermera_en_consulta"
-                android:textColor="@color/color_texto_principal"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardCitasHoy" />
-
-            <TextView
-                android:id="@+id/txtBadgeEnAtencion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/bg_badge_exito"
-                android:paddingStart="8dp"
-                android:paddingTop="2dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="2dp"
-                android:text="@string/inicio_enfermera_en_atencion"
-                android:textColor="@color/color_exito"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/txtTituloEnConsulta"
-                app:layout_constraintStart_toEndOf="@id/txtTituloEnConsulta"
-                app:layout_constraintTop_toTopOf="@id/txtTituloEnConsulta" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardEnConsulta"
-                style="@style/Widget.Material3.CardView.Outlined"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardBackgroundColor="@color/color_fondo"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtTituloEnConsulta"
-                app:strokeColor="@color/color_borde"
-                app:strokeWidth="1dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/txtInicialesPaciente"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/bg_iniciales_circular"
-                        android:gravity="center"
-                        android:importantForAccessibility="no"
-                        android:text=""
-                        android:textColor="@color/color_enlace"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="VR" />
-
-                    <TextView
-                        android:id="@+id/txtNombrePaciente"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text=""
-                        android:textColor="@color/color_texto_principal"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@id/txtMatriculaEdad"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/txtInicialesPaciente"
-                        app:layout_constraintTop_toTopOf="@id/txtInicialesPaciente"
-                        app:layout_constraintVertical_chainStyle="packed"
-                        tools:text="Valeria Romero" />
-
-                    <TextView
-                        android:id="@+id/txtMatriculaEdad"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text=""
-                        android:textColor="@color/color_texto_secundario"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@id/txtInicialesPaciente"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/txtNombrePaciente"
-                        app:layout_constraintTop_toBottomOf="@id/txtNombrePaciente"
-                        tools:text="Matrícula 20230351 · 21 años" />
-
-                    <TextView
-                        android:id="@+id/txtMotivoConsulta"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text=""
-                        android:textColor="@color/color_texto_principal"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtInicialesPaciente"
-                        tools:text="Revisión de seguimiento" />
-
-                    <TextView
-                        android:id="@+id/txtMedicoHorario"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/bg_caja_detalle"
-                        android:drawablePadding="8dp"
-                        android:ellipsize="end"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
-                        android:paddingStart="12dp"
-                        android:paddingTop="10dp"
-                        android:paddingEnd="12dp"
-                        android:paddingBottom="10dp"
-                        android:text=""
-                        android:textColor="@color/color_texto_secundario"
-                        android:textSize="12sp"
-                        app:drawableStartCompat="@drawable/ic_reloj"
-                        app:drawableTint="@color/color_icono"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtMotivoConsulta"
-                        tools:text="Dra. Sofía Reyes · Desde las 09:30" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
             <!-- Atenciones recientes -->
-            <TextView
-                android:id="@+id/txtTituloAtencionesRecientes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/inicio_enfermera_atenciones_recientes"
-                android:textColor="@color/color_texto_principal"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardEnConsulta" />
+            <androidx.constraintlayout.widget.Barrier android:id="@+id/barrierResumenJ" android:layout_width="wrap_content" android:layout_height="wrap_content" app:barrierDirection="bottom" app:constraint_referenced_ids="cardCitasHoy,cardAtencionesHoy"/>
+            <TextView android:id="@+id/txtTituloAtencionesRecientes" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:text="@string/inicio_enfermera_atenciones_recientes" android:textColor="@color/color_texto_principal" android:textSize="18sp" android:textStyle="bold" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/barrierResumenJ"/>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardAtencionesRecientes"
-                style="@style/Widget.Material3.CardView.Outlined"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardBackgroundColor="@color/color_fondo"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtTituloAtencionesRecientes"
-                app:strokeColor="@color/color_borde"
-                app:strokeWidth="1dp">
+            <com.google.android.material.card.MaterialCardView android:id="@+id/cardAtencionesRecientes" style="@style/Widget.Material3.CardView.Outlined" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginTop="12dp" app:cardBackgroundColor="@color/color_fondo" app:cardCornerRadius="12dp" app:cardElevation="0dp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/txtTituloAtencionesRecientes" app:strokeColor="@color/color_borde" app:strokeWidth="1dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvAtencionesRecientes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:overScrollMode="never"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/item_atencion_reciente" />
+                <LinearLayout android:id="@+id/listaAtencionesJ" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"/></com.google.android.material.card.MaterialCardView>
 
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Nota inferior -->
-            <TextView
-                android:id="@+id/txtNotaDatos"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/inicio_enfermera_nota_datos"
-                android:textColor="@color/color_texto_secundario"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardAtencionesRecientes" />
+            
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Navegación inferior de enfermería (igual que Toma de signos, con Inicio marcado) -->
+    </androidx.constraintlayout.widget.ConstraintLayout>

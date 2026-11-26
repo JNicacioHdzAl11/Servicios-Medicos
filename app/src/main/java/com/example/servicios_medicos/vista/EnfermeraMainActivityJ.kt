@@ -1,64 +1,64 @@
 package com.example.servicios_medicos.vista
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import com.example.servicios_medicos.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class EnfermeraMainActivityJ : AppCompatActivity() {
-
-    private lateinit var bottomNavEnfermera: BottomNavigationView
-
+    private lateinit var menu: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (intent.getStringExtra("token").isNullOrBlank()) { finish(); return }
         enableEdgeToEdge()
         setContentView(R.layout.activity_enfermera_main_j)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
-            insets
-        }
-
-        bottomNavEnfermera = findViewById(R.id.bottomNavEnfermera)
-
-        if (savedInstanceState == null) {
-            // Descomenta la siguiente línea en cuanto creemos InicioEnfermeraFragment
-            // cargarFragmento(InicioEnfermeraFragment())
-        }
-
-        configurarListeners()
-    }
-
-    private fun configurarListeners() {
-        bottomNavEnfermera.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_inicio -> {
-                    // cargarFragmento(InicioEnfermeraFragment())
-                    true
-                }
-
-                R.id.nav_citas -> {
-                    // cargarFragmento(CitasEnfermeraFragment())
-                    true
-                }
-
-                R.id.nav_campanias -> {
-                    // cargarFragmento(campanias_jn())
-                    true
-                }
-                else -> false
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), object : OnApplyWindowInsetsListener {
+            override fun onApplyWindowInsets(v: View, insets: WindowInsetsCompat): WindowInsetsCompat {
+                val barras = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(barras.left, barras.top, barras.right, barras.bottom)
+                return insets
             }
-        }
+        })
+        menu = findViewById(R.id.bottomNavEnfermera)
+        menu.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.navInicio -> mostrarInicio()
+                    R.id.navAlumnos -> abrirAlumnos(false)
+                    else -> return false
+                }
+                return item.itemId == R.id.navInicio
+            }
+        })
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (menu.selectedItemId != R.id.navInicio) menu.selectedItemId = R.id.navInicio
+                else finish()
+            }
+        })
+        if (savedInstanceState == null) mostrarInicio()
     }
-
-    private fun cargarFragmento(fragmento: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.navHostFragmentEnfermera, fragmento)
-            .commit()
+    private fun mostrarInicio() {
+        supportFragmentManager.beginTransaction().replace(R.id.navHostFragmentEnfermera, InicioEnfermera()).commit()
+    }
+    fun abrirAlumnos(conCita: Boolean) {
+        val destino = Intent(this, BuscarAlumnoActivityJ::class.java)
+        destino.putExtras(intent)
+        destino.putExtra("solo_citas", conCita)
+        startActivity(destino)
+    }
+    fun abrirConfiguracion() {
+        val destino = Intent(this, ConfiguracionActivityC::class.java)
+        destino.putExtras(intent)
+        startActivity(destino)
     }
 }
