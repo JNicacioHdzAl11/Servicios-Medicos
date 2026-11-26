@@ -1,5 +1,6 @@
 package com.example.servicios_medicos.vista
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -62,6 +63,14 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
         } else {
             mostrarError("No se recibió token de sesión")
         }
+        btnAjustes.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val destino = Intent(requireContext(), ConfiguracionActivityC::class.java)
+                destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
+                destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
+                startActivity(destino)
+            }
+        })
     }
 
     private fun enlazarVistas(view: View) {

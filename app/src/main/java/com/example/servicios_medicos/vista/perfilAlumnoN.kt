@@ -80,6 +80,14 @@ class perfilAlumnoN : Fragment() {
         } else {
             mostrarError("No se recibió token de sesión")
         }
+        btnAjustes.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val destino = Intent(requireContext(), ConfiguracionActivityC::class.java)
+                destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
+                destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
+                startActivity(destino)
+            }
+        })
     }
 
     private fun configurarListeners() {

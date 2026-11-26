@@ -36,6 +36,10 @@ class AlumnoMainActivityN : AppCompatActivity() {
                     cargarFragmento(InicioAlumnoFragmentN())
                     true
                 }
+                R.id.nav_citas -> {
+                    cargarFragmento(CitasFragmentN())
+                    true
+                }
                 R.id.nav_expediente -> {
                     cargarFragmento(expedienteAlumnoJ())
                     true
