@@ -89,6 +89,7 @@ class DetalleCampaniaActivityN : AppCompatActivity() {
 
 
         presentador = clsDetalleCampaniaPresentadorN(this)
+        configurarListeners()
 
         val token = intent.getStringExtra("token") ?: ""
         val idCampania = intent.getIntExtra("id_campania", 0)

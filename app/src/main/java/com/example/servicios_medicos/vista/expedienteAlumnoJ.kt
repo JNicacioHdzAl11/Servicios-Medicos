@@ -18,6 +18,7 @@ import com.example.servicios_medicos.modelo.dataExpedienteJN
 import com.example.servicios_medicos.modelo.dataSolicitudExpedienteJ
 import com.example.servicios_medicos.presentador.clsExpedienteAlumPresentadorJM
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
 
@@ -97,23 +98,21 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
     }
 
     private fun configurarListeners() {
-        btnRegresar.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
-            }
-        })
+        btnRegresar.setOnClickListener {
+            val bnvNavegacion = requireActivity().findViewById<BottomNavigationView>(R.id.bnvNavegacion)
+            bnvNavegacion.selectedItemId = R.id.nav_inicio
+        }
 
-        btnAjustes.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                Toast.makeText(requireContext(), "Abrir configuración", Toast.LENGTH_SHORT).show()
-            }
-        })
+        btnAjustes.setOnClickListener {
+            val destino = Intent(requireContext(), ConfiguracionActivityC::class.java)
+            destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
+            destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
+            startActivity(destino)
+        }
 
-        btnVerHistorial.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                Toast.makeText(requireContext(), "Abrir historial completo de consultas", Toast.LENGTH_SHORT).show()
-            }
-        })
+        btnVerHistorial.setOnClickListener {
+            Toast.makeText(requireContext(), "Abrir historial completo de consultas", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun mostrarCargando(cargando: Boolean) {

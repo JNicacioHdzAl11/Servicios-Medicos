@@ -13,6 +13,7 @@ import com.example.servicios_medicos.R
 import com.example.servicios_medicos.modelo.PerfilData
 import com.example.servicios_medicos.presentador.clsPerfilPresentadorJM
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class perfilAlumnoN : Fragment() {
 
@@ -92,12 +93,19 @@ class perfilAlumnoN : Fragment() {
 
     private fun configurarListeners() {
         btnRegresar.setOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
+            if (parentFragmentManager.backStackEntryCount > 0) {
+                parentFragmentManager.popBackStack()
+            } else {
+                val bnvNavegacion = requireActivity().findViewById<BottomNavigationView>(R.id.bnvNavegacion)
+                bnvNavegacion?.selectedItemId = R.id.nav_inicio
+            }
         }
 
         btnAjustes.setOnClickListener {
-            val intent = Intent(requireContext(), ConfiguracionActivityC::class.java)
-            startActivity(intent)
+            val destino = Intent(requireContext(), ConfiguracionActivityC::class.java)
+            destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
+            destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
+            startActivity(destino)
         }
 
         btnEditarDatos.setOnClickListener {
@@ -105,6 +113,9 @@ class perfilAlumnoN : Fragment() {
         }
 
         btnCerrarSesion.setOnClickListener {
+            val destino = Intent(requireContext(), LoginActivityC::class.java)
+            destino.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(destino)
             requireActivity().finish()
         }
     }

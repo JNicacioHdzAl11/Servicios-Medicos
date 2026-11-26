@@ -17,6 +17,7 @@ import com.example.servicios_medicos.modelo.dataCampaniaJN
 import com.example.servicios_medicos.presentador.clsCampaniasPresentadorN
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class campanias_jn : Fragment(), campaniaAdapter.OnCampaniaClickListener {
 
@@ -76,11 +77,10 @@ class campanias_jn : Fragment(), campaniaAdapter.OnCampaniaClickListener {
     }
 
     private fun configurarListeners() {
-        btnRegresar.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
-            }
-        })
+        btnRegresar.setOnClickListener {
+            val bnvNavegacion = requireActivity().findViewById<BottomNavigationView>(R.id.bnvNavegacion)
+            bnvNavegacion.selectedItemId = R.id.nav_inicio
+        }
     }
 
     override fun onVerInformacionClick(campania: dataCampaniaJN) {
