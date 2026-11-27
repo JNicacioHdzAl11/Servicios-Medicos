@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.presentador.clsExpedienteMedicoAlumPresentadorJM
+import com.example.servicios_medicos.presentador.clsExpedienteMedicoAlumnoPresentadorJM
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 
@@ -29,14 +29,14 @@ class ExpedienteMedicoAlumActivityJM : AppCompatActivity() {
     private lateinit var rvHistorialConsultas: RecyclerView
     private lateinit var btnIniciarNuevaConsulta: MaterialButton
     private lateinit var txtNotaExpedienteMed: TextView
-    private lateinit var presentador: clsExpedienteMedicoAlumPresentadorJM
+    private lateinit var presentador: clsExpedienteMedicoAlumnoPresentadorJM
     private var token = ""
     private var matricula = ""
     private var idConsulta = 0
 
     override fun onCreate(savedInstanceState: Bundle?) { // conecta los elementos de la pantalla y arranca el expediente medico del alumno
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_expediente_medico_alum_jm)
+        setContentView(R.layout.activity_expediente_jm)
 
         btnRegresar = findViewById(R.id.btnRegresar)
         txtTitulo = findViewById(R.id.txtTitulo)
@@ -51,13 +51,10 @@ class ExpedienteMedicoAlumActivityJM : AppCompatActivity() {
         txtAlergenosDetalle = findViewById(R.id.txtAlergenosDetalle)
         txtCirugiasPrevias = findViewById(R.id.txtCirugiasPrevias)
         txtTratamientoHabitual = findViewById(R.id.txtTratamientoHabitual)
-        rvHistorialConsultas = findViewById(R.id.rvHistorialConsultas)
-        btnIniciarNuevaConsulta = findViewById(R.id.btnIniciarNuevaConsulta)
-        txtNotaExpedienteMed = findViewById(R.id.txtNotaExpedienteMed)
 
         configurarListeners()
 
-        presentador = clsExpedienteMedicoAlumPresentadorJM(this)
+        presentador = clsExpedienteMedicoAlumnoPresentadorJM(this)
         val tokenRecibido = intent.getStringExtra("token")
         if (tokenRecibido != null) {
             token = tokenRecibido
@@ -75,13 +72,7 @@ class ExpedienteMedicoAlumActivityJM : AppCompatActivity() {
         btnRegresar.setOnClickListener {
             finish()
         }
-        btnIniciarNuevaConsulta.setOnClickListener {
-            val destino = Intent(this, ConsultaMedicaActivityJM::class.java)
-            destino.putExtra("token", token)
-            destino.putExtra("matricula", presentador.obtenerMatriculaActual().ifEmpty { matricula })
-            destino.putExtra("id_consulta", idConsulta)
-            startActivity(destino)
-        }
+
     }
 
     override fun onResume() { // carga los datos cada vez que se ve la pantalla

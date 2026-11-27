@@ -6,7 +6,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_fondo_secundario">
+    android:background="@color/color_fondo_secundario"
+    tools:context=".vista.ExpedienteAlumnoActivityJM">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clEncabezado"
@@ -24,7 +25,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Regresar"
+            android:contentDescription="@string/comun_cd_regresar"
             android:src="@drawable/ic_flecha_atras"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +54,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Configuración"
+            android:contentDescription="@string/comun_cd_ajustes"
             android:src="@drawable/ic_ajustes"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -337,13 +338,9 @@
                 android:layout_marginTop="16dp"
                 android:text="Volver al inicio"
                 android:textAllCaps="false"
-                android:textColor="@color/color_enlace"
-                android:textStyle="bold"
-                app:cornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtConsulta2"
-                app:strokeColor="@color/color_enlace" />
+                app:layout_constraintTop_toBottomOf="@id/txtConsulta2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
