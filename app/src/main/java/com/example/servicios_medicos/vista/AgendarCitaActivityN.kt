@@ -17,6 +17,7 @@ import com.example.servicios_medicos.R
 import com.example.servicios_medicos.modelo.DiaSemanaN
 import com.example.servicios_medicos.presentador.clsAgendarCitaPresentadorN
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 
 class AgendarCitaActivityN : AppCompatActivity() {
     private lateinit var btnRegresar: ImageButton
@@ -182,6 +183,11 @@ class AgendarCitaActivityN : AppCompatActivity() {
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 
-    fun mostrarMensaje(string: String) {}
-    fun mostrarBotonConfirmar(string: String, bool: Boolean) {}
+    fun mostrarMensaje(mensaje: String) { // muestra un aviso al alumno abajo de la pantalla
+        Snackbar.make(findViewById(R.id.main), mensaje, Snackbar.LENGTH_LONG).show()
+    }
+    fun mostrarBotonConfirmar(texto: String, activo: Boolean) { // cambia el texto del boton confirmar y lo prende o apaga
+        btnConfirmarCita.text = texto
+        btnConfirmarCita.isEnabled = activo
+    }
 }

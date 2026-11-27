@@ -26,7 +26,7 @@ class clsCitasModeloN {
     fun citasProximas(citas: List<CitaDetalleN>): List<CitaDetalleN> { // junta las citas que no han pasado y no estan canceladas
         val proximas = mutableListOf<CitaDetalleN>()
         for (cita in citas) {
-            if (cita.estado != "Cancelada" && yaPaso(cita) == false) {
+            if (cita.estado != "Cancelada" && cita.estado != "Completada" && yaPaso(cita) == false) {
                 proximas.add(0, cita)
             }
         }
@@ -36,7 +36,7 @@ class clsCitasModeloN {
     fun citasDelHistorial(citas: List<CitaDetalleN>): List<CitaDetalleN> { // junta las citas que ya pasaron o estan canceladas
         val historial = mutableListOf<CitaDetalleN>()
         for (cita in citas) {
-            if (cita.estado == "Cancelada" || yaPaso(cita)) {
+            if (cita.estado == "Cancelada" || cita.estado == "Completada" || yaPaso(cita)) {
                 historial.add(cita)
             }
         }
