@@ -1,11 +1,12 @@
 package com.example.servicios_medicos.presentador
 
-import com.example.servicios_medicos.modelo.CitaDetalleN
 import com.example.servicios_medicos.modelo.clsDetalleCitaModeloN
 import com.example.servicios_medicos.vista.DetalleCitaActivityN
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class clsDetalleCitaPresentadorN(private val vista: DetalleCitaActivityN) {
     private val modelo = clsDetalleCitaModeloN()
@@ -14,80 +15,83 @@ class clsDetalleCitaPresentadorN(private val vista: DetalleCitaActivityN) {
     private var motivoCita = ""
 
     fun iniciarPantalla(tokenSesion: String?, idCitaRecibido: Int) { // guarda el token y la cita y carga sus datos
-        if (tokenSesion == null || tokenSesion.isEmpty()) {
-            vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
-            return
-        }
-        if (idCitaRecibido == 0) {
-            vista.mostrarError("No encontramos tu cita.")
-            return
-        }
-        token = tokenSesion
+        token = tokenSesion ?: ""
         idCita = idCitaRecibido
+        if (token.isEmpty()) {
+            vista.mostrarMensaje("Tu sesión terminó, vuelve a entrar")
+            return
+        }
+        if (idCita == 0) {
+            vista.mostrarMensaje("No se encontró la cita")
+            return
+        }
         cargarDetalle()
     }
 
     fun cargarDetalle() { // pide los datos de la cita y los manda a la vista
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val respuesta = modelo.pedirDetalle(token, idCita)
-                val datos = respuesta.body()
-                if (respuesta.isSuccessful && datos != null && datos.status && datos.data != null) {
-                    mostrarCita(datos.data)
-                } else if (respuesta.code() == 401) {
-                    vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
-                } else if (respuesta.code() == 404) {
-                    vista.mostrarError("No encontramos tu cita.")
+                val cita = modelo.obtenerDetalle(token, idCita)
+                if (cita == null) {
+                    vista.mostrarMensaje("No se encontró la cita")
                 } else {
-                    vista.mostrarError("No pudimos cargar tu cita. Intenta de nuevo.")
+                    motivoCita = cita.motivo ?: ""
+
+                    var estado = cita.estado ?: "Sin estado"
+                    if (estado == "Pendiente" && modelo.yaPaso(cita)) {
+                        estado = "Vencida"
+                    }
+
+                    var fechaLarga = "Sin fecha"
+                    val fechaServidor = cita.fecha ?: ""
+                    if (fechaServidor.length == 10) {
+                        val fecha = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(fechaServidor)
+                        fechaLarga = SimpleDateFormat("EEEE, d 'de' MMMM", Locale("es", "MX")).format(fecha)
+                        fechaLarga = fechaLarga.substring(0, 1).uppercase() + fechaLarga.substring(1)
+                    }
+
+                    var hora = cita.hora ?: ""
+                    if (hora.length > 5) {
+                        hora = hora.substring(0, 5)
+                    }
+                    vista.mostrarDetalle(
+                        cita.motivo ?: "Cita médica",
+                        estado,
+                        fechaLarga,
+                        hora + " a " + modelo.sumarMediaHora(hora),
+                        "Folio de cita: " + (cita.codigoQr ?: cita.idCita.toString()),
+                        cita.doctora ?: "Por asignar",
+                        cita.consultorio ?: "Por asignar"
+                    )
+
+                    if (estado == "Vencida") {
+                        vista.mostrarVolverAAgendar("Volver a agendar")
+                    } else if (estado == "Pendiente") {
+                        vista.mostrarBotonCancelar("Cancelar cita", true)
+                    } else {
+                        vista.mostrarBotonCancelar("Cancelar cita", false)
+                    }
                 }
             } catch (e: Exception) {
-                vista.mostrarError("Revisa tu conexión a internet e intenta de nuevo.")
+                vista.mostrarMensaje("Error al cargar la cita")
             }
         }
-    }
-
-    private fun mostrarCita(cita: CitaDetalleN) { // arma los textos de la cita y elige que botones mostrar
-        motivoCita = modelo.textoORespaldo(cita.motivo, "")
-        vista.mostrarDetalle(
-            modelo.textoORespaldo(cita.motivo, "Cita médica"),
-            modelo.estadoParaMostrar(cita),
-            modelo.textoFechaLarga(cita.fecha),
-            modelo.textoHorario(cita.hora),
-            modelo.textoFolio(cita),
-            modelo.textoORespaldo(cita.doctora, "Por asignar"),
-            modelo.textoORespaldo(cita.consultorio, "Por asignar")
-        )
-        if (modelo.estadoParaMostrar(cita) == "Vencida") {
-            vista.mostrarVolverAAgendar()
-        } else {
-            vista.activarCancelar(modelo.sePuedeCancelar(cita))
-        }
-    }
-
-    fun cancelarCita() { // pregunta al alumno si quiere cancelar la cita
-        vista.preguntarCancelar()
     }
 
     fun confirmarCancelacion() { // cancela la cita y vuelve a cargar sus datos
-        vista.mostrarCargando(true)
+        vista.mostrarBotonCancelar("Cancelando...", false)
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val respuesta = modelo.pedirCancelar(token, idCita)
-                val datos = respuesta.body()
-                if (respuesta.isSuccessful && datos != null && datos.status) {
-                    vista.mostrarMensaje("Tu cita quedó cancelada.")
-                } else if (respuesta.code() == 400) {
-                    vista.mostrarError("Solo puedes cancelar citas pendientes que no han pasado.")
-                } else if (respuesta.code() == 401) {
-                    vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
+                val respuesta = modelo.cancelarCita(token, idCita)
+                if (respuesta.status) {
+                    vista.mostrarMensaje("Cita cancelada")
                 } else {
-                    vista.mostrarError("No se pudo cancelar tu cita. Intenta de nuevo.")
+                    vista.mostrarMensaje("No se pudo cancelar la cita")
                 }
             } catch (e: Exception) {
-                vista.mostrarError("Revisa tu conexión a internet e intenta de nuevo.")
+                vista.mostrarMensaje("No se pudo cancelar, solo se cancelan citas pendientes")
             }
-            vista.mostrarCargando(false)
+            vista.mostrarBotonCancelar("Cancelar cita", false)
             cargarDetalle()
         }
     }

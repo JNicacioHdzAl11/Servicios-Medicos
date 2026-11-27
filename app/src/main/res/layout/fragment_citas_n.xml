@@ -181,7 +181,7 @@
                         android:src="@drawable/ic_chevron_izquierda"
                         app:layout_constraintEnd_toStartOf="@id/ibSemanaSiguiente"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/color_enlace" />
+                        app:tint="@color/color_flecha_n" />
 
                     <ImageButton
                         android:id="@+id/ibSemanaSiguiente"
@@ -192,7 +192,7 @@
                         android:src="@drawable/ic_chevron_derecha"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/ibSemanaAnterior"
-                        app:tint="@color/color_enlace" />
+                        app:tint="@color/color_flecha_n" />
 
                     <LinearLayout
                         android:id="@+id/llSemana"
@@ -209,7 +209,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="?attr/selectableItemBackground"
+                            android:background="@drawable/bg_dia_n"
+                            android:foreground="?attr/selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center"
@@ -222,7 +223,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/comun_dia_letra_1"
-                                android:textColor="@color/color_texto_secundario"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_letra_n"
                                 android:textSize="11sp" />
 
                             <TextView
@@ -231,7 +233,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/comun_dia_numero_1"
-                                android:textColor="@color/color_texto_principal"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_numero_n"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -242,7 +245,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="?attr/selectableItemBackground"
+                            android:background="@drawable/bg_dia_n"
+                            android:foreground="?attr/selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center"
@@ -255,7 +259,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/comun_dia_letra_2"
-                                android:textColor="@color/color_texto_secundario"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_letra_n"
                                 android:textSize="11sp" />
 
                             <TextView
@@ -264,7 +269,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/comun_dia_numero_2"
-                                android:textColor="@color/color_texto_principal"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_numero_n"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -275,7 +281,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="?attr/selectableItemBackground"
+                            android:background="@drawable/bg_dia_n"
+                            android:foreground="?attr/selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center"
@@ -288,7 +295,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/comun_dia_letra_3"
-                                android:textColor="@color/color_texto_secundario"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_letra_n"
                                 android:textSize="11sp" />
 
                             <TextView
@@ -297,7 +305,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/comun_dia_numero_3"
-                                android:textColor="@color/color_texto_principal"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_numero_n"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -308,7 +317,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="?attr/selectableItemBackground"
+                            android:background="@drawable/bg_dia_n"
+                            android:foreground="?attr/selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center"
@@ -321,7 +331,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/comun_dia_letra_4"
-                                android:textColor="@color/color_texto_secundario"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_letra_n"
                                 android:textSize="11sp" />
 
                             <TextView
@@ -330,7 +341,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/comun_dia_numero_4"
-                                android:textColor="@color/color_texto_principal"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_numero_n"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -341,7 +353,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="?attr/selectableItemBackground"
+                            android:background="@drawable/bg_dia_n"
+                            android:foreground="?attr/selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center"
@@ -354,7 +367,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/comun_dia_letra_5"
-                                android:textColor="@color/color_texto_secundario"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_letra_n"
                                 android:textSize="11sp" />
 
                             <TextView
@@ -363,7 +377,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/comun_dia_numero_5"
-                                android:textColor="@color/color_texto_principal"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_numero_n"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -374,7 +389,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="?attr/selectableItemBackground"
+                            android:background="@drawable/bg_dia_n"
+                            android:foreground="?attr/selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center"
@@ -387,7 +403,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/comun_dia_letra_6"
-                                android:textColor="@color/color_texto_secundario"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_letra_n"
                                 android:textSize="11sp" />
 
                             <TextView
@@ -396,7 +413,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/comun_dia_numero_6"
-                                android:textColor="@color/color_texto_principal"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_numero_n"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -407,7 +425,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="?attr/selectableItemBackground"
+                            android:background="@drawable/bg_dia_n"
+                            android:foreground="?attr/selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center"
@@ -420,7 +439,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/comun_dia_letra_7"
-                                android:textColor="@color/color_texto_secundario"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_letra_n"
                                 android:textSize="11sp" />
 
                             <TextView
@@ -429,7 +449,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:text="@string/comun_dia_numero_7"
-                                android:textColor="@color/color_texto_principal"
+                                android:duplicateParentState="true"
+                                android:textColor="@color/color_texto_dia_numero_n"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
@@ -462,6 +483,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvSeccionAgendadas" />

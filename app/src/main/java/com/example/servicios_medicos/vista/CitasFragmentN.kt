@@ -9,9 +9,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
 import com.example.servicios_medicos.adaptador.clsCitasAdaptadorN
@@ -30,7 +28,6 @@ class CitasFragmentN : Fragment() {
     private lateinit var btnSemanaAnterior: ImageButton
     private lateinit var btnSemanaSiguiente: ImageButton
     private lateinit var layDias: List<LinearLayout>
-    private lateinit var txtDiasLetras: List<TextView>
     private lateinit var txtDiasNumeros: List<TextView>
     private lateinit var txtSeccionAgendadas: TextView
     private lateinit var rvCitas: RecyclerView
@@ -50,14 +47,6 @@ class CitasFragmentN : Fragment() {
 
         btnRegresar = view.findViewById(R.id.ibRegresar)
         btnAjustes = view.findViewById(R.id.ibAjustes)
-        btnAjustes.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                val destino = Intent(requireContext(), ConfiguracionActivityC::class.java)
-                destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
-                destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
-                startActivity(destino)
-            }
-        })
         btnProximas = view.findViewById(R.id.btnProximas)
         btnHistorial = view.findViewById(R.id.btnHistorial)
         txtMes = view.findViewById(R.id.tvMes)
@@ -72,15 +61,6 @@ class CitasFragmentN : Fragment() {
             view.findViewById(R.id.llDia6),
             view.findViewById(R.id.llDia7)
         )
-        txtDiasLetras = listOf(
-            view.findViewById(R.id.tvDiaLetra1),
-            view.findViewById(R.id.tvDiaLetra2),
-            view.findViewById(R.id.tvDiaLetra3),
-            view.findViewById(R.id.tvDiaLetra4),
-            view.findViewById(R.id.tvDiaLetra5),
-            view.findViewById(R.id.tvDiaLetra6),
-            view.findViewById(R.id.tvDiaLetra7)
-        )
         txtDiasNumeros = listOf(
             view.findViewById(R.id.tvDiaNumero1),
             view.findViewById(R.id.tvDiaNumero2),
@@ -92,8 +72,6 @@ class CitasFragmentN : Fragment() {
         )
         txtSeccionAgendadas = view.findViewById(R.id.tvSeccionAgendadas)
         rvCitas = view.findViewById(R.id.rvCitas)
-        rvCitas.layoutManager = LinearLayoutManager(requireContext())
-        rvCitas.isNestedScrollingEnabled = false
         btnSolicitarCita = view.findViewById(R.id.btnSolicitarCita)
 
         presentador = clsCitasPresentadorN(this)
@@ -134,57 +112,34 @@ class CitasFragmentN : Fragment() {
             }
         }
 
-
         btnSolicitarCita.setOnClickListener {
             presentador.solicitarCita()
         }
-    }
-
-    fun marcarPestania(pestania: String) { // marca la pestaña proximas o historial
-        if (pestania == "historial") {
-            btnHistorial.isChecked = true
-        } else {
-            btnProximas.isChecked = true
+        btnAjustes.setOnClickListener {
+            presentador.verConfiguracion()
         }
     }
 
-    fun mostrarTextoProximas(texto: String) { // muestra cuantas citas proximas hay en la pestaña
-        btnProximas.text = texto
-    }
-
-    fun mostrarMes(texto: String) { // muestra el mes del calendario
-        txtMes.text = texto
-    }
-
-    fun mostrarSemana(dias: List<DiaSemanaN>) { // muestra los 7 dias de la semana
+    fun mostrarSemana(mes: String, dias: List<DiaSemanaN>) { // muestra el mes y el numero de los 7 dias de la semana
+        txtMes.text = mes
         for (i in 0 until dias.size) {
-            txtDiasLetras[i].text = dias[i].letra
             txtDiasNumeros[i].text = dias[i].numero
         }
     }
 
-    fun marcarDia(numeroDia: Int) { // pinta de azul el dia elegido
-        val colorBlanco = ContextCompat.getColor(requireContext(), R.color.color_boton_primario_texto)
-        val colorPrincipal = ContextCompat.getColor(requireContext(), R.color.color_texto_principal)
-        val colorSecundario = ContextCompat.getColor(requireContext(), R.color.color_texto_secundario)
+    fun marcarDia(numeroDia: Int) { // marca el dia elegido y el xml lo pinta de azul
         for (i in 0 until layDias.size) {
             if (i == numeroDia) {
-                layDias[i].setBackgroundResource(R.drawable.bg_dia_seleccionado)
-                txtDiasLetras[i].setTextColor(colorBlanco)
-                txtDiasNumeros[i].setTextColor(colorBlanco)
+                layDias[i].isSelected = true
             } else {
-                layDias[i].setBackgroundResource(android.R.color.transparent)
-                txtDiasLetras[i].setTextColor(colorSecundario)
-                txtDiasNumeros[i].setTextColor(colorPrincipal)
+                layDias[i].isSelected = false
             }
         }
     }
 
-    fun mostrarTituloSeccion(texto: String) { // cambia el titulo de la lista de citas
-        txtSeccionAgendadas.text = texto
-    }
-
-    fun mostrarCitas(tarjetas: List<TarjetaCitaN>) { // manda las tarjetas a la lista de citas
+    fun mostrarCitas(textoProximas: String, titulo: String, tarjetas: List<TarjetaCitaN>) { // muestra el total de proximas, el titulo y las tarjetas de citas
+        btnProximas.text = textoProximas
+        txtSeccionAgendadas.text = titulo
         rvCitas.adapter = clsCitasAdaptadorN(tarjetas, this)
     }
 
@@ -204,8 +159,14 @@ class CitasFragmentN : Fragment() {
         intent.putExtra("token", token)
         startActivity(intent)
     }
+    fun abrirConfiguracion() { // abre la pantalla de configuracion
+        val intent = Intent(requireContext(), ConfiguracionActivityC::class.java)
+        intent.putExtra("token", requireActivity().intent.getStringExtra("token"))
+        intent.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
+        startActivity(intent)
+    }
 
-    fun mostrarError(mensaje: String) { // muestra un mensaje cuando algo sale mal
+    fun mostrarMensaje(mensaje: String) { // muestra un aviso al alumno
         Toast.makeText(requireContext(), mensaje, Toast.LENGTH_LONG).show()
     }
 }

@@ -2,35 +2,34 @@ package com.example.servicios_medicos.modelo
 
 import com.example.servicios_medicos.Data.dataInicioAlumnoN
 import com.example.servicios_medicos.network.RetrofitCliente
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class clsInicioAlumnoModeloN {
 
-    suspend fun obtenerDatosInicio(token: String): Response<dataInicioAlumnoN> { // llama a la api inicio alumno
+    suspend fun obtenerDatosInicio(token: String): dataInicioAlumnoN { // pide a la api los datos de inicio del alumno
         return RetrofitCliente.apiAlumnoN.obtenerInicioAlumno("Bearer $token")
     }
 
-    suspend fun listarCitas(token: String): List<CitaDetalleN> { // pide las citas del alumno y regresa la lista
-        val respuesta = RetrofitCliente.apiAlumnoN.listarCitas("Bearer $token")
-        val datos = respuesta.body()
-        if (respuesta.isSuccessful && datos != null) {
-            val citas = datos.data
-            if (citas != null) {
-                return citas
-            }
-        }
-        return emptyList()
+    suspend fun obtenerCitas(token: String): List<CitaDetalleN> { // pide a la api las citas del alumno
+        val datos = RetrofitCliente.apiAlumnoN.listarCitas("Bearer $token")
+        return datos.data ?: emptyList()
     }
 
-    fun contarCitasProximas(citas: List<CitaDetalleN>): Int { // cuenta las citas que siguen y no estan canceladas
-        val hoy = obtenerHoyServidor()
+    fun yaPaso(fecha: String, hora: String): Boolean { // revisa si la fecha y hora de la cita ya pasaron
+        val ahora = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US).format(Date())
+        var horaCorta = hora
+        if (horaCorta.length > 5) {
+            horaCorta = hora.substring(0, 5)
+        }
+        return fecha + " " + horaCorta < ahora
+    }
+
+    fun contarCitasProximas(citas: List<CitaDetalleN>): Int { // cuenta las citas que no han pasado y no estan canceladas
         var total = 0
         for (cita in citas) {
-            val fecha = cita.fecha
-            if (fecha != null && fecha >= hoy && cita.estado != "Cancelada") {
+            if (cita.estado != "Cancelada" && yaPaso(cita.fecha ?: "", cita.hora ?: "") == false) {
                 total = total + 1
             }
         }
@@ -38,38 +37,38 @@ class clsInicioAlumnoModeloN {
     }
 
     fun calcularPendientes(citas: List<CitaDetalleN>): String { // revisa si el alumno tiene citas vencidas o una cita hoy
-        val hoy = obtenerHoyServidor()
+        val hoy = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
         var citasVencidas = 0
         var tieneCitaHoy = false
         for (cita in citas) {
-            val fecha = cita.fecha
-            if (fecha != null && cita.estado == "Pendiente") {
-                if (fecha < hoy) {
+            if (cita.estado == "Pendiente") {
+                if (yaPaso(cita.fecha ?: "", cita.hora ?: "")) {
                     citasVencidas = citasVencidas + 1
-                }
-                if (fecha == hoy) {
+                } else if (cita.fecha == hoy) {
                     tieneCitaHoy = true
                 }
             }
         }
-        var textoPendientes = "Sin pendientes"
         if (citasVencidas > 0) {
-            textoPendientes = "Citas vencidas: " + citasVencidas
-        } else if (tieneCitaHoy) {
-            textoPendientes = "Tienes cita hoy"
+            return "Citas vencidas: " + citasVencidas
         }
-        return textoPendientes
+        if (tieneCitaHoy) {
+            return "Tienes cita hoy"
+        }
+        return "Sin pendientes"
     }
 
-    fun obtenerHoyServidor(): String { // regresa la fecha de hoy igual que la manda el servidor
-        val formato = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-        return formato.format(Date())
-    }
-
-    fun obtenerFechaHoy(): String { // arma el texto de la fecha de hoy para el saludo
-        val formato = SimpleDateFormat("EEEE, d 'de' MMMM", Locale("es", "MX"))
-        val fecha = formato.format(Date())
-        return fecha.substring(0, 1).uppercase() + fecha.substring(1)
+    fun sumarMediaHora(hora: String): String { // suma 30 minutos a la hora de la cita
+        if (hora.length < 5) {
+            return hora
+        }
+        if (hora.substring(3, 5) == "00") {
+            return hora.substring(0, 3) + "30"
+        }
+        var horas = (hora.substring(0, 2).toInt() + 1).toString()
+        if (horas.length == 1) {
+            horas = "0" + horas
+        }
+        return horas + ":00"
     }
 }
-

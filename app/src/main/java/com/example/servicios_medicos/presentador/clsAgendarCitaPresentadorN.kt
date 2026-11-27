@@ -5,44 +5,40 @@ import com.example.servicios_medicos.vista.AgendarCitaActivityN
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class clsAgendarCitaPresentadorN(private val vista: AgendarCitaActivityN) {
     private val modelo = clsAgendarCitaModeloN()
     private var token = ""
     private var motivoElegido = ""
     private var fechaElegida = ""
-    private var textoFecha = ""
+    private var fechaCorta = ""
     private var horaElegida = ""
     private var horasDelDia: List<String> = emptyList()
-    private var doctoraDelDia = "Médico por asignar · Servicio Médico"
-    private val lunesDeHoy = modelo.buscarLunesDeLaSemana(Calendar.getInstance())
+    private var doctora = "Médico por asignar - Servicio Médico"
+    private val lunesDeHoy = modelo.buscarLunes(Calendar.getInstance())
     private var lunesSemana = lunesDeHoy
     private var numeroSemana = 0
     private val semanasMaximas = 4
 
-    fun iniciarPantalla(tokenSesion: String?, motivoRecibido: String?) { // guarda el token, marca el motivo si viene uno y marca el dia de hoy
-        if (tokenSesion != null && tokenSesion.isNotEmpty()) {
-            token = tokenSesion
-        } else {
-            vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
+    fun iniciarPantalla(tokenSesion: String?, motivoRecibido: String?) { // guarda el token, marca el motivo si viene uno y elige el dia de hoy
+        token = tokenSesion ?: ""
+        if (token.isEmpty()) {
+            vista.mostrarMensaje("Tu sesión terminó, vuelve a entrar")
         }
-        vista.marcarMotivo(-1)
-        val motivos = modelo.listaDeMotivos()
-        for (i in 0 until motivos.size) {
-            if (motivos[i] == motivoRecibido) {
-                elegirMotivo(i)
-            }
-        }
-        actualizarResumen()
+        elegirMotivo(modelo.listaDeMotivos().indexOf(motivoRecibido ?: ""))
         mostrarSemana()
-        val hoy = modelo.fechaDeHoy()
+        val hoy = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
         val dias = modelo.armarDiasDeLaSemana(lunesSemana)
         for (i in 0 until dias.size) {
             if (dias[i].fechaServidor == hoy && dias[i].habilitado) {
                 elegirDia(i)
             }
         }
+        actualizarResumen()
     }
 
     fun elegirMotivo(posicion: Int) { // guarda el motivo que eligio el alumno
@@ -57,40 +53,29 @@ class clsAgendarCitaPresentadorN(private val vista: AgendarCitaActivityN) {
 
     fun semanaAnterior() { // regresa una semana, no deja pasar de la semana de hoy
         if (numeroSemana == 0) {
-            vista.mostrarError("No puedes agendar en fechas pasadas.")
+            vista.mostrarMensaje("No puedes agendar en fechas pasadas")
             return
         }
         numeroSemana = numeroSemana - 1
-        lunesSemana = modelo.moverSemanas(lunesDeHoy, numeroSemana)
+        lunesSemana = modelo.moverDias(lunesDeHoy, 7 * numeroSemana)
         mostrarSemana()
     }
 
     fun semanaSiguiente() { // avanza una semana, hasta 4 semanas despues de hoy
         if (numeroSemana == semanasMaximas) {
-            vista.mostrarError("Solo puedes agendar con " + semanasMaximas + " semanas de anticipación.")
+            vista.mostrarMensaje("Solo puedes agendar hasta " + semanasMaximas + " semanas adelante")
             return
         }
         numeroSemana = numeroSemana + 1
-        lunesSemana = modelo.moverSemanas(lunesDeHoy, numeroSemana)
+        lunesSemana = modelo.moverDias(lunesDeHoy, 7 * numeroSemana)
         mostrarSemana()
     }
 
-    private fun mostrarSemana() { // manda a la vista el mes, los dias y las flechas
+    private fun mostrarSemana() { // manda a la vista el mes, los dias, las flechas y el dia marcado
         val dias = modelo.armarDiasDeLaSemana(lunesSemana)
-        vista.mostrarMes(modelo.textoDelMes(lunesSemana))
-        vista.mostrarSemana(dias)
-
-        if (numeroSemana > 0) {
-            vista.activarFlechaAtras(true)
-        } else {
-            vista.activarFlechaAtras(false)
-        }
-        if (numeroSemana < semanasMaximas) {
-            vista.activarFlechaAdelante(true)
-        } else {
-            vista.activarFlechaAdelante(false)
-        }
-
+        val mes = SimpleDateFormat("MMMM yyyy", Locale("es", "MX")).format(lunesSemana.time)
+        vista.mostrarSemana(mes.substring(0, 1).uppercase() + mes.substring(1), dias)
+        vista.activarFlechas(numeroSemana > 0, numeroSemana < semanasMaximas)
         var diaMarcado = -1
         for (i in 0 until dias.size) {
             if (dias[i].fechaServidor == fechaElegida) {
@@ -102,51 +87,46 @@ class clsAgendarCitaPresentadorN(private val vista: AgendarCitaActivityN) {
 
     fun elegirDia(numeroDia: Int) { // guarda el dia que eligio el alumno y busca sus horarios
         val dias = modelo.armarDiasDeLaSemana(lunesSemana)
-        if (numeroDia < 0 || numeroDia >= dias.size) {
-            return
-        }
-        if (dias[numeroDia].habilitado == false) {
-            vista.mostrarError("Ese día no hay servicio o ya pasó, elige otra fecha.")
-            return
-        }
-        val fecha = modelo.fechaDelDia(lunesSemana, numeroDia)
+        val fecha = modelo.moverDias(lunesSemana, numeroDia)
         fechaElegida = dias[numeroDia].fechaServidor
-        textoFecha = modelo.textoFechaCorta(fecha)
+        fechaCorta = SimpleDateFormat("EEE d MMM", Locale("es", "MX")).format(fecha.time)
+        val diaElegido = SimpleDateFormat("EEEE d 'de' MMMM", Locale("es", "MX")).format(fecha.time)
         vista.marcarDia(numeroDia)
-        vista.mostrarDiaElegido(modelo.textoDiaElegido(fecha))
+        vista.mostrarDiaElegido(diaElegido.substring(0, 1).uppercase() + diaElegido.substring(1) + " - Horarios disponibles")
         cargarHorarios()
     }
 
     fun cargarHorarios() { // revisa que no tenga cita ese dia y trae las horas libres
         horaElegida = ""
         horasDelDia = emptyList()
-        vista.mostrarHorarios(horasDelDia)
+        vista.mostrarHorarios(listOf("Selecciona un horario"))
         actualizarResumen()
-        if (token.isEmpty() || fechaElegida.isEmpty()) {
+        if (token.isEmpty()) {
             return
         }
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val tieneCita = modelo.tieneCitaEseDia(token, fechaElegida)
-                val respuesta = modelo.pedirHorarios(token, fechaElegida)
-                val datos = respuesta.body()
-                if (tieneCita) {
-                    vista.mostrarError("Ya tienes una cita ese día. Elige otra fecha.")
-                } else if (respuesta.isSuccessful && datos != null && datos.status) {
-                    horasDelDia = modelo.sacarHorasLibres(datos, fechaElegida)
-                    doctoraDelDia = modelo.textoDoctora(datos)
-                    vista.mostrarHorarios(horasDelDia)
-                    actualizarResumen()
-                    if (horasDelDia.isEmpty()) {
-                        vista.mostrarError("No hay horarios disponibles para este día.")
-                    }
-                } else if (respuesta.code() == 401) {
-                    vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
+                if (modelo.tieneCitaEseDia(token, fechaElegida)) {
+                    vista.mostrarMensaje("Ya tienes una cita ese día")
                 } else {
-                    vista.mostrarError("No pudimos cargar los horarios. Intenta de nuevo.")
+                    val horarios = modelo.obtenerHorarios(token, fechaElegida)
+                    horasDelDia = modelo.sacarHorasLibres(horarios.horarios, fechaElegida)
+                    doctora = (horarios.doctora ?: "Médico por asignar") + " - " + (horarios.consultorio ?: "Servicio Médico")
+                    val opciones = mutableListOf<String>()
+                    if (horasDelDia.isEmpty()) {
+                        opciones.add("Sin horarios disponibles")
+                        vista.mostrarMensaje("No hay horarios para este día")
+                    } else {
+                        opciones.add("Selecciona un horario")
+                    }
+                    for (hora in horasDelDia) {
+                        opciones.add(hora)
+                    }
+                    vista.mostrarHorarios(opciones)
+                    actualizarResumen()
                 }
             } catch (e: Exception) {
-                vista.mostrarError("Revisa tu conexión a internet e intenta de nuevo.")
+                vista.mostrarMensaje("Error al cargar los horarios")
             }
         }
     }
@@ -160,48 +140,52 @@ class clsAgendarCitaPresentadorN(private val vista: AgendarCitaActivityN) {
         actualizarResumen()
     }
 
-    private fun actualizarResumen() { // manda a la vista el resumen de la cita
-        val textoMotivo = modelo.textoResumenMotivo(motivoElegido, textoFecha)
-        val textoHorario = modelo.textoResumenHorario(horaElegida)
-        vista.mostrarResumen(textoMotivo, textoHorario, doctoraDelDia)
+    private fun actualizarResumen() { // arma los textos del resumen y los manda a la vista
+        var textoMotivo = "Selecciona un motivo"
+        if (motivoElegido.isNotEmpty()) {
+            textoMotivo = motivoElegido
+        }
+        var textoFecha = "Selecciona una fecha"
+        if (fechaCorta.isNotEmpty()) {
+            textoFecha = fechaCorta
+        }
+        var textoHorario = "Selecciona un horario"
+        if (horaElegida.isNotEmpty()) {
+            textoHorario = horaElegida + " a " + modelo.sumarMediaHora(horaElegida)
+        }
+        vista.mostrarResumen(textoMotivo + " - " + textoFecha, textoHorario, doctora)
     }
 
     fun confirmarCita() { // revisa que el alumno eligio todo y guarda la cita
         if (token.isEmpty()) {
-            vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
+            vista.mostrarMensaje("Tu sesión terminó, vuelve a entrar")
             return
         }
         if (motivoElegido.isEmpty()) {
-            vista.mostrarError("Selecciona el motivo de tu cita.")
+            vista.mostrarMensaje("Selecciona un motivo")
             return
         }
         if (fechaElegida.isEmpty()) {
-            vista.mostrarError("Selecciona una fecha.")
+            vista.mostrarMensaje("Selecciona una fecha")
             return
         }
         if (horaElegida.isEmpty()) {
-            vista.mostrarError("Selecciona un horario.")
+            vista.mostrarMensaje("Selecciona un horario")
             return
         }
-        vista.mostrarCargando(true)
+        vista.mostrarBotonConfirmar("Agendando...", false)
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 val respuesta = modelo.guardarCita(token, fechaElegida, horaElegida, motivoElegido)
-                val datos = respuesta.body()
-                if (respuesta.isSuccessful && datos != null && datos.status) {
-                    vista.mostrarCitaAgendada("Tu cita quedó agendada.")
-                } else if (respuesta.code() == 409) {
-                    vista.mostrarError("Ese horario ya fue ocupado, elige otro.")
-                    cargarHorarios()
-                } else if (respuesta.code() == 401) {
-                    vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
+                if (respuesta.status) {
+                    vista.mostrarCitaAgendada("Cita agendada")
                 } else {
-                    vista.mostrarError("No se pudo agendar tu cita. Intenta de nuevo.")
+                    vista.mostrarMensaje("No se pudo agendar la cita")
                 }
             } catch (e: Exception) {
-                vista.mostrarError("Revisa tu conexión a internet e intenta de nuevo.")
+                vista.mostrarMensaje("No se pudo agendar, ese horario puede estar ocupado")
             }
-            vista.mostrarCargando(false)
+            vista.mostrarBotonConfirmar("Confirmar cita", true)
         }
     }
 }

@@ -9,12 +9,10 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.servicios_medicos.R
 import com.example.servicios_medicos.presentador.clsDetalleCitaPresentadorN
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 
 class DetalleCitaActivityN : AppCompatActivity() {
@@ -28,7 +26,6 @@ class DetalleCitaActivityN : AppCompatActivity() {
     private lateinit var txtConsultorio: TextView
     private lateinit var btnReprogramarCita: MaterialButton
     private lateinit var btnCancelarCita: MaterialButton
-    private lateinit var bnvNavegacion: BottomNavigationView
     private lateinit var presentador: clsDetalleCitaPresentadorN
 
     override fun onCreate(savedInstanceState: Bundle?) { // conecta los elementos de la pantalla y arranca detalle cita
@@ -49,6 +46,8 @@ class DetalleCitaActivityN : AppCompatActivity() {
         txtFolioCita = findViewById(R.id.tvFolioCita)
         txtMedico = findViewById(R.id.tvMedico)
         txtConsultorio = findViewById(R.id.tvConsultorio)
+        btnReprogramarCita = findViewById(R.id.btnReprogramarCita)
+        btnCancelarCita = findViewById(R.id.btnCancelarCita)
 
         presentador = clsDetalleCitaPresentadorN(this)
 
@@ -59,7 +58,7 @@ class DetalleCitaActivityN : AppCompatActivity() {
         presentador.iniciarPantalla(token, idCita)
     }
 
-    private fun configurarListeners() { // dice que hace cada boton y el menu de abajo
+    private fun configurarListeners() { // dice que hace cada boton
         btnRegresar.setOnClickListener {
             finish()
         }
@@ -67,30 +66,8 @@ class DetalleCitaActivityN : AppCompatActivity() {
             presentador.reprogramarCita()
         }
         btnCancelarCita.setOnClickListener {
-            presentador.cancelarCita()
+            preguntarCancelar()
         }
-        bnvNavegacion.setOnItemSelectedListener { item ->
-            if (item.itemId == R.id.nav_inicio) {
-                irAPantallaPrincipal("inicio")
-            }
-            if (item.itemId == R.id.nav_citas) {
-                irAPantallaPrincipal("citas")
-            }
-            false
-        }
-        bnvNavegacion.setOnItemReselectedListener { item ->
-            if (item.itemId == R.id.nav_citas) {
-                irAPantallaPrincipal("citas")
-            }
-        }
-    }
-
-    private fun irAPantallaPrincipal(abrir: String) { // regresa a la pantalla principal y abre inicio o mis citas
-        val intent = Intent(this, AlumnoMainActivityN::class.java)
-        intent.putExtra("abrir", abrir)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-        startActivity(intent)
-        finish()
     }
 
     fun mostrarDetalle(tipo: String, estado: String, fecha: String, horario: String, folio: String, medico: String, consultorio: String) { // muestra los datos de la cita
@@ -101,32 +78,26 @@ class DetalleCitaActivityN : AppCompatActivity() {
         txtFolioCita.text = folio
         txtMedico.text = medico
         txtConsultorio.text = consultorio
-        pintarEstado(txtEstadoCita, estado)
-    }
-
-    private fun pintarEstado(txtEstado: TextView, estado: String) { // pinta el estado de verde, rojo o gris
-        var color = R.color.color_texto_secundario
         if (estado == "Pendiente") {
-            color = R.color.color_exito
+            txtEstadoCita.isSelected = true
+        } else {
+            txtEstadoCita.isSelected = false
         }
         if (estado == "Cancelada") {
-            color = R.color.color_peligro
-        }
-        txtEstado.setTextColor(ContextCompat.getColor(this, color))
-    }
-
-    fun activarCancelar(activo: Boolean) { // activa o apaga el boton cancelar cita
-        btnCancelarCita.isEnabled = activo
-        if (activo) {
-            btnCancelarCita.alpha = 1f
+            txtEstadoCita.isActivated = true
         } else {
-            btnCancelarCita.alpha = 0.4f
+            txtEstadoCita.isActivated = false
         }
     }
 
-    fun mostrarVolverAAgendar() { // quita cancelar y cambia reprogramar por volver a agendar
+    fun mostrarBotonCancelar(texto: String, activo: Boolean) { // cambia el texto del boton cancelar y lo prende o apaga
+        btnCancelarCita.text = texto
+        btnCancelarCita.isEnabled = activo
+    }
+
+    fun mostrarVolverAAgendar(texto: String) { // quita cancelar y cambia reprogramar por volver a agendar
         btnCancelarCita.visibility = View.GONE
-        btnReprogramarCita.text = "Volver a agendar"
+        btnReprogramarCita.text = texto
     }
 
     fun preguntarCancelar() { // abre una ventana para preguntar si quiere cancelar
@@ -148,15 +119,6 @@ class DetalleCitaActivityN : AppCompatActivity() {
         ventana.show()
     }
 
-    fun mostrarCargando(cargando: Boolean) { // cambia el boton cancelar mientras se cancela la cita
-        if (cargando) {
-            btnCancelarCita.isEnabled = false
-            btnCancelarCita.text = "Cancelando..."
-        } else {
-            btnCancelarCita.text = "Cancelar cita"
-        }
-    }
-
     fun abrirAgendarCita(token: String, motivo: String) { // abre agendar cita con el motivo de esta cita
         val intent = Intent(this, AgendarCitaActivityN::class.java)
         intent.putExtra("token", token)
@@ -164,11 +126,7 @@ class DetalleCitaActivityN : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun mostrarMensaje(mensaje: String) { // muestra un aviso cuando la cita se cancelo
-        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
-    }
-
-    fun mostrarError(mensaje: String) { // muestra un mensaje cuando algo sale mal
+    fun mostrarMensaje(mensaje: String) { // muestra un aviso al alumno
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 }
