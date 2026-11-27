@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo_secundario"
+    tools:context=".vista.DoctoraMainActivityJM">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navHostFragmentDoctora"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/vDivisorNavegacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_inicio_doctora_jm" />
+
+    <View
+        android:id="@+id/vDivisorNavegacion"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_borde"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavDoctora"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavDoctora"
+        style="@style/Widget.Material3.BottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fondo"
+        app:elevation="0dp"
+        app:itemActiveIndicatorStyle="@style/SaludCampus.IndicadorNavegacion"
+        app:itemIconTint="@color/selector_nav_item"
+        app:itemTextAppearanceActive="@style/SaludCampus.TextoNavegacion.Activo"
+        app:itemTextAppearanceInactive="@style/SaludCampus.TextoNavegacion"
+        app:itemTextColor="@color/selector_nav_item"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navegacion_medico" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
