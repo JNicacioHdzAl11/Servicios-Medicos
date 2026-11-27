@@ -54,11 +54,11 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
         enlazarVistas(view)
         configurarListeners()
 
-        presentador = clsExpedienteMedicoAlumPresentadorJM(this)
+        //presentador = clsExpedienteMedicoAlumPresentadorJM(this)
 
         val token = requireActivity().intent.getStringExtra("token") ?: ""
         if (token.isNotEmpty()) {
-            presentador.cargarDatosExpediente(token)
+            //presentador.ExpedienteMedicoAlumActivityJM(token)
         } else {
             mostrarError("No se recibió token de sesión")
         }
