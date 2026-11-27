@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
 import com.example.servicios_medicos.modelo.TarjetaCitaN
@@ -36,15 +35,16 @@ class clsCitasAdaptadorN(private val tarjetas: List<TarjetaCitaN>, private val v
         holder.txtEstado.text = tarjeta.estado
         holder.txtFecha.text = tarjeta.fecha
         holder.txtDoctora.text = tarjeta.doctora
-
-        var color = R.color.color_texto_secundario
         if (tarjeta.estado == "Pendiente") {
-            color = R.color.color_exito
+            holder.txtEstado.isSelected = true
+        } else {
+            holder.txtEstado.isSelected = false
         }
         if (tarjeta.estado == "Cancelada") {
-            color = R.color.color_peligro
+            holder.txtEstado.isActivated = true
+        } else {
+            holder.txtEstado.isActivated = false
         }
-        holder.txtEstado.setTextColor(ContextCompat.getColor(holder.itemView.context, color))
 
         holder.itemView.setOnClickListener {
             vista.tocarCita(position)

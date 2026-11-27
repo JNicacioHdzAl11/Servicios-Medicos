@@ -13,8 +13,10 @@ import com.example.servicios_medicos.R
 import com.example.servicios_medicos.presentador.clsInicioAlumnoPresentadorN
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 
 class InicioAlumnoFragmentN : Fragment() {
+    private lateinit var btnRegresar: ImageButton
     private lateinit var txtSaludo: TextView
     private lateinit var txtMatricula: TextView
     private lateinit var txtFechaHoy: TextView
@@ -27,14 +29,13 @@ class InicioAlumnoFragmentN : Fragment() {
     private lateinit var txtCita1Medico: TextView
     private lateinit var txtVerTodasCitas: TextView
     private lateinit var btnSolicitarCita: MaterialButton
-    private lateinit var btnRegresar: ImageButton
     private lateinit var btnAjustes: ImageButton
+    private lateinit var cardAvisos: MaterialCardView
     private lateinit var txtCampania1Titulo: TextView
     private lateinit var txtCampania1Detalle: TextView
     private lateinit var txtCampania2Titulo: TextView
     private lateinit var txtCampania2Detalle: TextView
     private lateinit var presentador: clsInicioAlumnoPresentadorN
-    private var token = ""
 
     override fun onCreateView( // carga el diseño de la pantalla de inicio
         inflater: LayoutInflater,
@@ -47,6 +48,8 @@ class InicioAlumnoFragmentN : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // conecta los elementos de la pantalla y arranca el inicio del alumno
         super.onViewCreated(view, savedInstanceState)
 
+
+        btnRegresar = view.findViewById(R.id.ibRegresar)
         txtSaludo = view.findViewById(R.id.txtSaludo)
         txtMatricula = view.findViewById(R.id.txtMatricula)
         txtFechaHoy = view.findViewById(R.id.txtFechaHoy)
@@ -59,17 +62,8 @@ class InicioAlumnoFragmentN : Fragment() {
         txtCita1Medico = view.findViewById(R.id.txtCita1Medico)
         txtVerTodasCitas = view.findViewById(R.id.txtVerTodasCitas)
         btnSolicitarCita = view.findViewById(R.id.btnSolicitarCita)
-        btnRegresar = view.findViewById(R.id.ibRegresar)
         btnAjustes = view.findViewById(R.id.ibAjustes)
-        btnAjustes.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                val destino = Intent(requireContext(), ConfiguracionActivityC::class.java)
-                destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
-                destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
-                startActivity(destino)
-            }
-        })
-        // los id del XML se quedan igual, solo cambia el nombre de la variable
+        cardAvisos = view.findViewById(R.id.cvAvisos)
         txtCampania1Titulo = view.findViewById(R.id.txtAvisoVacunacionTitulo)
         txtCampania1Detalle = view.findViewById(R.id.txtAvisoVacunacion)
         txtCampania2Titulo = view.findViewById(R.id.txtAvisoBienestarTitulo)
@@ -78,38 +72,32 @@ class InicioAlumnoFragmentN : Fragment() {
         configurarListeners()
 
         presentador = clsInicioAlumnoPresentadorN(this)
-        val tokenRecibido = requireActivity().intent.getStringExtra("token")
-        if (tokenRecibido != null) {
-            token = tokenRecibido
-        }
-        presentador.iniciarPantalla(token)
+        presentador.iniciarPantalla(requireActivity().intent.getStringExtra("token"))
     }
-    private fun configurarListeners() { // dice que hace cada boton, regresar cierra la sesion y no deja volver atras
-        btnRegresar.setOnClickListener {
-            val intent = Intent(requireContext(), LoginActivityC::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            requireActivity().finish()
-        }
+    private fun configurarListeners() { // dice que hace solicitar cita, ver todas y avisos de salud
         btnSolicitarCita.setOnClickListener {
-            val intent = Intent(requireContext(), AgendarCitaActivityN::class.java)
-            intent.putExtra("token", token)
-            startActivity(intent)
+            presentador.solicitarCita()
         }
         txtVerTodasCitas.setOnClickListener {
-            val menu = requireActivity().findViewById<BottomNavigationView>(R.id.bnvNavegacion)
-            menu.selectedItemId = R.id.nav_citas
+            presentador.verTodasLasCitas()
+        }
+        cardAvisos.setOnClickListener {
+            presentador.verCampanias()
+        }
+        btnRegresar.setOnClickListener {
+            presentador.regresarAlLogin()
+        }
+        btnAjustes.setOnClickListener {
+            presentador.verConfiguracion()
         }
     }
     override fun onResume() { // carga los datos cada vez que se ve la pantalla
         super.onResume()
         presentador.cargarDatosInicio()
     }
-    fun mostrarSaludo(texto: String) { // muestra el saludo con el nombre del alumno
-        txtSaludo.text = texto
-    }
-    fun mostrarMatricula(texto: String) { // muestra la matricula del alumno
-        txtMatricula.text = texto
+    fun mostrarAlumno(saludo: String, matricula: String) { // muestra el saludo y la matricula del alumno
+        txtSaludo.text = saludo
+        txtMatricula.text = matricula
     }
     fun mostrarFechaHoy(fecha: String) { // muestra la fecha de hoy
         txtFechaHoy.text = fecha
@@ -120,11 +108,21 @@ class InicioAlumnoFragmentN : Fragment() {
         txtEstadoDetalle.text = pendientes
     }
 
-    fun mostrarProximaCita(titulo: String, estado: String, fecha: String, medico: String) { // muestra la tarjeta de tu proxima cita
+    fun mostrarProximaCita(titulo: String, estado: String, fecha: String, horario: String) { // muestra la tarjeta de tu proxima cita
         txtCita1Titulo.text = titulo
         txtCita1Estado.text = estado
         txtCita1Fecha.text = fecha
-        txtCita1Medico.text = medico
+        txtCita1Medico.text = horario
+        if (estado == "Pendiente") {
+            txtCita1Estado.isSelected = true
+        } else {
+            txtCita1Estado.isSelected = false
+        }
+        if (estado == "Cancelada") {
+            txtCita1Estado.isActivated = true
+        } else {
+            txtCita1Estado.isActivated = false
+        }
     }
     fun mostrarCampania(numero: Int, titulo: String, detalle: String) { // muestra la campaña 1 o 2 de salud
         if (numero == 1) {
@@ -135,8 +133,32 @@ class InicioAlumnoFragmentN : Fragment() {
             txtCampania2Detalle.text = detalle
         }
     }
-    fun mostrarError(mensaje: String) { // muestra un mensaje cuando algo sale mal
+    fun abrirAgendarCita(token: String) { // abre agendar cita
+        val intent = Intent(requireContext(), AgendarCitaActivityN::class.java)
+        intent.putExtra("token", token)
+        startActivity(intent)
+    }
+    fun abrirMisCitas() { // cambia el menu de abajo a mis citas
+        val menu = requireActivity().findViewById<BottomNavigationView>(R.id.bnvNavegacion)
+        menu.selectedItemId = R.id.nav_citas
+    }
+    fun abrirCampanias() { // cambia el menu de abajo a campañas
+        val menu = requireActivity().findViewById<BottomNavigationView>(R.id.bnvNavegacion)
+        menu.selectedItemId = R.id.nav_campanias
+    }
+    fun mostrarMensaje(mensaje: String) { // muestra un aviso al alumno
         Toast.makeText(requireContext(), mensaje, Toast.LENGTH_LONG).show()
     }
-}
+    fun abrirLogin() { // regresa al login y cierra la pantalla principal
+        val intent = Intent(requireContext(), LoginActivityC::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
 
+    fun abrirConfiguracion() { // abre la pantalla de configuracion
+        val intent = Intent(requireContext(), ConfiguracionActivityC::class.java)
+        intent.putExtra("token", requireActivity().intent.getStringExtra("token"))
+        intent.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
+        startActivity(intent)
+    }
+}
