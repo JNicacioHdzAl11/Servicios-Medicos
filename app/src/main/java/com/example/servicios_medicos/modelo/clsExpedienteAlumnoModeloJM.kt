@@ -1,47 +1,37 @@
 package com.example.servicios_medicos.modelo
 
-import com.example.servicios_medicos.network.RetrofitCliente
-import retrofit2.Response
+import com.example.servicios_medicos.Data.dataExpedienteDoctoraJM
+import com.example.servicios_medicos.network.ApiDoctoraJM
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class clsExpedienteAlumnoModeloJM {
+    private val api = Retrofit.Builder()
+        .baseUrl("https://movil.uthhbola8.com/Servi_medicos/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+        .create(ApiDoctoraJM::class.java)
 
-    suspend fun obtenerExpedienteAlumno(token: String): Response<dataExpedienteAlumno> { // pide el expediente del alumno autenticado
-        return RetrofitCliente.apiServiceExpedienteJM.obtenerExpedienteAlumno("Bearer $token")
+    fun obtenerExpedienteAlumno(token: String, matricula: String): Call<dataExpedienteDoctoraJM> { // llama a la api expediente del alumno
+        return api.obtenerExpedienteAlumno("Bearer $token", matricula)
     }
 
-    suspend fun solicitarExpedienteCompleto(token: String, matricula: String): Response<dataRespuestaP3JM> { // envia la solicitud de expediente completo
-        return RetrofitCliente.apiServiceExpedienteJM.solicitarExpediente("Bearer $token", matricula)
+    fun armarIniciales(nombre: String): String { // arma las iniciales del alumno
+        val partes = nombre.trim().split(" ").filter { it.isNotEmpty() }
+        if (partes.isEmpty()) {
+            return "AL"
+        }
+        if (partes.size == 1) {
+            return partes[0].take(2).uppercase()
+        }
+        return (partes[0].take(1) + partes[1].take(1)).uppercase()
     }
 
-    fun formatearMatriculaActualizacion(matricula: String?, fechaActualizacion: String?): String { // arma la linea de matricula y ultima actualizacion
-        val mat = matricula?.trim().orEmpty()
-        val fecha = fechaActualizacion?.trim().orEmpty()
-        if (mat.isNotEmpty() && fecha.isNotEmpty()) {
-            return "Matrícula $mat · Actualizado el $fecha"
+    fun formatearMatriculaEdad(matricula: String, edad: String): String { // arma matricula y edad
+        if (edad.isNotEmpty()) {
+            return "Matrícula $matricula · $edad"
         }
-        if (mat.isNotEmpty()) {
-            return "Matrícula $mat"
-        }
-        if (fecha.isNotEmpty()) {
-            return "Actualizado el $fecha"
-        }
-        return "Expediente actualizado"
-    }
-
-    fun resolverTexto(valor: String?, respaldo: String): String { // regresa el dato si existe o un texto de respaldo
-        if (valor != null && valor.trim().isNotEmpty()) {
-            return valor.trim()
-        }
-        return respaldo
-    }
-
-    fun obtenerConsultasRecientesLimitadas(
-        consultas: List<Any>,
-        limite: Int = 2
-    ): List<Any> { // devuelve las consultas recientes mas recientes hasta el limite indicado
-        if (consultas.size <= limite) {
-            return consultas
-        }
-        return consultas.take(limite)
+        return "Matrícula $matricula"
     }
 }

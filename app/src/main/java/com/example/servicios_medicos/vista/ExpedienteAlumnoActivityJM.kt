@@ -5,51 +5,59 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.servicios_medicos.R
 import com.example.servicios_medicos.presentador.clsExpedienteAlumnoPresentadorJM
 import com.google.android.material.button.MaterialButton
 
 class ExpedienteAlumnoActivityJM : AppCompatActivity() {
     private lateinit var btnRegresar: ImageButton
-    private lateinit var txtTitulo: TextView
-    private lateinit var btnAjustes: ImageButton
-    private lateinit var txtNombreAlumno: TextView
-    private lateinit var txtMatriculaActualizacion: TextView
+    private lateinit var btnAjustesExpediente: ImageButton
+    private lateinit var txtIniciales: TextView
+    private lateinit var txtNombrePaciente: TextView
+    private lateinit var txtMatriculaEdad: TextView
+    private lateinit var txtCarreraGrupo: TextView
+    private lateinit var txtAlertaAlergia: TextView
     private lateinit var txtTipoSangre: TextView
-    private lateinit var txtAlergias: TextView
-    private lateinit var txtPadecimientos: TextView
-    private lateinit var txtCirugias: TextView
-    private lateinit var txtTratamiento: TextView
-    private lateinit var txtSeccionConsultas: TextView
-    private lateinit var btnVerHistorial: MaterialButton
-    private lateinit var rvConsultasRecientes: RecyclerView
-    private lateinit var btnSolicitarExpediente: MaterialButton
-    private lateinit var txtNota: TextView
+    private lateinit var txtEnfermedadesCronicas: TextView
+    private lateinit var txtAlergenosDetalle: TextView
+    private lateinit var txtCirugiasPrevias: TextView
+    private lateinit var txtTratamientoHabitual: TextView
+    private lateinit var txtConsulta1: TextView
+    private lateinit var txtConsulta2: TextView
+    private lateinit var btnVolverInicioDoctora: MaterialButton
     private lateinit var presentador: clsExpedienteAlumnoPresentadorJM
     private var token = ""
-    private var matricula = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) { // conecta los elementos de la pantalla y arranca el expediente del alumno
+    override fun onCreate(savedInstanceState: Bundle?) { // carga el diseño del expediente del alumno y arranca la pantalla
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_expediente_alumno_jm)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_expediente_alum_jm)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         btnRegresar = findViewById(R.id.btnRegresar)
-        txtTitulo = findViewById(R.id.txtTitulo)
-        btnAjustes = findViewById(R.id.btnAjustes)
-        txtNombreAlumno = findViewById(R.id.txtNombreAlumno)
-        txtMatriculaActualizacion = findViewById(R.id.txtMatriculaActualizacion)
+        btnAjustesExpediente = findViewById(R.id.btnAjustesExpediente)
+        txtIniciales = findViewById(R.id.txtIniciales)
+        txtNombrePaciente = findViewById(R.id.txtNombrePaciente)
+        txtMatriculaEdad = findViewById(R.id.txtMatriculaEdad)
+        txtCarreraGrupo = findViewById(R.id.txtCarreraGrupo)
+        txtAlertaAlergia = findViewById(R.id.txtAlertaAlergia)
         txtTipoSangre = findViewById(R.id.txtTipoSangre)
-        txtAlergias = findViewById(R.id.txtAlergias)
-        txtPadecimientos = findViewById(R.id.txtPadecimientos)
-        txtCirugias = findViewById(R.id.txtCirugias)
-        txtTratamiento = findViewById(R.id.txtTratamiento)
-        txtSeccionConsultas = findViewById(R.id.txtSeccionConsultas)
-        btnVerHistorial = findViewById(R.id.btnVerHistorial)
-        rvConsultasRecientes = findViewById(R.id.rvConsultasRecientes)
-        btnSolicitarExpediente = findViewById(R.id.btnSolicitarExpediente)
-        txtNota = findViewById(R.id.txtNota)
+        txtEnfermedadesCronicas = findViewById(R.id.txtEnfermedadesCronicas)
+        txtAlergenosDetalle = findViewById(R.id.txtAlergenosDetalle)
+        txtCirugiasPrevias = findViewById(R.id.txtCirugiasPrevias)
+        txtTratamientoHabitual = findViewById(R.id.txtTratamientoHabitual)
+        txtConsulta1 = findViewById(R.id.txtConsulta1)
+        txtConsulta2 = findViewById(R.id.txtConsulta2)
+        btnVolverInicioDoctora = findViewById(R.id.btnVolverInicioDoctora)
 
         configurarListeners()
 
@@ -58,60 +66,50 @@ class ExpedienteAlumnoActivityJM : AppCompatActivity() {
         if (tokenRecibido != null) {
             token = tokenRecibido
         }
-        val matriculaRecibida = intent.getStringExtra("matricula")
-        if (matriculaRecibida != null) {
-            matricula = matriculaRecibida
-        }
-        presentador.iniciarPantalla(token, matricula)
+        presentador.iniciarPantalla(token, intent.getStringExtra("matricula"))
     }
 
-    private fun configurarListeners() { // define que hace cada boton de la pantalla
+    private fun configurarListeners() { // conecta regreso y configuracion (sin abrir consulta ni receta)
         btnRegresar.setOnClickListener {
             finish()
         }
-        btnAjustes.setOnClickListener {
-            val destino = Intent(this, ConfiguracionActivityC::class.java)
+        btnVolverInicioDoctora.setOnClickListener {
+            finish()
+        }
+        btnAjustesExpediente.setOnClickListener {
+            val destino = Intent(this, ConfiguracionDoctoraActivityJM::class.java)
             destino.putExtra("token", token)
             startActivity(destino)
-        }
-        btnVerHistorial.setOnClickListener {
-            val destino = Intent(this, ExpedienteAlumnoActivityJM::class.java)
-            destino.putExtra("token", token)
-            destino.putExtra("matricula", matricula)
-            startActivity(destino)
-        }
-        btnSolicitarExpediente.setOnClickListener {
-            Toast.makeText(this, "Solicitud de expediente enviada.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun onResume() { // carga los datos del expediente cada vez que se ve la pantalla
+    override fun onResume() { // carga los datos cada vez que se ve la pantalla
         super.onResume()
-        presentador.cargarExpedienteAlumno()
+        presentador.cargarExpediente()
     }
 
-    fun mostrarDatosAlumno(nombre: String, matriculaActualizacion: String) { // muestra nombre del alumno, matricula y fecha de actualizacion
-        txtNombreAlumno.text = nombre
-        txtMatriculaActualizacion.text = matriculaActualizacion
+    fun mostrarPaciente(iniciales: String, nombre: String, matriculaEdad: String, carreraGrupo: String) { // muestra datos generales del alumno
+        txtIniciales.text = iniciales
+        txtNombrePaciente.text = nombre
+        txtMatriculaEdad.text = matriculaEdad
+        txtCarreraGrupo.text = carreraGrupo
     }
 
-    fun mostrarDatosClinicosClave(tipoSangre: String, alergias: String) { // muestra tipo de sangre y alergias en las tarjetas superiores
+    fun mostrarClinicos(alergia: String, tipoSangre: String, enfermedades: String) { // muestra alergia, sangre y enfermedades cronicas
+        txtAlertaAlergia.text = alergia
         txtTipoSangre.text = tipoSangre
-        txtAlergias.text = alergias
+        txtEnfermedadesCronicas.text = enfermedades
     }
 
-    fun mostrarAntecedentes(padecimientos: String, cirugias: String, tratamiento: String) { // muestra padecimientos, cirugias y tratamiento habitual
-        txtPadecimientos.text = padecimientos
-        txtCirugias.text = cirugias
-        txtTratamiento.text = tratamiento
+    fun mostrarAntecedentes(alergenos: String, cirugias: String, tratamiento: String) { // muestra antecedentes del alumno
+        txtAlergenosDetalle.text = alergenos
+        txtCirugiasPrevias.text = cirugias
+        txtTratamientoHabitual.text = tratamiento
     }
 
-    fun mostrarConsultasRecientes(consultas: List<Any>) { // guarda las consultas recientes para cuando conectes el adaptador
-        rvConsultasRecientes.tag = consultas
-    }
-
-    fun mostrarMensajeSolicitud(mensaje: String) { // confirma cuando se envio la solicitud de expediente
-        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+    fun mostrarConsultas(consulta1: String, consulta2: String) { // muestra las consultas recientes
+        txtConsulta1.text = consulta1
+        txtConsulta2.text = consulta2
     }
 
     fun mostrarError(mensaje: String) { // muestra un mensaje cuando algo sale mal

@@ -1,83 +1,93 @@
 package com.example.servicios_medicos.presentador
 
+import com.example.servicios_medicos.Data.dataExpedienteDoctoraJM
 import com.example.servicios_medicos.modelo.clsExpedienteAlumnoModeloJM
 import com.example.servicios_medicos.vista.ExpedienteAlumnoActivityJM
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class clsExpedienteAlumnoPresentadorJM(private val vista: ExpedienteAlumnoActivityJM) {
     private val modelo = clsExpedienteAlumnoModeloJM()
     private var token = ""
     private var matricula = ""
+    private var consulta: Call<dataExpedienteDoctoraJM>? = null
 
-    fun iniciarPantalla(tokenSesion: String?, matriculaAlumno: String? = "") { // guarda el token y la matricula de sesion
-        if (!tokenSesion.isNullOrEmpty()) {
+    fun iniciarPantalla(tokenSesion: String?, matriculaAlumno: String?) { // guarda token y matricula del alumno
+        if (tokenSesion != null && tokenSesion.isNotEmpty()) {
             token = tokenSesion
         } else {
             vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
         }
-        if (!matriculaAlumno.isNullOrEmpty()) {
+        if (matriculaAlumno != null && matriculaAlumno.isNotEmpty()) {
             matricula = matriculaAlumno
         }
     }
 
-    fun cargarExpedienteAlumno() { // pide los datos del expediente del alumno sin congelar la pantalla
-        if (token.isEmpty()) {
+    fun cargarExpediente() { // pide los datos del expediente sin congelar la pantalla
+        if (token.isEmpty() || matricula.isEmpty()) {
             return
         }
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val respuesta = modelo.obtenerExpedienteAlumno(token)
-                val datos = respuesta.body()
-                if (respuesta.isSuccessful && datos != null) {
-                    vista.mostrarDatosAlumno(
-                        nombre = "Expediente cargado",
-                        matriculaActualizacion = if (matricula.isNotEmpty()) "Matrícula $matricula" else "Expediente actualizado"
-                    )
-                    vista.mostrarDatosClinicosClave(
-                        tipoSangre = "--",
-                        alergias = "Sin registro"
-                    )
-                    vista.mostrarAntecedentes(
-                        padecimientos = "Sin registro",
-                        cirugias = "Sin antecedentes",
-                        tratamiento = "Sin registro activo"
-                    )
-                    vista.mostrarConsultasRecientes(emptyList())
-                } else if (respuesta.code() == 401) {
+        consulta?.cancel()
+        val llamada = modelo.obtenerExpedienteAlumno(token, matricula)
+        consulta = llamada
+        llamada.enqueue(object : Callback<dataExpedienteDoctoraJM> {
+            override fun onResponse(
+                call: Call<dataExpedienteDoctoraJM>,
+                response: Response<dataExpedienteDoctoraJM>
+            ) {
+                if (call.isCanceled) return
+                val datos = response.body()
+                if (response.isSuccessful && datos != null && datos.status) {
+                    mostrarDatos(datos)
+                } else if (response.code() == 401) {
                     vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
                 } else {
-                    vista.mostrarError("No pudimos cargar tu expediente. Intenta de nuevo.")
+                    vista.mostrarError(
+                        if (datos != null && datos.message.isNotBlank()) datos.message
+                        else "No pudimos cargar el expediente. Intenta de nuevo."
+                    )
                 }
-            } catch (e: Exception) {
+            }
+
+            override fun onFailure(call: Call<dataExpedienteDoctoraJM>, t: Throwable) {
+                if (call.isCanceled) return
                 vista.mostrarError("Revisa tu conexión a internet e intenta de nuevo.")
             }
-        }
+        })
     }
 
-    fun solicitarExpedienteCompleto() { // envia la solicitud para obtener el expediente completo
-        if (token.isEmpty()) {
-            vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
+    fun cancelar() {
+        consulta?.cancel()
+    }
+
+    private fun mostrarDatos(datos: dataExpedienteDoctoraJM) { // manda a la vista los datos del alumno y antecedentes
+        val exp = datos.data
+        if (exp == null) {
             return
         }
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val respuesta = modelo.solicitarExpedienteCompleto(token, matricula)
-                if (respuesta.isSuccessful) {
-                    vista.mostrarMensajeSolicitud("Solicitud de expediente completo enviada.")
-                } else if (respuesta.code() == 401) {
-                    vista.mostrarError("Tu sesión terminó. Vuelve a iniciar sesión.")
-                } else {
-                    vista.mostrarError("No se pudo enviar la solicitud. Intenta de nuevo.")
-                }
-            } catch (e: Exception) {
-                vista.mostrarError("Revisa tu conexión a internet e intenta de nuevo.")
-            }
-        }
-    }
 
-    fun obtenerMatriculaActual(): String { // regresa la matricula cargada del alumno
-        return matricula
+        val iniciales = if (exp.iniciales.isNotEmpty()) {
+            exp.iniciales
+        } else {
+            modelo.armarIniciales(exp.nombrePaciente)
+        }
+        vista.mostrarPaciente(
+            iniciales,
+            exp.nombrePaciente,
+            modelo.formatearMatriculaEdad(exp.matricula, exp.edad),
+            exp.carreraGrupo
+        )
+        vista.mostrarClinicos(
+            "Alergia: ${exp.alergia}",
+            "Tipo de sangre: ${exp.tipoSangre}",
+            "Enfermedades crónicas: ${exp.enfermedadesCronicas}"
+        )
+        vista.mostrarAntecedentes(
+            "Alérgenos: ${exp.alergenosDetalle}",
+            "Cirugías previas: ${exp.cirugiasPrevias}",
+            "Tratamiento habitual: ${exp.tratamientoHabitual}"
+        )
+        vista.mostrarConsultas(exp.consulta1, exp.consulta2)
     }
 }
