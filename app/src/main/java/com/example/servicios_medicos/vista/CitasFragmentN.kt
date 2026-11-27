@@ -18,6 +18,7 @@ import com.example.servicios_medicos.modelo.TarjetaCitaN
 import com.example.servicios_medicos.presentador.clsCitasPresentadorN
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
+import androidx.activity.OnBackPressedCallback
 
 class CitasFragmentN : Fragment() {
     private lateinit var btnRegresar: ImageButton
@@ -77,6 +78,8 @@ class CitasFragmentN : Fragment() {
         presentador = clsCitasPresentadorN(this)
 
         configurarListeners()
+        configurarBotonAtras()
+
 
         val token = requireActivity().intent.getStringExtra("token")
         presentador.iniciarPantalla(token)
@@ -118,6 +121,13 @@ class CitasFragmentN : Fragment() {
         btnAjustes.setOnClickListener {
             presentador.verConfiguracion()
         }
+    }
+    private fun configurarBotonAtras() { // el boton atras del telefono regresa a inicio igual que la flecha
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() { // se ejecuta al picar atras o hacer el gesto
+                btnRegresar.performClick()
+            }
+        })
     }
 
     fun mostrarSemana(mes: String, dias: List<DiaSemanaN>) { // muestra el mes y el numero de los 7 dias de la semana

@@ -29,11 +29,24 @@ class clsInicioAlumnoModeloN {
     fun contarCitasProximas(citas: List<CitaDetalleN>): Int { // cuenta las citas que no han pasado y no estan canceladas
         var total = 0
         for (cita in citas) {
-            if (cita.estado != "Cancelada" && yaPaso(cita.fecha ?: "", cita.hora ?: "") == false) {
+            if (cita.estado != "Cancelada" && cita.estado != "Completada" && yaPaso(cita.fecha ?: "", cita.hora ?: "") == false) {
                 total = total + 1
             }
         }
         return total
+    }
+    fun buscarProximaCita(citas: List<CitaDetalleN>): CitaDetalleN? { // busca la cita pendiente mas cercana que todavia no pasa
+        var proxima: CitaDetalleN? = null
+        for (cita in citas) {
+            if (cita.estado != "Cancelada" && cita.estado != "Completada" && yaPaso(cita.fecha ?: "", cita.hora ?: "") == false) {
+                if (proxima == null) {
+                    proxima = cita
+                } else if ((cita.fecha ?: "") + (cita.hora ?: "") < (proxima.fecha ?: "") + (proxima.hora ?: "")) {
+                    proxima = cita
+                }
+            }
+        }
+        return proxima
     }
 
     fun calcularPendientes(citas: List<CitaDetalleN>): String { // revisa si el alumno tiene citas vencidas o una cita hoy

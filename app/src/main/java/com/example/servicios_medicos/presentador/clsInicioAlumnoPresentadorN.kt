@@ -39,16 +39,12 @@ class clsInicioAlumnoPresentadorN(private val vista: InicioAlumnoFragmentN) {
                         vista.mostrarAlumno("¡Hola, " + alumno.nombreCompleto + "!", "Matrícula: " + alumno.matricula)
                     }
 
-                    val cita = contenido.proximaCita
+                    val cita = modelo.buscarProximaCita(citas)
                     if (cita != null) {
                         val fechaServidor = cita.fecha ?: ""
                         var hora = cita.hora ?: ""
                         if (hora.length > 5) {
                             hora = hora.substring(0, 5)
-                        }
-                        var estado = cita.estado
-                        if (estado == "Pendiente" && modelo.yaPaso(fechaServidor, hora)) {
-                            estado = "Vencida"
                         }
                         var fecha = fechaServidor
                         if (fechaServidor.length == 10) {
@@ -56,7 +52,7 @@ class clsInicioAlumnoPresentadorN(private val vista: InicioAlumnoFragmentN) {
                             fecha = SimpleDateFormat("EEEE, d 'de' MMMM", Locale("es", "MX")).format(fechaCita)
                             fecha = fecha.substring(0, 1).uppercase() + fecha.substring(1)
                         }
-                        vista.mostrarProximaCita(cita.motivo, estado, "Fecha: " + fecha, "Hora: " + hora + " a " + modelo.sumarMediaHora(hora))
+                        vista.mostrarProximaCita(cita.motivo ?: "Cita médica", "Pendiente", "Fecha: " + fecha, "Hora: " + hora + " a " + modelo.sumarMediaHora(hora))
                     } else {
                         vista.mostrarProximaCita("Sin citas programadas", "Sin cita", "Sin fecha", "Sin horario asignado")
                     }

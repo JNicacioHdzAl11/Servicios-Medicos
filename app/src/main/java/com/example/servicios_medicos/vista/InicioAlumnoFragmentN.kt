@@ -14,6 +14,7 @@ import com.example.servicios_medicos.presentador.clsInicioAlumnoPresentadorN
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import  androidx.activity.OnBackPressedCallback
 
 class InicioAlumnoFragmentN : Fragment() {
     private lateinit var btnRegresar: ImageButton
@@ -70,6 +71,7 @@ class InicioAlumnoFragmentN : Fragment() {
         txtCampania2Detalle = view.findViewById(R.id.txtAvisoBienestar)
 
         configurarListeners()
+        configurarBotonAtras()
 
         presentador = clsInicioAlumnoPresentadorN(this)
         presentador.iniciarPantalla(requireActivity().intent.getStringExtra("token"))
@@ -90,6 +92,13 @@ class InicioAlumnoFragmentN : Fragment() {
         btnAjustes.setOnClickListener {
             presentador.verConfiguracion()
         }
+
+    }
+    private fun configurarBotonAtras() { // en inicio el boton atras del telefono no hace nada, solo se sale con la flecha
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() { // se ejecuta al picar atras o hacer el gesto
+            }
+        })
     }
     override fun onResume() { // carga los datos cada vez que se ve la pantalla
         super.onResume()
