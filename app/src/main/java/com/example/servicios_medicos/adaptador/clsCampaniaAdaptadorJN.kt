@@ -1,4 +1,4 @@
-package com.example.servicios_medicos.adapters
+package com.example.servicios_medicos.adaptador
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.modelo.dataCampaniaJN
+import com.example.servicios_medicos.Data.dataCampaniaJN
 import com.google.android.material.button.MaterialButton
 
-class campaniaAdapter(
+class clsCampaniaAdaptadorJN(
     private var listaCampanias: List<dataCampaniaJN> = emptyList(),
     private val listener: OnCampaniaClickListener
-) : RecyclerView.Adapter<campaniaAdapter.CampaniaViewHolder>() {
+) : RecyclerView.Adapter<clsCampaniaAdaptadorJN.CampaniaViewHolder>() {
 
     interface OnCampaniaClickListener {
         fun onVerInformacionClick(campania: dataCampaniaJN)

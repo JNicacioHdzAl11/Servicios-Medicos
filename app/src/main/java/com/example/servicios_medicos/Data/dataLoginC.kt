@@ -1,5 +1,4 @@
-
-package com.example.servicios_medicos.modelo
+package com.example.servicios_medicos.Data
 
 import com.google.gson.annotations.SerializedName
 
