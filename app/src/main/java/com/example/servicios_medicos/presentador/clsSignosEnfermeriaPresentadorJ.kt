@@ -1,8 +1,8 @@
 package com.example.servicios_medicos.presentador
 
 import com.example.servicios_medicos.modelo.clsModuloEnfermeriaModeloJ
-import com.example.servicios_medicos.modelo.dataSignosEnfermeriaJ
-import com.example.servicios_medicos.modelo.dataRespuestaEnfermeriaJ
+import com.example.servicios_medicos.Data.dataSignosEnfermeriaJ
+import com.example.servicios_medicos.Data.dataRespuestaEnfermeriaJ
 import com.example.servicios_medicos.vista.TomaSignosActivityJ
 import com.google.gson.JsonElement
 import org.json.JSONObject

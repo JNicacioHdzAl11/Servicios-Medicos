@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardMedicamento"
+    style="@style/Widget.Material3.CardView.Outlined"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="@color/diagnostico_superficie"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/diagnostico_borde"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Nombre · Concentración -->
+        <TextView
+            android:id="@+id/txtNombreMedicamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/diagnostico_texto_principal"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/txtSeparadorNombre"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Loratadina" />
+
+        <TextView
+            android:id="@+id/txtSeparadorNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/diagnostico_separador"
+            android:textColor="@color/diagnostico_texto_principal"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/txtNombreMedicamento"
+            app:layout_constraintEnd_toStartOf="@id/txtConcentracion"
+            app:layout_constraintStart_toEndOf="@id/txtNombreMedicamento" />
+
+        <TextView
+            android:id="@+id/txtConcentracion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/diagnostico_texto_principal"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/txtNombreMedicamento"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtSeparadorNombre"
+            tools:text="10 mg" />
+
+        <!-- Cantidad · Vía de administración -->
+        <TextView
+            android:id="@+id/txtCantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textColor="@color/diagnostico_texto_principal"
+            android:textSize="14sp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/txtSeparadorVia"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtNombreMedicamento"
+            tools:text="1 tableta" />
+
+        <TextView
+            android:id="@+id/txtSeparadorVia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/diagnostico_separador"
+            android:textColor="@color/diagnostico_texto_principal"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/txtCantidad"
+            app:layout_constraintEnd_toStartOf="@id/txtViaAdministracion"
+            app:layout_constraintStart_toEndOf="@id/txtCantidad" />
+
+        <TextView
+            android:id="@+id/txtViaAdministracion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/diagnostico_texto_principal"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/txtCantidad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtSeparadorVia"
+            tools:text="Vía oral" />
+
+        <!-- Frecuencia · Horario -->
+        <TextView
+            android:id="@+id/txtFrecuencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text=""
+            android:textColor="@color/diagnostico_texto_secundario"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@id/txtSeparadorHorario"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtCantidad"
+            tools:text="Cada 24 h" />
+
+        <TextView
+            android:id="@+id/txtSeparadorHorario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/diagnostico_separador"
+            android:textColor="@color/diagnostico_texto_secundario"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/txtFrecuencia"
+            app:layout_constraintEnd_toStartOf="@id/txtHorario"
+            app:layout_constraintStart_toEndOf="@id/txtFrecuencia" />
+
+        <TextView
+            android:id="@+id/txtHorario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/diagnostico_texto_secundario"
+            android:textSize="12sp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBaseline_toBaselineOf="@id/txtFrecuencia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtSeparadorHorario"
+            tools:text="08:00" />
+
+        <!-- Duración -->
+        <TextView
+            android:id="@+id/txtLabelDuracion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/diagnostico_label_duracion"
+            android:textColor="@color/diagnostico_texto_principal"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtHorario" />
+
+        <TextView
+            android:id="@+id/txtDuracion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text=""
+            android:textColor="@color/diagnostico_texto_principal"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/txtLabelDuracion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtLabelDuracion"
+            tools:text="5 días" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

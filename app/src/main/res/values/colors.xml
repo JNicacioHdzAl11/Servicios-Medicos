@@ -30,4 +30,14 @@
     <color name="color_metrica_azul">#FF1D74F5</color>
     <color name="color_metrica_verde_fondo">#FFECFDF5</color>
     <color name="color_metrica_verde">#FF059669</color>
+
+    <!-- Pantalla Información del diagnóstico (solo modo claro) -->
+    <color name="diagnostico_fondo">#FFF8FAFC</color>
+    <color name="diagnostico_superficie">#FFFFFFFF</color>
+    <color name="diagnostico_primario">#FF1D74F5</color>
+    <color name="diagnostico_fondo_azul_claro">#FFEAF2FE</color>
+    <color name="diagnostico_borde">#FFD9E6FB</color>
+    <color name="diagnostico_divisor">#FFE2E8F0</color>
+    <color name="diagnostico_texto_principal">#FF0F1E36</color>
+    <color name="diagnostico_texto_secundario">#FF64748B</color>
 </resources>

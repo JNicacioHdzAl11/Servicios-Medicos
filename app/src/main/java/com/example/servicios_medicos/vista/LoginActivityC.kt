@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.WindowInsetsCompat
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.modelo.dataUsuarioC
+import com.example.servicios_medicos.Data.dataUsuarioC
 import com.example.servicios_medicos.presentador.clsLoginPresentadorC
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText

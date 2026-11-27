@@ -67,7 +67,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@id/vDivisorNavegacion"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vDivisorEncabezado">
@@ -437,32 +437,5 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Navegación inferior -->
-    <View
-        android:id="@+id/vDivisorNavegacion"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/color_borde"
-        app:layout_constraintBottom_toTopOf="@id/bnvNavegacion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bnvNavegacion"
-        style="@style/Widget.Material3.BottomNavigationView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/color_fondo"
-        app:elevation="0dp"
-        app:itemActiveIndicatorStyle="@style/SaludCampus.IndicadorNavegacion"
-        app:itemIconTint="@color/selector_nav_item"
-        app:itemTextAppearanceActive="@style/SaludCampus.TextoNavegacion.Activo"
-        app:itemTextAppearanceInactive="@style/SaludCampus.TextoNavegacion"
-        app:itemTextColor="@color/selector_nav_item"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_navegacion_alumno_campanias" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,7 @@
 package com.example.servicios_medicos.presentador
 
 import com.example.servicios_medicos.modelo.clsConfiguracionModeloC
-import com.example.servicios_medicos.modelo.dataOperacionRespuestaC
+import com.example.servicios_medicos.Data.dataOperacionRespuestaC
 import com.example.servicios_medicos.vista.AjustesContrasenaFragmentC
 import retrofit2.Call
 import retrofit2.Callback

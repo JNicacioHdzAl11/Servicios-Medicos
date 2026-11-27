@@ -1,9 +1,9 @@
 package com.example.servicios_medicos.presentador
 
 import com.example.servicios_medicos.modelo.clsModuloEnfermeriaModeloJ
-import com.example.servicios_medicos.modelo.dataRespuestaEnfermeriaJ
-import com.example.servicios_medicos.modelo.dataAlumnoEnfermeriaJ
-import com.example.servicios_medicos.modelo.dataCitaEnfermeriaJ
+import com.example.servicios_medicos.Data.dataRespuestaEnfermeriaJ
+import com.example.servicios_medicos.Data.dataAlumnoEnfermeriaJ
+import com.example.servicios_medicos.Data.dataCitaEnfermeriaJ
 import com.example.servicios_medicos.vista.BuscarAlumnoActivityJ
 import org.json.JSONObject
 import retrofit2.Call

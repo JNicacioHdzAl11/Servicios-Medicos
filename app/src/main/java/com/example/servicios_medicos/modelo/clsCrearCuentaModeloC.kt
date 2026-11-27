@@ -1,5 +1,7 @@
 package com.example.servicios_medicos.modelo
 
+import com.example.servicios_medicos.Data.dataCrearCuentaC
+import com.example.servicios_medicos.Data.dataCrearCuentaRespuestaC
 import com.example.servicios_medicos.network.RetrofitCliente
 import retrofit2.Response
 

@@ -23,8 +23,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.modelo.dataAlumnoEnfermeriaJ
-import com.example.servicios_medicos.modelo.dataCitaEnfermeriaJ
+import com.example.servicios_medicos.Data.dataAlumnoEnfermeriaJ
+import com.example.servicios_medicos.Data.dataCitaEnfermeriaJ
 import com.example.servicios_medicos.presentador.clsAlumnosEnfermeriaPresentadorJ
 import com.example.servicios_medicos.adaptador.clsAlumnosEnfermeriaAdaptadorJ
 import java.text.Normalizer

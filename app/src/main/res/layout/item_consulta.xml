@@ -61,15 +61,14 @@
             app:layout_constraintTop_toBottomOf="@id/txtServicio"
             tools:text="Dra. Sofía Reyes · Consulta concluida" />
 
+        <!-- Enlace a la pantalla Información del diagnóstico de esta consulta -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDescargarReceta"
+            android:id="@+id/btnDetalleDiagnostico"
             style="@style/SaludCampus.BotonEnlace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/item_descargar_receta"
-            app:icon="@drawable/ic_descargar"
-            app:iconGravity="end"
+            android:text="@string/item_detalle_diagnostico"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtMedico" />
 

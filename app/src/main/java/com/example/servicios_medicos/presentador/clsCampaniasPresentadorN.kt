@@ -1,7 +1,7 @@
 package com.example.servicios_medicos.presentador
 
 import com.example.servicios_medicos.modelo.clsCampaniasModeloN
-import com.example.servicios_medicos.modelo.dataCampaniaJN
+import com.example.servicios_medicos.Data.dataCampaniaJN
 import com.example.servicios_medicos.vista.campanias_jn
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

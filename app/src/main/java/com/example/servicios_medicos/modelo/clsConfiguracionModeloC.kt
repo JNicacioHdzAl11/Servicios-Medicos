@@ -1,5 +1,10 @@
 package com.example.servicios_medicos.modelo
 
+import com.example.servicios_medicos.Data.dataActualizarContrasenaC
+import com.example.servicios_medicos.Data.dataContactoEmergenciaC
+import com.example.servicios_medicos.Data.dataOperacionRespuestaC
+import com.example.servicios_medicos.Data.dataPerfilRespuestaC
+import com.example.servicios_medicos.Data.dataPreferenciasConfiguracionC
 import com.example.servicios_medicos.network.ApiConfiguracionC
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

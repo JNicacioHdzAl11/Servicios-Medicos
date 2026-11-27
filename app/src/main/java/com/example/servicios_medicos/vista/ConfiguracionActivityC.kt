@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.modelo.dataPerfilConfiguracionC
+import com.example.servicios_medicos.Data.dataPerfilConfiguracionC
 import com.example.servicios_medicos.presentador.clsConfiguracionPresentadorC
 import com.google.android.material.materialswitch.MaterialSwitch
 

@@ -1,4 +1,4 @@
-package com.example.servicios_medicos.adapters
+package com.example.servicios_medicos.adaptador
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
 
-class requisitoAdapter(
+class clsRequisitosAdaptadorJN(
     private var listaRequisitos: List<String> = emptyList()
-) : RecyclerView.Adapter<requisitoAdapter.RequisitoViewHolder>() {
+) : RecyclerView.Adapter<clsRequisitosAdaptadorJN.RequisitoViewHolder>() {
 
     fun actualizarLista(nuevaLista: List<String>) {
         this.listaRequisitos = nuevaLista

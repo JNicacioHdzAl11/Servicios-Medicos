@@ -12,15 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.adapters.consultaAdapter
-import com.example.servicios_medicos.modelo.dataConsultaJ
-import com.example.servicios_medicos.modelo.dataExpedienteJN
-import com.example.servicios_medicos.modelo.dataSolicitudExpedienteJ
+import com.example.servicios_medicos.adaptador.clsConsultaAdaptadorJN
+import com.example.servicios_medicos.Data.dataExpedienteJN
+import com.example.servicios_medicos.Data.dataSolicitudExpedienteJ
 import com.example.servicios_medicos.presentador.clsExpedienteAlumPresentadorJM
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.servicios_medicos.Data.dataConsultaJN
 
-class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
+class expedienteAlumnoJ : Fragment(), clsConsultaAdaptadorJN.OnConsultaClickListener {
 
     private lateinit var btnRegresar: ImageButton
     private lateinit var btnAjustes: ImageButton
@@ -36,9 +35,8 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
     private lateinit var txtCirugias: TextView
     private lateinit var txtTratamiento: TextView
 
-    private lateinit var btnVerHistorial: MaterialButton
     private lateinit var rvConsultasRecientes: RecyclerView
-    private lateinit var adapterConsultas: consultaAdapter
+    private lateinit var adapterConsultas: clsConsultaAdaptadorJN
 
     private lateinit var presentador: clsExpedienteAlumPresentadorJM
 
@@ -64,14 +62,6 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
         } else {
             mostrarError("No se recibió token de sesión")
         }
-        btnAjustes.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                val destino = Intent(requireContext(), ConfiguracionActivityC::class.java)
-                destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
-                destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
-                startActivity(destino)
-            }
-        })
     }
 
     private fun enlazarVistas(view: View) {
@@ -89,11 +79,10 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
         txtCirugias = view.findViewById(R.id.txtCirugias)
         txtTratamiento = view.findViewById(R.id.txtTratamiento)
 
-        btnVerHistorial = view.findViewById(R.id.btnVerHistorial)
         rvConsultasRecientes = view.findViewById(R.id.rvConsultasRecientes)
         rvConsultasRecientes.layoutManager = LinearLayoutManager(requireContext())
 
-        adapterConsultas = consultaAdapter(emptyList(), this)
+        adapterConsultas = clsConsultaAdaptadorJN(emptyList(), this)
         rvConsultasRecientes.adapter = adapterConsultas
     }
 
@@ -109,14 +98,10 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
             destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
             startActivity(destino)
         }
-
-        btnVerHistorial.setOnClickListener {
-            Toast.makeText(requireContext(), "Abrir historial completo de consultas", Toast.LENGTH_SHORT).show()
-        }
     }
 
     fun mostrarCargando(cargando: Boolean) {
-        btnVerHistorial.isEnabled = !cargando
+        // Puedes mostrar u ocultar un ProgressBar aquí si lo agregas al XML
     }
 
     fun mostrarDatosExpediente(expediente: dataExpedienteJN, ultimaSolicitud: dataSolicitudExpedienteJ?) {
@@ -162,11 +147,11 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
         }
     }
 
-    fun mostrarConsultasRecientes(consultas: List<dataConsultaJ>) {
+    fun mostrarConsultasRecientes(consultas: List<dataConsultaJN>) {
         adapterConsultas.actualizarLista(consultas)
     }
 
-    override fun onDescargarRecetaClick(consulta: dataConsultaJ) {
+    override fun onDescargarRecetaClick(consulta: dataConsultaJN) {
         Toast.makeText(
             requireContext(),
             "Descargando receta #${consulta.idReceta}...",
@@ -174,12 +159,13 @@ class expedienteAlumnoJ : Fragment(), consultaAdapter.OnConsultaClickListener {
         ).show()
     }
 
-    override fun onConsultaItemClick(consulta: dataConsultaJ) {
-        Toast.makeText(
-            requireContext(),
-            "Diagnóstico: ${consulta.diagnostico ?: "Sin diagnóstico registrado"}",
-            Toast.LENGTH_LONG
-        ).show()
+    // AQUÍ SE ENLAZA CON LA PANTALLA DETALLE DIAGNÓSTICO
+    override fun onConsultaItemClick(consulta: dataConsultaJN) {
+        val intent = Intent(requireContext(), DetalleDiagnosticoJN::class.java).apply {
+            putExtra("token", requireActivity().intent.getStringExtra("token"))
+            putExtra("id_consulta", consulta.idConsulta)
+        }
+        startActivity(intent)
     }
 
     private fun formatearFechaCorta(fechaRaw: String): String {

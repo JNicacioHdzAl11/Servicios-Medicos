@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.modelo.dataAlumnoEnfermeriaJ
+import com.example.servicios_medicos.Data.dataAlumnoEnfermeriaJ
 import com.example.servicios_medicos.vista.BuscarAlumnoActivityJ
 
 class clsAlumnosEnfermeriaAdaptadorJ(private val vista: BuscarAlumnoActivityJ) : RecyclerView.Adapter<clsAlumnosEnfermeriaAdaptadorJ.Fila>() {

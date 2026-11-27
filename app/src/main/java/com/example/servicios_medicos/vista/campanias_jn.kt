@@ -12,14 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.adapters.campaniaAdapter
-import com.example.servicios_medicos.modelo.dataCampaniaJN
+import com.example.servicios_medicos.adaptador.clsCampaniaAdaptadorJN
+import com.example.servicios_medicos.Data.dataCampaniaJN
 import com.example.servicios_medicos.presentador.clsCampaniasPresentadorN
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class campanias_jn : Fragment(), campaniaAdapter.OnCampaniaClickListener {
+class campanias_jn : Fragment(), clsCampaniaAdaptadorJN.OnCampaniaClickListener {
 
     private lateinit var btnRegresar: ImageButton
 
@@ -32,7 +32,7 @@ class campanias_jn : Fragment(), campaniaAdapter.OnCampaniaClickListener {
     private lateinit var btnVerInformacionDestacada: MaterialButton
 
     private lateinit var rvCampanias: RecyclerView
-    private lateinit var adapter: campaniaAdapter
+    private lateinit var adapter: clsCampaniaAdaptadorJN
 
     private lateinit var presentador: clsCampaniasPresentadorN
 
@@ -60,7 +60,7 @@ class campanias_jn : Fragment(), campaniaAdapter.OnCampaniaClickListener {
         rvCampanias = view.findViewById(R.id.rvCampanias)
         rvCampanias.layoutManager = LinearLayoutManager(requireContext())
 
-        adapter = campaniaAdapter(emptyList(), this)
+        adapter = clsCampaniaAdaptadorJN(emptyList(), this)
         rvCampanias.adapter = adapter
 
         presentador = clsCampaniasPresentadorN(this)

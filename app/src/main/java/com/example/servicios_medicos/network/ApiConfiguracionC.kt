@@ -1,10 +1,10 @@
 package com.example.servicios_medicos.network
 
-import com.example.servicios_medicos.modelo.dataPerfilRespuestaC
-import com.example.servicios_medicos.modelo.dataOperacionRespuestaC
-import com.example.servicios_medicos.modelo.dataActualizarContrasenaC
-import com.example.servicios_medicos.modelo.dataContactoEmergenciaC
-import com.example.servicios_medicos.modelo.dataPreferenciasConfiguracionC
+import com.example.servicios_medicos.Data.dataPerfilRespuestaC
+import com.example.servicios_medicos.Data.dataOperacionRespuestaC
+import com.example.servicios_medicos.Data.dataActualizarContrasenaC
+import com.example.servicios_medicos.Data.dataContactoEmergenciaC
+import com.example.servicios_medicos.Data.dataPreferenciasConfiguracionC
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

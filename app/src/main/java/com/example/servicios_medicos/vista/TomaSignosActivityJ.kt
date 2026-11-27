@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.button.MaterialButton
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.modelo.dataSignosEnfermeriaJ
+import com.example.servicios_medicos.Data.dataSignosEnfermeriaJ
 import com.example.servicios_medicos.presentador.clsSignosEnfermeriaPresentadorJ
 
 class TomaSignosActivityJ : AppCompatActivity() {

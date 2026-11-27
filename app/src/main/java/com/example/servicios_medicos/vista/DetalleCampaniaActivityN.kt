@@ -3,7 +3,6 @@ package com.example.servicios_medicos.vista
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -16,14 +15,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.adapters.requisitoAdapter
-import com.example.servicios_medicos.modelo.dataDetalleCampaniaJN
+import com.example.servicios_medicos.adaptador.clsRequisitosAdaptadorJN
+import com.example.servicios_medicos.Data.dataDetalleCampaniaJN
 import com.example.servicios_medicos.presentador.clsDetalleCampaniaPresentadorN
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.google.android.material.navigation.NavigationBarView
 
 class DetalleCampaniaActivityN : AppCompatActivity() {
 
@@ -40,12 +37,11 @@ class DetalleCampaniaActivityN : AppCompatActivity() {
 
     private lateinit var txtDescripcion: TextView
     private lateinit var rvRequisitos: RecyclerView
-    private lateinit var adapterRequisitos: requisitoAdapter
+    private lateinit var adapterRequisitos: clsRequisitosAdaptadorJN
 
     private lateinit var txtAntesAcudir: TextView
     private lateinit var txtDespuesAplicacion: TextView
     private lateinit var btnDescargarInfografia: MaterialButton
-    private lateinit var bnvNavegacion: BottomNavigationView
 
     private lateinit var presentador: clsDetalleCampaniaPresentadorN
     private var campaniaActual: dataDetalleCampaniaJN? = null
@@ -77,15 +73,13 @@ class DetalleCampaniaActivityN : AppCompatActivity() {
         txtDescripcion = findViewById(R.id.txtDescripcion)
         rvRequisitos = findViewById(R.id.rvRequisitos)
         rvRequisitos.layoutManager = LinearLayoutManager(this)
-        adapterRequisitos = requisitoAdapter(emptyList())
+        adapterRequisitos = clsRequisitosAdaptadorJN(emptyList())
         rvRequisitos.adapter = adapterRequisitos
 
         txtAntesAcudir = findViewById(R.id.txtAntesAcudir)
         txtDespuesAplicacion = findViewById(R.id.txtDespuesAplicacion)
         btnDescargarInfografia = findViewById(R.id.btnDescargarInfografia)
-        bnvNavegacion = findViewById(R.id.bnvNavegacion)
 
-        bnvNavegacion.selectedItemId = R.id.nav_campanias
 
 
         presentador = clsDetalleCampaniaPresentadorN(this)
@@ -129,15 +123,7 @@ class DetalleCampaniaActivityN : AppCompatActivity() {
             }
         })
 
-        bnvNavegacion.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
-            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                if (item.itemId == R.id.nav_campanias) {
-                    finish()
-                    return true
-                }
-                return false
-            }
-        })
+
     }
 
     fun mostrarCargando(cargando: Boolean) {

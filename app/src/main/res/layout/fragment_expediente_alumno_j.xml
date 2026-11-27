@@ -389,18 +389,9 @@
                 android:textColor="@color/color_texto_principal"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/btnVerHistorial"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardAntecedentes" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnVerHistorial"
-                style="@style/SaludCampus.BotonEnlace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/expediente_ver_historial"
-                app:layout_constraintBaseline_toBaselineOf="@id/txtSeccionConsultas"
-                app:layout_constraintEnd_toEndOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvConsultasRecientes"

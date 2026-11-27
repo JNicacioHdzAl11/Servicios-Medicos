@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.modelo.PerfilData
+import com.example.servicios_medicos.Data.PerfilData
 import com.example.servicios_medicos.presentador.clsPerfilPresentadorJM
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.bottomnavigation.BottomNavigationView

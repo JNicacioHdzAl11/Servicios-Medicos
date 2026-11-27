@@ -2,8 +2,8 @@ package com.example.servicios_medicos.presentador
 
 import com.example.servicios_medicos.modelo.clsModuloEnfermeriaModeloJ
 import com.example.servicios_medicos.modelo.clsResumenEnfermeriaModeloJ
-import com.example.servicios_medicos.modelo.dataCitaEnfermeriaJ
-import com.example.servicios_medicos.modelo.dataRespuestaEnfermeriaJ
+import com.example.servicios_medicos.Data.dataCitaEnfermeriaJ
+import com.example.servicios_medicos.Data.dataRespuestaEnfermeriaJ
 import com.example.servicios_medicos.vista.InicioEnfermera
 import retrofit2.Call
 import retrofit2.Callback

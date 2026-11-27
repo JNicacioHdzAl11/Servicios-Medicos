@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/diagnostico_fondo"
+    tools:context=".vista.DetalleDiagnosticoActivity">
+
+    <!-- Barra superior -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clEncabezado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/diagnostico_superficie"
+        android:minHeight="64dp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnRegresar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/diagnostico_cd_regresar"
+            android:src="@drawable/ic_flecha_atras"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/diagnostico_primario" />
+
+        <TextView
+            android:id="@+id/txtTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/diagnostico_titulo"
+            android:textColor="@color/diagnostico_texto_principal"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnRegresar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vDivisorEncabezado"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/diagnostico_divisor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clEncabezado" />
+
+    <!-- Contenido desplazable -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvContenido"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vDivisorEncabezado">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContenido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="24dp">
+
+            <!-- A. Información de la consulta -->
+            <TextView
+                android:id="@+id/txtFechaConsulta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/diagnostico_texto_secundario"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Consulta del 03 de noviembre de 2026" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardInformacionConsulta"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/diagnostico_fondo_azul_claro"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtFechaConsulta"
+                app:strokeColor="@color/diagnostico_borde"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/txtNombrePaciente"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/diagnostico_texto_principal"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Valeria Romero" />
+
+                    <TextView
+                        android:id="@+id/txtMatricula"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text=""
+                        android:textColor="@color/diagnostico_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toStartOf="@id/txtSeparadorConsulta"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtNombrePaciente"
+                        tools:text="Matrícula 20230351" />
+
+                    <TextView
+                        android:id="@+id/txtSeparadorConsulta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:text="@string/diagnostico_separador"
+                        android:textColor="@color/diagnostico_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintBaseline_toBaselineOf="@id/txtMatricula"
+                        app:layout_constraintEnd_toStartOf="@id/txtFolioReceta"
+                        app:layout_constraintStart_toEndOf="@id/txtMatricula" />
+
+                    <TextView
+                        android:id="@+id/txtFolioReceta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/diagnostico_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBaseline_toBaselineOf="@id/txtMatricula"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/txtSeparadorConsulta"
+                        tools:text="Receta RX-2026-1103" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- B. Información del médico -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardInformacionMedico"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/diagnostico_superficie"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardInformacionConsulta"
+                app:strokeColor="@color/diagnostico_borde"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/imgMedico"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@string/diagnostico_cd_icono_medico"
+                        android:src="@drawable/ic_usuario"
+                        app:layout_constraintBottom_toBottomOf="@id/txtNombreMedico"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/txtNombreMedico"
+                        app:tint="@color/diagnostico_primario" />
+
+                    <TextView
+                        android:id="@+id/txtNombreMedico"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text=""
+                        android:textColor="@color/diagnostico_texto_principal"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/imgMedico"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Dra. Sofía Reyes" />
+
+                    <!-- Cédula profesional -->
+                    <TextView
+                        android:id="@+id/txtLabelCedula"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/diagnostico_label_cedula"
+                        android:textColor="@color/diagnostico_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtNombreMedico" />
+
+                    <TextView
+                        android:id="@+id/txtCedulaProfesional"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text=""
+                        android:textColor="@color/diagnostico_texto_principal"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/txtLabelCedula"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/txtLabelCedula"
+                        tools:text="7845123" />
+
+                    <!-- Consultorio -->
+                    <TextView
+                        android:id="@+id/txtLabelConsultorio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/diagnostico_label_consultorio"
+                        android:textColor="@color/diagnostico_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtCedulaProfesional" />
+
+                    <TextView
+                        android:id="@+id/txtConsultorio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text=""
+                        android:textColor="@color/diagnostico_texto_principal"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/txtLabelConsultorio"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/txtLabelConsultorio"
+                        tools:text="1 · Servicios Médicos" />
+
+                    <!-- Especialidad -->
+                    <TextView
+                        android:id="@+id/txtLabelEspecialidad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/diagnostico_label_especialidad"
+                        android:textColor="@color/diagnostico_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtConsultorio" />
+
+                    <TextView
+                        android:id="@+id/txtEspecialidad"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:gravity="end"
+                        android:text=""
+                        android:textColor="@color/diagnostico_texto_principal"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBaseline_toBaselineOf="@id/txtLabelEspecialidad"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/txtLabelEspecialidad"
+                        tools:text="Medicina general" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- C. Diagnóstico -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDiagnostico"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/diagnostico_superficie"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardInformacionMedico"
+                app:strokeColor="@color/diagnostico_borde"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/txtTituloDiagnostico"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/diagnostico_label_diagnostico"
+                        android:textColor="@color/diagnostico_texto_principal"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtNombreDiagnostico"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text=""
+                        android:textColor="@color/diagnostico_texto_principal"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtTituloDiagnostico"
+                        tools:text="Rinitis alérgica estacional" />
+
+                    <TextView
+                        android:id="@+id/txtDescripcionDiagnostico"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text=""
+                        android:textColor="@color/diagnostico_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtNombreDiagnostico"
+                        tools:text="Evitar exposición a polvo y otros alérgenos." />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- D. Medicamentos e indicaciones -->
+            <TextView
+                android:id="@+id/txtTituloMedicamentos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/diagnostico_label_medicamentos"
+                android:textColor="@color/diagnostico_texto_principal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardDiagnostico" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMedicamentos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtTituloMedicamentos"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_medicamento_receta" />
+
+            <TextView
+                android:id="@+id/txtNotaIndicaciones"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/diagnostico_nota_indicaciones"
+                android:textColor="@color/diagnostico_texto_secundario"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvMedicamentos" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

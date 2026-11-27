@@ -292,7 +292,8 @@
     <string name="comprobante_btn_descargar">Descargar comprobante (PDF)</string>
     <string name="comprobante_antes_titulo">Antes de tu consulta</string>
     <string name="comprobante_antes_texto">Llega 10 minutos antes con tu credencial universitaria y este comprobante vigente.</string>
-    <string name="comprobante_nota">Documento válido únicamente dentro de Servicios Médicos.</string>>
+    <string name="comprobante_nota">Documento válido únicamente dentro de Servicios Médicos.</string>
+    >
 
     <!-- Campañas de salud -->
     <string name="campanias_descripcion">Prevención y bienestar para tu vida universitaria.</string>
@@ -359,6 +360,7 @@
     <!-- Ítems de lista -->
     <string name="item_ver_detalle">Ver detalle</string>
     <string name="item_descargar_receta">Descargar receta</string>
+    <string name="item_detalle_diagnostico">Detalle de diagnóstico</string>
     <string name="item_ver_receta_anterior">Ver receta anterior</string>
 
     <!-- Expediente del alumno (personal médico) -->
@@ -429,4 +431,24 @@
     <string name="detalle_cita_sede_valor">Campus · Planta baja</string>
     <string name="detalle_cita_btn_reprogramar">Reprogramar cita</string>
     <string name="detalle_cita_btn_cancelar">Cancelar cita</string>
+
+    <!-- Pantalla Información del diagnóstico: textos estáticos -->
+    <string name="diagnostico_titulo">Información del diagnóstico</string>
+    <string name="diagnostico_cd_regresar">Regresar</string>
+    <string name="diagnostico_cd_icono_medico">Médico</string>
+    <string name="diagnostico_separador">·</string>
+
+    <!-- Etiquetas -->
+    <string name="diagnostico_label_cedula">Cédula profesional</string>
+    <string name="diagnostico_label_consultorio">Consultorio</string>
+    <string name="diagnostico_label_especialidad">Especialidad</string>
+    <string name="diagnostico_label_diagnostico">Diagnóstico</string>
+    <string name="diagnostico_label_medicamentos">Medicamentos e indicaciones</string>
+    <string name="diagnostico_label_duracion">Duración:</string>
+    <string name="diagnostico_nota_indicaciones">Indicaciones médicas · Síguelas únicamente como lo indica tu receta.</string>
+
+    <!-- Formatos opcionales para armar los textos dinámicos desde Kotlin -->
+    <string name="diagnostico_formato_fecha_consulta">Consulta del %1$s</string>
+    <string name="diagnostico_formato_matricula">Matrícula %1$s</string>
+    <string name="diagnostico_formato_folio_receta">Receta %1$s</string>
 </resources>

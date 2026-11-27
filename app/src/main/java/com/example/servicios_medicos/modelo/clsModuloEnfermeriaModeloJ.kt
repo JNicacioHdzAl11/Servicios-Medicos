@@ -1,5 +1,9 @@
 package com.example.servicios_medicos.modelo
 
+import com.example.servicios_medicos.Data.dataAlumnoEnfermeriaJ
+import com.example.servicios_medicos.Data.dataCitaEnfermeriaJ
+import com.example.servicios_medicos.Data.dataRespuestaEnfermeriaJ
+import com.example.servicios_medicos.Data.dataSignosEnfermeriaJ
 import com.example.servicios_medicos.network.ApiModuloEnfermeriaJ
 import com.google.gson.JsonElement
 import retrofit2.Call

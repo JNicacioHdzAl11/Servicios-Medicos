@@ -1,5 +1,7 @@
 package com.example.servicios_medicos.modelo
 
+import com.example.servicios_medicos.Data.dataExpedienteResponseJ
+import com.example.servicios_medicos.Data.dataHistorialConsultasResponseJ
 import com.example.servicios_medicos.network.RetrofitCliente
 import retrofit2.Response
 
