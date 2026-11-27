@@ -31,8 +31,6 @@ object RetrofitCliente {
     val apiServiceExpedienteJM: ApiServiceExpedienteJM =
         retrofit.create(ApiServiceExpedienteJM::class.java)
 
-    val apiPerfilJM: ApiPerfilJM =
-        retrofit.create(ApiPerfilJM::class.java)
 
 //nuevo<<<<!!!o!!!>>>>>
 //nuevo<<<<!!!o!!!>>>>>

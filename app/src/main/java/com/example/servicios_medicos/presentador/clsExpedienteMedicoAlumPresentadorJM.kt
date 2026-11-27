@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class clsExpedienteMedicoAlumPresentadorJM(private val vista: ExpedienteMedicoAlumActivityJM) {
+class clsExpedienteMedicoAlumnoPresentadorJM(private val vista: ExpedienteMedicoAlumActivityJM) {
     private val modelo = clsExpedienteMedicoAlumModeloJM()
     private var token = ""
     private var matricula = ""

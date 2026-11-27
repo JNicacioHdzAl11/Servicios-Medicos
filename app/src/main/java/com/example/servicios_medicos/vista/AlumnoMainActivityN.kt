@@ -1,5 +1,6 @@
 package com.example.servicios_medicos.vista
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -37,7 +38,10 @@ class AlumnoMainActivityN : AppCompatActivity() {
                     true
                 }
                 R.id.nav_expediente -> {
-                    cargarFragmento(expedienteAlumnoJ())
+                    val intent = Intent(this, ExpedienteAlumnoActivityJM::class.java)
+                    // Si necesitas pasar el token o matrícula que recibió AlumnoMainActivityN:
+                    intent.putExtras(this.intent)
+                    startActivity(intent)
                     true
                 }
                 R.id.nav_campanias -> {
