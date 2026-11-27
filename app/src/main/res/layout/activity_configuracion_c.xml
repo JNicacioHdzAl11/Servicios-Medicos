@@ -737,17 +737,20 @@
 
                     <View
                         android:id="@+id/vDivisorSoporte2"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/color_borde" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/clPreguntasFrecuentes"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:focusable="true"
+                        android:enabled="false"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:minHeight="72dp"
                         android:paddingStart="16dp"
                         android:paddingTop="12dp"
