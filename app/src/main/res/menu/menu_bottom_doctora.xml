@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_inicio"
+        android:icon="@drawable/ic_inicio"
+        android:title="Inicio" />
+    <item
+        android:id="@+id/nav_alumnos"
+        android:icon="@drawable/ic_alumnos"
+        android:title="Expediente" />
+    <item
+        android:id="@+id/nav_configuracion"
+        android:icon="@drawable/ic_ajustes"
+        android:title="Configuración" />
+</menu>

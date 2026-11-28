@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo"
+    tools:context=".vista.ExpedienteMedicoAlumActivityJM">
+
+    <!-- Barra superior -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clEncabezadoExpediente"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fondo"
+        android:minHeight="64dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnRegresar"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Regresar"
+            android:src="@drawable/ic_flecha_atras"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/color_texto_principal" />
+
+        <TextView
+            android:id="@+id/txtTituloExpediente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Expediente del Alumno"
+            android:textColor="@color/color_texto_principal"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnAjustesExpediente"
+            app:layout_constraintStart_toEndOf="@id/btnRegresar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnAjustesExpediente"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/color_fondo_azul_claro"
+            android:contentDescription="@string/comun_cd_ajustes"
+            android:padding="6dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_alumnos"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/vDivisorSuperiorExp"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_borde"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clEncabezadoExpediente" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvExpediente"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/vDivisorInferiorExp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vDivisorSuperiorExp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContenidoExpediente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="24dp">
+
+            <!-- Tarjeta principal del alumno -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDatosAlumno"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/color_fondo"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/color_borde"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/txtIniciales"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@color/color_fondo_azul_claro"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/color_enlace"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="LF" />
+
+                    <TextView
+                        android:id="@+id/txtNombrePaciente"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text=""
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/txtMatriculaEdad"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/txtIniciales"
+                        app:layout_constraintTop_toTopOf="@id/txtIniciales"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:text="Luis Fernández" />
+
+                    <TextView
+                        android:id="@+id/txtMatriculaEdad"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text=""
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@id/txtIniciales"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtNombrePaciente"
+                        app:layout_constraintTop_toBottomOf="@id/txtNombrePaciente"
+                        tools:text="Matrícula 20240128 · 20 años" />
+
+                    <TextView
+                        android:id="@+id/txtCarreraGrupo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text=""
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtIniciales"
+                        tools:text="Ing. en Sistemas · 5.º cuatrimestre · Grupo A" />
+
+                    <TextView
+                        android:id="@+id/txtAlertaAlergia"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/color_fondo_secundario"
+                        android:padding="12dp"
+                        android:text=""
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtCarreraGrupo"
+                        tools:text="Alergia: Penicilina" />
+
+                    <TextView
+                        android:id="@+id/txtTipoSangreEtiqueta"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="Tipo de sangre"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toStartOf="@id/txtEnfermedadesEtiqueta"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtAlertaAlergia" />
+
+                    <TextView
+                        android:id="@+id/txtTipoSangre"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text=""
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/txtTipoSangreEtiqueta"
+                        app:layout_constraintStart_toStartOf="@id/txtTipoSangreEtiqueta"
+                        app:layout_constraintTop_toBottomOf="@id/txtTipoSangreEtiqueta"
+                        tools:text="O positivo (O+)" />
+
+                    <TextView
+                        android:id="@+id/txtEnfermedadesEtiqueta"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Enfermedades crónicas"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/txtTipoSangreEtiqueta"
+                        app:layout_constraintTop_toTopOf="@id/txtTipoSangreEtiqueta" />
+
+                    <TextView
+                        android:id="@+id/txtEnfermedadesCronicas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text=""
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@id/txtEnfermedadesEtiqueta"
+                        app:layout_constraintStart_toStartOf="@id/txtEnfermedadesEtiqueta"
+                        app:layout_constraintTop_toBottomOf="@id/txtEnfermedadesEtiqueta"
+                        tools:text="Ninguna referida" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Sección Antecedentes -->
+            <TextView
+                android:id="@+id/txtTituloAntecedentes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Antecedentes"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardDatosAlumno" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAntecedentes"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/color_fondo"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtTituloAntecedentes"
+                app:strokeColor="@color/color_borde"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Alérgenos"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtAlergenosDetalle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text=""
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        tools:text="Penicilina · reacción cutánea" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Cirugías previas"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtCirugiasPrevias"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text=""
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        tools:text="Apendicectomía · 2020" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Tratamiento habitual"
+                        android:textColor="@color/color_texto_secundario"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtTratamientoHabitual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text=""
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        tools:text="Ninguno referido" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Sección Historial de Consultas Recientes -->
+            <TextView
+                android:id="@+id/txtTituloHistorial"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="Historial de Consultas Recientes"
+                android:textColor="@color/color_texto_principal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardAntecedentes" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardConsulta1"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/color_fondo"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtTituloHistorial"
+                app:strokeColor="@color/color_borde"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/txtConsulta1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        tools:text="20 oct 2026 · 10:15  |  Finalizada\nCefalea de seguimiento\nDiagnóstico: cefalea tensional." />
+
+                    <TextView
+                        android:id="@+id/txtVerReceta1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Ver receta anterior >"
+                        android:textColor="@color/color_enlace"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardConsulta2"
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/color_fondo"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardConsulta1"
+                app:strokeColor="@color/color_borde"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/txtConsulta2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/color_texto_principal"
+                        android:textSize="14sp"
+                        tools:text="08 sep 2026 · 09:00\nDolor de garganta\nDiagnóstico: faringitis viral." />
+
+                    <TextView
+                        android:id="@+id/txtVerReceta2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Ver receta anterior >"
+                        android:textColor="@color/color_enlace"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnIniciarNuevaConsulta"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/color_enlace"
+                android:text="Iniciar Nueva Consulta"
+                android:textAllCaps="false"
+                android:textColor="@color/color_fondo"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardConsulta2" />
+
+            <TextView
+                android:id="@+id/txtPieExpediente"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Datos simulados · Expediente confidencial"
+                android:textColor="@color/color_texto_secundario"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnIniciarNuevaConsulta" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/vDivisorInferiorExp"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_borde"
+        app:layout_constraintBottom_toTopOf="@id/llBarraInferiorExpediente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Barra inferior: Inicio, Alumnos (activo), Citas, Recetas, Configuración -->
+    <LinearLayout
+        android:id="@+id/llBarraInferiorExpediente"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fondo"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNavInicio"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Inicio"
+            android:textAllCaps="false"
+            android:textColor="@color/color_texto_secundario"
+            android:textSize="12sp"
+            app:backgroundTint="@android:color/transparent"
+            app:icon="@drawable/ic_inicio"
+            app:iconGravity="top"
+            app:iconTint="@color/color_texto_secundario" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNavExpediente"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Expediente"
+            android:textAllCaps="false"
+            android:textColor="@color/color_enlace"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/color_fondo_azul_claro"
+            app:icon="@drawable/ic_alumnos"
+            app:iconGravity="top"
+            app:iconTint="@color/color_enlace" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNavConfiguracion"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Configuración"
+            android:textAllCaps="false"
+            android:textColor="@color/color_texto_secundario"
+            android:textSize="12sp"
+            app:backgroundTint="@android:color/transparent"
+            app:icon="@drawable/ic_ajustes"
+            app:iconGravity="top"
+            app:iconTint="@color/color_texto_secundario" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

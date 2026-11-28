@@ -162,6 +162,21 @@ class LoginActivityC : AppCompatActivity() {
             startActivity(intent)
             finish()
 
+        }else if (rol.equals("doctora", ignoreCase = true)) {
+
+            val intent = Intent(
+                this,
+                DoctoraMainActivityJM::class.java
+            )
+
+            intent.putExtra("id_usuario", usuario.idUsuario)
+            intent.putExtra("identificador", usuario.identificador)
+            intent.putExtra("correo", usuario.correo)
+            intent.putExtra("token", usuario.token)
+
+            startActivity(intent)
+            finish()
+
         } else {
 
             Toast.makeText(
