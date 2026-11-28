@@ -9,15 +9,11 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.servicios_medicos.Data.InicioDoctoraDataJM
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.presentador.clsInicioDoctoraPresentadorJM
 import com.google.android.material.button.MaterialButton
-import java.util.Locale
+import com.example.servicios_medicos.presentador.clsInicioDoctoraPresentadorJM
 
 class InicioDoctoraFragmentJM : Fragment() {
-
-    private lateinit var btnConfiguracion: ImageButton
     private lateinit var txtSaludoDoctora: TextView
     private lateinit var txtCedulaDoctora: TextView
     private lateinit var txtFechaActual: TextView
@@ -28,17 +24,16 @@ class InicioDoctoraFragmentJM : Fragment() {
     private lateinit var txtMatriculaEdad: TextView
     private lateinit var txtMotivoConsulta: TextView
     private lateinit var txtSignosVitalesResumen: TextView
-    private lateinit var btnVerExpedienteAlumno: MaterialButton
-    private lateinit var txtAbrirConfiguracion: TextView
     private lateinit var txtProxima1: TextView
     private lateinit var txtProxima2: TextView
-
+    private lateinit var btnAbrirExpediente: MaterialButton
+    private lateinit var btnAjustesDoctora: ImageButton
+    private lateinit var txtAbrirConfiguracion: TextView
     private lateinit var presentador: clsInicioDoctoraPresentadorJM
     private var token = ""
-    private var correo = ""
     private var matriculaEspera = ""
 
-    override fun onCreateView(
+    override fun onCreateView( // carga el diseño de la pantalla de inicio de la doctora
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,10 +41,9 @@ class InicioDoctoraFragmentJM : Fragment() {
         return inflater.inflate(R.layout.fragment_inicio_doctora_jm, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) { // conecta los elementos de la pantalla y arranca el inicio de la doctora
         super.onViewCreated(view, savedInstanceState)
 
-        btnConfiguracion = view.findViewById(R.id.btnConfiguracion)
         txtSaludoDoctora = view.findViewById(R.id.txtSaludoDoctora)
         txtCedulaDoctora = view.findViewById(R.id.txtCedulaDoctora)
         txtFechaActual = view.findViewById(R.id.txtFechaActual)
@@ -60,69 +54,85 @@ class InicioDoctoraFragmentJM : Fragment() {
         txtMatriculaEdad = view.findViewById(R.id.txtMatriculaEdad)
         txtMotivoConsulta = view.findViewById(R.id.txtMotivoConsulta)
         txtSignosVitalesResumen = view.findViewById(R.id.txtSignosVitalesResumen)
-        btnVerExpedienteAlumno = view.findViewById(R.id.btnVerExpedienteAlumno)
-        txtAbrirConfiguracion = view.findViewById(R.id.txtAbrirConfiguracion)
         txtProxima1 = view.findViewById(R.id.txtProxima1)
         txtProxima2 = view.findViewById(R.id.txtProxima2)
+        btnAbrirExpediente = view.findViewById(R.id.btnVerExpedienteAlumno)
+        btnAjustesDoctora = view.findViewById(R.id.btnConfiguracion)
+        txtAbrirConfiguracion = view.findViewById(R.id.txtAbrirConfiguracion)
 
-        token = requireActivity().intent.getStringExtra("token") ?: ""
-        correo = requireActivity().intent.getStringExtra("correo") ?: ""
+        configurarListeners()
 
         presentador = clsInicioDoctoraPresentadorJM(this)
-        configurarListeners()
+        val tokenRecibido = requireActivity().intent.getStringExtra("token")
+        if (tokenRecibido != null) {
+            token = tokenRecibido
+        }
+        presentador.iniciarPantalla(token)
     }
 
-    private fun configurarListeners() {
-        val abrirConfig = View.OnClickListener {
+    private fun configurarListeners() { // dice que hace cada boton de la pantalla
+        btnAjustesDoctora.setOnClickListener {
             val destino = Intent(requireContext(), ConfiguracionDoctoraActivityJM::class.java)
-            destino.putExtra("token", token)
-            destino.putExtra("correo", correo)
+            destino.putExtra("token", requireActivity().intent.getStringExtra("token"))
+            destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
             startActivity(destino)
         }
-        btnConfiguracion.setOnClickListener(abrirConfig)
-        txtAbrirConfiguracion.setOnClickListener(abrirConfig)
-
-        btnVerExpedienteAlumno.setOnClickListener {
-            val destino = Intent(requireContext(), ExpedienteAlumnoActivityJM::class.java)
+        txtAbrirConfiguracion.setOnClickListener {
+            btnAjustesDoctora.performClick()
+        }
+        btnAbrirExpediente.setOnClickListener {
+            val destino = Intent(requireContext(), ExpedienteMedicoAlumActivityJM::class.java)
             destino.putExtra("token", token)
+            destino.putExtra("correo", requireActivity().intent.getStringExtra("correo"))
             destino.putExtra("matricula", matriculaEspera)
             startActivity(destino)
         }
     }
 
-    override fun onResume() {
+    override fun onResume() { // carga los datos cada vez que se ve la pantalla
         super.onResume()
-        presentador.cargarInicioDoctora(token)
+        presentador.cargarInicioDoctora()
     }
 
-    override fun onDestroyView() {
-        presentador.cancelar()
-        super.onDestroyView()
+    fun mostrarFechaHoy(fecha: String) { // muestra la fecha de hoy
+        txtFechaActual.text = fecha
     }
 
-    fun mostrarInicioDoctora(datos: InicioDoctoraDataJM) {
-        if (datos.matriculaEspera.isNotEmpty()) matriculaEspera = datos.matriculaEspera
-        txtSaludoDoctora.text = "Buenos días, ${datos.nombreCompleto}"
-        txtCedulaDoctora.text = "Cédula profesional ${datos.cedula}"
-        txtFechaActual.text = datos.fechaSesion
-        txtTotalCitasHoy.text = String.format(Locale.US, "%02d", datos.citasHoy)
-        txtTotalAtenciones.text = String.format(Locale.US, "%02d", datos.consultasRealizadas)
+    fun mostrarEncabezadoDoctora(saludo: String, cedula: String, fecha: String) { // muestra datos de la doctora y fecha
+        txtSaludoDoctora.text = saludo
+        txtCedulaDoctora.text = cedula
+        txtFechaActual.text = fecha
+    }
 
-        val partes = datos.nombreEspera.trim().split(" ").filter { it.isNotEmpty() }
-        txtInicialesPaciente.text = when {
-            partes.size >= 2 -> (partes[0].take(1) + partes[1].take(1)).uppercase()
-            partes.size == 1 -> partes[0].take(2).uppercase()
-            else -> "AL"
+    fun mostrarContadores(citasHoy: String, atenciones: String) { // muestra citas de hoy y consultas realizadas
+        txtTotalCitasHoy.text = citasHoy
+        txtTotalAtenciones.text = atenciones
+    }
+
+    fun mostrarPacienteEnEspera(
+        matricula: String,
+        iniciales: String,
+        nombre: String,
+        detalle: String,
+        motivo: String,
+        signos: String
+    ) { // muestra los datos del paciente en espera
+        if (matricula.isNotEmpty()) {
+            matriculaEspera = matricula
         }
-        txtNombrePaciente.text = datos.nombreEspera
-        txtMatriculaEdad.text = datos.detalleEspera
-        txtMotivoConsulta.text = datos.motivoEspera
-        txtSignosVitalesResumen.text = datos.signosEspera
-        txtProxima1.text = "${datos.proxima1} · ${datos.hora1}"
-        txtProxima2.text = "${datos.proxima2} · ${datos.hora_2}"
+        txtInicialesPaciente.text = iniciales
+        txtNombrePaciente.text = nombre
+        txtMatriculaEdad.text = detalle
+        txtMotivoConsulta.text = motivo
+        txtSignosVitalesResumen.text = signos
     }
 
-    fun mostrarError(mensaje: String) {
+    fun mostrarProximasConsultas(prox1: String, prox2: String) { // muestra las proximas consultas
+        txtProxima1.text = prox1
+        txtProxima2.text = prox2
+    }
+
+    fun mostrarError(mensaje: String) { // muestra un mensaje cuando algo sale mal
         Toast.makeText(requireContext(), mensaje, Toast.LENGTH_LONG).show()
     }
 }

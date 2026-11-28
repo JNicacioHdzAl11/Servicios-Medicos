@@ -60,41 +60,38 @@ class clsExpedienteMedicoAlumPresentadorJM(private val vista: ExpedienteMedicoAl
     }
 
     private fun mostrarDatos(datos: dataExpedienteDoctoraJM) {
-        val bloque = datos.data ?: return
-        val alumno = bloque.alumno
-        val exp = bloque.expediente
-        val historial = bloque.historialConsultas
+        val exp = datos.data ?: return
 
-        val nombre = alumno?.nombreCompleto.orEmpty()
+        val nombre = exp.nombrePaciente.orEmpty()
         val iniciales = modelo.armarIniciales(nombre)
         val carrera = listOfNotNull(
-            alumno?.area?.takeIf { it.isNotBlank() },
-            alumno?.cuatrimestre?.takeIf { it.isNotBlank() }?.let { "${it}°" },
-            alumno?.grupo?.takeIf { it.isNotBlank() }
+            exp.carreraGrupo?.takeIf { it.isNotBlank() }
         ).joinToString(" · ")
 
-        vista.mostrarPaciente(
-            iniciales,
-            nombre,
-            modelo.formatearMatriculaEdad(alumno?.matricula.orEmpty(), exp?.edad.orEmpty()),
-            carrera
+        vista.mostrarIniciales(iniciales)
+        vista.mostrarNombrePaciente(nombre)
+        vista.mostrarMatriculaEdad(
+            modelo.formatearMatriculaEdad(exp.matricula.orEmpty(), exp.edad.orEmpty())
         )
-        vista.mostrarClinicos(
-            "Alergia: ${exp?.alergias?.ifBlank { "Ninguna" } ?: "Sin registro"}",
-            "Tipo de sangre: ${exp?.tipoSangre?.ifBlank { "No especificado" } ?: "Sin registro"}",
-            "Enfermedades crónicas: ${exp?.enfermedades?.ifBlank { "Ninguna" } ?: "Sin registro"}"
+        vista.mostrarCarreraGrupo(carrera)
+        vista.mostrarAlertaAlergia(
+            "Alergias: ${exp.alergia.orEmpty().ifBlank { "Ninguna" }}"
+        )
+        vista.mostrarResumenClinico(
+            "Tipo de sangre: ${exp.tipoSangre.orEmpty().ifBlank { "No registrado" }}",
+            "Enfermedades crónicas: ${exp.enfermedadesCronicas.orEmpty().ifBlank { "Ninguna" }}"
         )
         vista.mostrarAntecedentes(
-            "Alérgenos: ${exp?.alergias?.ifBlank { "Ninguno" } ?: "Sin registro"}",
-            "Antecedentes: ${exp?.antecedentes?.ifBlank { "Ninguno" } ?: "Sin registro"}",
-            "Tratamiento habitual: Sin registro"
+            "Alérgenos: ${exp.alergenosDetalle.orEmpty().ifBlank { "Sin registro" }}",
+            "Cirugías previas: ${exp.cirugiasPrevias.orEmpty().ifBlank { "Sin registro" }}",
+            "Tratamiento habitual: ${exp.tratamientoHabitual.orEmpty().ifBlank { "Sin registro" }}"
         )
-
-        val c1 = historial.getOrNull(0)?.let { "${it.fechaConsulta ?: ""} · ${it.motivo ?: ""} (${it.diagnostico ?: "Sin diagnóstico"})" }
-            ?: "Sin consultas previas"
-        val c2 = historial.getOrNull(1)?.let { "${it.fechaConsulta ?: ""} · ${it.motivo ?: ""} (${it.diagnostico ?: "Sin diagnóstico"})" }
-            ?: ""
-        vista.mostrarConsultas(c1, c2)
+        vista.mostrarHistorialConsultas(
+            listOfNotNull(
+                exp.consulta1?.takeIf { it.isNotBlank() },
+                exp.consulta2?.takeIf { it.isNotBlank() }
+            )
+        )
     }
 
     fun cancelar() {

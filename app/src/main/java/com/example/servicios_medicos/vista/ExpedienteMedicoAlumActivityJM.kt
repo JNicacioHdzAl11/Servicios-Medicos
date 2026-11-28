@@ -5,17 +5,19 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servicios_medicos.R
-import com.example.servicios_medicos.presentador.clsExpedienteMedicoAlumnoPresentadorJM
+import com.example.servicios_medicos.presentador.clsExpedienteMedicoAlumPresentadorJM
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 
 class ExpedienteMedicoAlumActivityJM : AppCompatActivity() {
     private lateinit var btnRegresar: ImageButton
-    private lateinit var txtTitulo: TextView
-    private lateinit var ivAvatarMedico: ShapeableImageView
+    private lateinit var txtTituloExpediente: TextView
     private lateinit var txtIniciales: TextView
     private lateinit var txtNombrePaciente: TextView
     private lateinit var txtMatriculaEdad: TextView
@@ -26,21 +28,30 @@ class ExpedienteMedicoAlumActivityJM : AppCompatActivity() {
     private lateinit var txtAlergenosDetalle: TextView
     private lateinit var txtCirugiasPrevias: TextView
     private lateinit var txtTratamientoHabitual: TextView
-    private lateinit var rvHistorialConsultas: RecyclerView
-    private lateinit var btnIniciarNuevaConsulta: MaterialButton
-    private lateinit var txtNotaExpedienteMed: TextView
-    private lateinit var presentador: clsExpedienteMedicoAlumnoPresentadorJM
+    private lateinit var txtPieExpediente: TextView
+
+    private var btnIniciarNuevaConsulta: MaterialButton? = null
+    private var ivAvatarMedico: ShapeableImageView? = null
+    private var rvHistorialConsultas: RecyclerView? = null
+    private lateinit var presentador: clsExpedienteMedicoAlumPresentadorJM
     private var token = ""
+    private var correo = ""
     private var matricula = ""
     private var idConsulta = 0
 
     override fun onCreate(savedInstanceState: Bundle?) { // conecta los elementos de la pantalla y arranca el expediente medico del alumno
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_expediente_jm)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_expediente_doctora_alum_jm)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         btnRegresar = findViewById(R.id.btnRegresar)
-        txtTitulo = findViewById(R.id.txtTitulo)
-        ivAvatarMedico = findViewById(R.id.ivAvatarMedico)
+        txtTituloExpediente = findViewById(R.id.txtTituloExpediente)
         txtIniciales = findViewById(R.id.txtIniciales)
         txtNombrePaciente = findViewById(R.id.txtNombrePaciente)
         txtMatriculaEdad = findViewById(R.id.txtMatriculaEdad)
@@ -51,13 +62,21 @@ class ExpedienteMedicoAlumActivityJM : AppCompatActivity() {
         txtAlergenosDetalle = findViewById(R.id.txtAlergenosDetalle)
         txtCirugiasPrevias = findViewById(R.id.txtCirugiasPrevias)
         txtTratamientoHabitual = findViewById(R.id.txtTratamientoHabitual)
+        txtPieExpediente = findViewById(R.id.txtPieExpediente)
+        btnIniciarNuevaConsulta = findViewById(resources.getIdentifier("btnIniciarNuevaConsulta", "id", packageName))
+        ivAvatarMedico = findViewById(resources.getIdentifier("ivAvatarMedico", "id", packageName))
+        rvHistorialConsultas = findViewById(resources.getIdentifier("rvHistorialConsultas", "id", packageName))
 
         configurarListeners()
 
-        presentador = clsExpedienteMedicoAlumnoPresentadorJM(this)
+        presentador = clsExpedienteMedicoAlumPresentadorJM(this)
         val tokenRecibido = intent.getStringExtra("token")
         if (tokenRecibido != null) {
             token = tokenRecibido
+        }
+        val correoRecibido = intent.getStringExtra("correo")
+        if (correoRecibido != null) {
+            correo = correoRecibido
         }
         val matriculaRecibida = intent.getStringExtra("matricula")
         if (matriculaRecibida != null) {
@@ -72,12 +91,25 @@ class ExpedienteMedicoAlumActivityJM : AppCompatActivity() {
         btnRegresar.setOnClickListener {
             finish()
         }
-
+        findViewById<MaterialButton>(R.id.btnNavInicio)?.setOnClickListener {
+            val destino = Intent(this, DoctoraMainActivityJM::class.java)
+            destino.putExtra("token", token)
+            destino.putExtra("correo", correo)
+            startActivity(destino)
+            finish()
+        }
+        findViewById<MaterialButton>(R.id.btnNavConfiguracion)?.setOnClickListener {
+            val destino = Intent(this, ConfiguracionDoctoraActivityJM::class.java)
+            destino.putExtra("token", token)
+            destino.putExtra("correo", correo)
+            startActivity(destino)
+            finish()
+        }
     }
 
     override fun onResume() { // carga los datos cada vez que se ve la pantalla
         super.onResume()
-        presentador.cargarExpedienteMedico()
+        presentador.cargarExpediente()
     }
 
     fun mostrarIniciales(texto: String) { // muestra las iniciales en el circulo del alumno
@@ -111,8 +143,8 @@ class ExpedienteMedicoAlumActivityJM : AppCompatActivity() {
         txtTratamientoHabitual.text = tratamiento
     }
 
-    fun mostrarHistorialConsultas(consultas: List<Any>) { // actualiza la lista de consultas recientes en el RecyclerView
-        rvHistorialConsultas.tag = consultas
+    fun mostrarHistorialConsultas(consultas: List<Any>) { // actualiza la lista de consultas recientes si existe el RecyclerView
+        rvHistorialConsultas?.tag = consultas
     }
 
     fun mostrarError(mensaje: String) { // muestra un mensaje cuando algo sale mal

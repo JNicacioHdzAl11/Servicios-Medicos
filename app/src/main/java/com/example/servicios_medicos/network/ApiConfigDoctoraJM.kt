@@ -11,12 +11,12 @@ import retrofit2.http.POST
 
 interface ApiConfigDoctoraJM {
 
-    @GET("doctora/configuracion_doctora.php")
+    @GET("config/obtener_configuracion.php")
     fun obtenerConfiguracion(
         @Header("Authorization") tokenBearer: String
     ): Call<dataConfigDoctoraRespuestaJM>
 
-    @POST("doctora/guardar_configuracion.php")
+    @POST("config/guardar_preferencias.php")
     fun guardarPreferencias(
         @Header("Authorization") tokenBearer: String,
         @Body datos: dataPreferenciasDoctoraJM

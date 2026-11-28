@@ -101,6 +101,21 @@
         <activity android:name=".vista.BuscarAlumnoActivityJ" android:exported="false" android:theme="@style/Theme.EnfermeriaJ" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".vista.TomaSignosActivityJ" android:exported="false" android:theme="@style/Theme.EnfermeriaJ" android:windowSoftInputMode="adjustResize" />
 
+        <activity
+            android:name=".vista.DoctoraMainActivityJM"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".vista.ConfiguracionDoctoraActivityJM"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".vista.ExpedienteMedicoAlumActivityJM"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

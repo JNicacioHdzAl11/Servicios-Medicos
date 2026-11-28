@@ -40,6 +40,7 @@ class DoctoraMainActivityJM : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             cargarFragmento(InicioDoctoraFragmentJM())
+            bottomNavDoctora.selectedItemId = R.id.nav_inicio
         }
 
         configurarListeners()
@@ -50,6 +51,13 @@ class DoctoraMainActivityJM : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_inicio -> {
                     cargarFragmento(InicioDoctoraFragmentJM())
+                    true
+                }
+                R.id.nav_alumnos -> {
+                    val destino = Intent(this, ExpedienteMedicoAlumActivityJM::class.java)
+                    destino.putExtra("token", token)
+                    destino.putExtra("correo", correo)
+                    startActivity(destino)
                     true
                 }
                 R.id.nav_configuracion -> {

@@ -21,10 +21,13 @@ class clsConfigDoctoraModeloJM {
 
     fun guardarPreferencias(
         token: String,
-        modoOscuro: Boolean,
-        avisosUrgencias: Boolean
+        recordatoriosCitas: Boolean,
+        avisosCampanias: Boolean
     ): Call<dataOperacionDoctoraJM> {
-        val datos = dataPreferenciasDoctoraJM(modoOscuro, avisosUrgencias)
+        val datos = dataPreferenciasDoctoraJM(
+            recordatoriosCitas = recordatoriosCitas,
+            avisosCampanias = avisosCampanias
+        )
         return api.guardarPreferencias("Bearer $token", datos)
     }
 }

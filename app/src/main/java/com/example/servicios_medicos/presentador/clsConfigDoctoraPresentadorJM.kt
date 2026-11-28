@@ -34,8 +34,8 @@ class clsConfigDoctoraPresentadorJM(private val vista: ConfiguracionDoctoraActiv
                     vista.mostrarConfiguracion(resultado.data)
                 } else {
                     vista.mostrarError(
-                        if (resultado != null && resultado.message.isNotBlank()) resultado.message
-                        else "No fue posible consultar tu configuración (${response.code()})"
+                        resultado?.message?.takeIf { it.isNotBlank() }
+                            ?: "No fue posible consultar tu configuración (${response.code()})"
                     )
                 }
             }
@@ -48,7 +48,7 @@ class clsConfigDoctoraPresentadorJM(private val vista: ConfiguracionDoctoraActiv
         })
     }
 
-    fun guardarPreferencias(token: String, modoOscuro: Boolean, avisosUrgencias: Boolean) {
+    fun guardarPreferencias(token: String, recordatoriosCitas: Boolean, avisosCampanias: Boolean) {
         if (token.isBlank()) {
             vista.mostrarError("La sesión ha caducado")
             return
@@ -56,7 +56,7 @@ class clsConfigDoctoraPresentadorJM(private val vista: ConfiguracionDoctoraActiv
         consulta?.cancel()
         guardado?.cancel()
         vista.mostrarGuardando(true)
-        val llamada = modelo.guardarPreferencias(token, modoOscuro, avisosUrgencias)
+        val llamada = modelo.guardarPreferencias(token, recordatoriosCitas, avisosCampanias)
         guardado = llamada
         llamada.enqueue(object : Callback<dataOperacionDoctoraJM> {
             override fun onResponse(
@@ -67,9 +67,12 @@ class clsConfigDoctoraPresentadorJM(private val vista: ConfiguracionDoctoraActiv
                 vista.mostrarGuardando(false)
                 val resultado = response.body()
                 if (response.isSuccessful && resultado?.status == true) {
-                    vista.mostrarPreferenciasGuardadas(modoOscuro, avisosUrgencias)
+                    vista.mostrarPreferenciasGuardadas(recordatoriosCitas, avisosCampanias)
                 } else {
-                    vista.mostrarError(resultado?.message ?: "No se guardaron las preferencias")
+                    vista.mostrarError(
+                        resultado?.message?.takeIf { it.isNotBlank() }
+                            ?: "No se guardaron las preferencias (${response.code()})"
+                    )
                     cargarConfiguracion(token)
                 }
             }

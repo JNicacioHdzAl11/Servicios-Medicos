@@ -774,26 +774,71 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/color_borde"
-        app:layout_constraintBottom_toTopOf="@id/bnvNavegacion"
+        app:layout_constraintBottom_toTopOf="@id/llBarraInferiorConfig"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bnvNavegacion"
-        style="@style/Widget.Material3.BottomNavigationView"
+    <LinearLayout
+        android:id="@+id/llBarraInferiorConfig"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/color_fondo"
-        app:elevation="0dp"
-        app:itemActiveIndicatorStyle="@style/SaludCampus.IndicadorNavegacion"
-        app:itemIconTint="@color/selector_nav_item"
-        app:itemTextAppearanceActive="@style/SaludCampus.TextoNavegacion.Activo"
-        app:itemTextAppearanceInactive="@style/SaludCampus.TextoNavegacion"
-        app:itemTextColor="@color/selector_nav_item"
-        app:labelVisibilityMode="labeled"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_navegacion_medico" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNavInicio"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Inicio"
+            android:textAllCaps="false"
+            android:textColor="@color/color_texto_secundario"
+            android:textSize="12sp"
+            app:backgroundTint="@android:color/transparent"
+            app:icon="@drawable/ic_inicio"
+            app:iconGravity="top"
+            app:iconTint="@color/color_texto_secundario" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNavExpediente"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Expediente"
+            android:textAllCaps="false"
+            android:textColor="@color/color_texto_secundario"
+            android:textSize="12sp"
+            app:backgroundTint="@android:color/transparent"
+            app:icon="@drawable/ic_alumnos"
+            app:iconGravity="top"
+            app:iconTint="@color/color_texto_secundario" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNavConfiguracion"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Configuración"
+            android:textAllCaps="false"
+            android:textColor="@color/color_enlace"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/color_fondo_azul_claro"
+            app:icon="@drawable/ic_ajustes"
+            app:iconGravity="top"
+            app:iconTint="@color/color_enlace" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
